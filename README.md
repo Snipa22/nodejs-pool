@@ -58,12 +58,12 @@ Deployment via Installer
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
 ```bash
-pm2 start init.js --name=blockManager -- --module=blockManager
-pm2 start init.js --name=worker -- --module=worker
-pm2 start init.js --name=payments -- --module=payments
-pm2 start init.js --name=remoteShare -- --module=remoteShare
-pm2 start init.js --name=longRunner -- --module=longRunner
-pm2 start init.js --name=pool -- --module=pool
+pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm Z"  -- --module=blockManager
+pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=worker
+pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=payments
+pm2 start init.js --name=remoteShare --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=remoteShare
+pm2 start init.js --name=longRunner --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=longRunner
+pm2 start init.js --name=pool --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=pool
 pm2 restart api
 ```
 
@@ -140,6 +140,14 @@ UPDATE pool.users SET email='your new password here' WHERE username='Administrat
 The email field is used as the default password field until the password is changed, at which point, it's hashed and dumped into the password field instead, and using the email field as a password is disabled.
 
 You should take a look at the [wiki](https://github.com/Snipa22/nodejs-pool/wiki/Configuration-Details) for specific configuration settings in the system.
+
+Pool Update Procedures
+======================
+If upgrading the pool, please do a git pull to get the latest code within the pool's directory.
+
+Once complete, please cd into sql_sync, then run node sql_sync.js
+
+This will update your pool with the latest config options with any defaults that the pools may set.
 
 Pool Troubleshooting
 ====================
