@@ -18,12 +18,12 @@ Pre-Deploy
 Deployment via Installer
 ------------------------
 
-1. Add your user to /etc/sudoers, this must be done so the script can sudo up and do it's job.  We suggest passwordless sudo.  Suggested line: <USER> ALL=(ALL) NOPASSWD:ALL.  Our sample builds use: pooldaemon ALL=(ALL) NOPASSWD:ALL
+1. Add your user to /etc/sudoers, this must be done so the script can sudo up and do it's job.  We suggest passwordless sudo.  Suggested line: \<USER\> ALL=(ALL) NOPASSWD:ALL.  Our sample builds use: pooldaemon ALL=(ALL) NOPASSWD:ALL
 2. Run the deploy script as a NON-ROOT USER.  This is very important!  This script will install the pool to whatever user it's running under!  Also.  Go get a coffee, this sucker bootstraps the monero installation
 3. Once it's complete, copy config_example.json to config.json and change as appropriate.  It is pre-loaded for a local install of everything, running on 127.0.0.1.  This will work perfectly fine if you're using a single node setup.
-4. You'll need to change the API end point for the frontend code in the xmrpoolui folder, under app/utils/services.js -- This will usually be http://<your server ip>/api unless you tweak caddy!
-5. Change the path in config.json for your database directory to: /home/<username>/pool_db/  The directory's already been created during startup.  Or change as appropriate!  Just make sure your user has write permissions, then run: pm2 restart api to reload the API for usage
-6. Hop into the web interface (Should be at http://<your server IP>/#/admin), then login with Administrator/Password123, MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN.
+4. You'll need to change the API end point for the frontend code in the xmrpoolui folder, under app/utils/services.js -- This will usually be http://\<your server ip\>/api unless you tweak caddy!
+5. Change the path in config.json for your database directory to: /home/\<username\>/pool_db/  The directory's already been created during startup.  Or change as appropriate!  Just make sure your user has write permissions, then run: pm2 restart api to reload the API for usage
+6. Hop into the web interface (Should be at http://\<your server IP\>/#/admin), then login with Administrator/Password123, MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN.
 7. From the admin panel, you can configure all of your pool's settings for addresses, payment thresholds, etc.
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
@@ -69,7 +69,7 @@ The pool is designed to have a dual-wallet design, one which is a fee wallet, on
 2. Make sure to save your regeneration stuff!
 3. For the pool wallet, store the password in a file, the suggestion is ~/wallet_pass
 4. Change the mode of the file with chmod to 0400: chmod 0400 ~/wallet_pass
-5. Start the wallet using PM2: pm2 start /usr/local/src/monero/build/release/bin/monero-wallet-rpc -- --rpc-bind-port 18082 --password-file ~/wallet_pass --wallet-file <Your wallet name here>
+5. Start the wallet using PM2: pm2 start /usr/local/src/monero/build/release/bin/monero-wallet-rpc -- --rpc-bind-port 18082 --password-file ~/wallet_pass --wallet-file \<Your wallet name here\>
 6. If you don't use PM2, then throw the wallet into a screen and have fun.
 
 Manual Setup
@@ -94,6 +94,18 @@ SQL import command: sudo mysql pool < ~/nodejs-pool/sample_config.sql (Adjust na
 ```
 
 Additional ports can be added as desired, samples can be found at the end of base.sql.  If you're not comfortable with the MySQL command line, I highly suggest MySQL Workbench or a similar piece of software (I use datagrip!).  Your root MySQL password can be found in /root/.my.cnf
+
+Final Manual Steps
+------------------
+Until the main frontend is done, we suggest running the following SQL line:
+```
+DELETE FROM pool.users WHERE username = 'Administrator';
+```
+This will remove the administrator user until there's an easier way to change the password.  Alternatively, you can change the password to something not known by the public:
+```
+UPDATE pool.users SET email='your new password here' WHERE username='Administrator';
+```
+The email field is used as the default password field until the password is changed, at which point, it's hashed and dumped into the password field instead, and using the email field as a password is disabled.
 
 Pool Troubleshooting
 ====================
