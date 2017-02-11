@@ -53,7 +53,7 @@ Deployment via Installer
 3. Once it's complete, copy config_example.json to config.json and change as appropriate.  It is pre-loaded for a local install of everything, running on 127.0.0.1.  This will work perfectly fine if you're using a single node setup.
 4. You'll need to change the API end point for the frontend code in the xmrpoolui folder, under app/utils/services.js -- This will usually be http://\<your server ip\>/api unless you tweak caddy!
 5. Change the path in config.json for your database directory to: /home/\<username\>/pool_db/  The directory's already been created during startup.  Or change as appropriate!  Just make sure your user has write permissions, then run: pm2 restart api to reload the API for usage
-6. Hop into the web interface (Should be at http://\<your server IP\>/#/admin), then login with Administrator/Password123, MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN.
+6. Hop into the web interface (Should be at http://\<your server IP\>/#/admin), then login with Administrator/Password123, MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN. <- This step is currently not active, we're waiting for the frontend to catch up!  Head down to the Manual SQL Configuration to take a look at what needs to be done by hand for now.
 7. From the admin panel, you can configure all of your pool's settings for addresses, payment thresholds, etc.
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
