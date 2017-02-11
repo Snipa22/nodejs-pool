@@ -99,7 +99,7 @@ The pool is designed to have a dual-wallet design, one which is a fee wallet, on
 2. Make sure to save your regeneration stuff!
 3. For the pool wallet, store the password in a file, the suggestion is ~/wallet_pass
 4. Change the mode of the file with chmod to 0400: chmod 0400 ~/wallet_pass
-5. Start the wallet using PM2: pm2 start /usr/local/src/monero/build/release/bin/monero-wallet-rpc -- --rpc-bind-port 18082 --password-file ~/wallet_pass --wallet-file \<Your wallet name here\>
+5. Start the wallet using PM2: pm2 start /usr/local/src/monero/build/release/bin/monero-wallet-rpc -- --rpc-bind-port 18082 --password-file ~/wallet_pass --wallet-file \<Your wallet name here\> --disable-rpc-login
 6. If you don't use PM2, then throw the wallet into a screen and have fun.
 
 Manual Setup
