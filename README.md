@@ -37,6 +37,11 @@ pm2 start init.js --name=pool -- --module=pool
 pm2 restart api
 ```
 
+Install Script:
+```bash
+curl -L https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/deploy.bash | bash
+```
+
 Assumptions for the installer
 -----------------------------
 The installer assumes that you will be running a single-node instance and using a clean Ubuntu 16.04 server install.  The following system defaults are set:
