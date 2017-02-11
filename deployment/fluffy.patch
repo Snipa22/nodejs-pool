@@ -1,0 +1,77 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cee3d8c..c411f2b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -275,18 +275,21 @@ add_definitions("-DBLOCKCHAIN_DB=${BLOCKCHAIN_DB}")
+
+ # Can't install hook in static build on OSX, because OSX linker does not support --wrap
+ # On ARM, having libunwind package (with .so's only) installed breaks static link.
+-if(APPLE OR (ARM AND STATIC))
+-  set(DEFAULT_STACK_TRACE OFF)
+-  set(LIBUNWIND_LIBRARIES "")
+-else()
+-  find_package(Libunwind)
+-    if(LIBUNWIND_FOUND)
+-      set(DEFAULT_STACK_TRACE ON)
+-    else()
+-      set(DEFAULT_STACK_TRACE OFF)
+-      set(LIBUNWIND_LIBRARIES "")
+-    endif()
+-endif()
++#if(APPLE OR (ARM AND STATIC))
++#  set(DEFAULT_STACK_TRACE OFF)
++#  set(LIBUNWIND_LIBRARIES "")
++#else()
++#  find_package(Libunwind)
++#    if(LIBUNWIND_FOUND)
++#      set(DEFAULT_STACK_TRACE ON)
++#    else()
++#      set(DEFAULT_STACK_TRACE OFF)
++#      set(LIBUNWIND_LIBRARIES "")
++#    endif()
++#endif()
++
++set(DEFAULT_STACK_TRACE OFF)
++set(LIBUNWIND_LIBRARIES "")
+
+ option(STACK_TRACE "Install a hook that dumps stack on exception" ${DEFAULT_STACK_TRACE})
+
+diff --git a/src/cryptonote_config.h b/src/cryptonote_config.h
+index 95cbf74..d444bcc 100644
+--- a/src/cryptonote_config.h
++++ b/src/cryptonote_config.h
+@@ -98,7 +98,7 @@
+ #define P2P_LOCAL_WHITE_PEERLIST_LIMIT                  1000
+ #define P2P_LOCAL_GRAY_PEERLIST_LIMIT                   5000
+
+-#define P2P_DEFAULT_CONNECTIONS_COUNT                   8
++#define P2P_DEFAULT_CONNECTIONS_COUNT                   256
+ #define P2P_DEFAULT_HANDSHAKE_INTERVAL                  60           //secondes
+ #define P2P_DEFAULT_PACKET_MAX_SIZE                     50000000     //50000000 bytes maximum packet size
+ #define P2P_DEFAULT_PEERS_IN_HANDSHAKE                  250
+diff --git a/src/cryptonote_core/tx_pool.cpp b/src/cryptonote_core/tx_pool.cpp
+index 6ad1390..8a9b7fa 100644
+--- a/src/cryptonote_core/tx_pool.cpp
++++ b/src/cryptonote_core/tx_pool.cpp
+@@ -619,7 +619,7 @@ namespace cryptonote
+
+     LOG_PRINT_L2("Filling block template, median size " << median_size << ", " << m_txs_by_fee_and_receive_time.size() << " txes in the pool");
+     auto sorted_it = m_txs_by_fee_and_receive_time.begin();
+-    while (sorted_it != m_txs_by_fee_and_receive_time.end())
++    while (sorted_it != m_txs_by_fee_and_receive_time.end() && (bl.tx_hashes.size() < 120))
+     {
+       auto tx_it = m_transactions.find(sorted_it->second);
+       LOG_PRINT_L2("Considering " << tx_it->first << ", size " << tx_it->second.blob_size << ", current block size " << total_size << "/" << max_total_size << ", current coinbase " << print_money(best_coinbase));
+diff --git a/src/cryptonote_protocol/cryptonote_protocol_handler.inl b/src/cryptonote_protocol/cryptonote_protocol_handler.inl
+index 73e4fa7..0e9e65a 100644
+--- a/src/cryptonote_protocol/cryptonote_protocol_handler.inl
++++ b/src/cryptonote_protocol/cryptonote_protocol_handler.inl
+@@ -1108,7 +1108,7 @@ namespace cryptonote
+     {
+       if (peer_id && exclude_context.m_connection_id != context.m_connection_id)
+       {
+-        if(m_core.get_testnet() && (support_flags & P2P_SUPPORT_FLAG_FLUFFY_BLOCKS))
++        if(support_flags & P2P_SUPPORT_FLAG_FLUFFY_BLOCKS)
+         {
+           MDEBUG("PEER SUPPORTS FLUFFY BLOCKS - RELAYING THIN/COMPACT WHATEVER BLOCK");
+           fluffyConnections.push_back(context.m_connection_id);

@@ -1,0 +1,13 @@
+[Unit]
+Description=Monero Daemon
+After=network.target
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart=/usr/local/src/monero/build/release/bin/monerod --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc
+Restart=always
+User=monerodaemon
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,51 @@
+enum POOLTYPE {
+    PPLNS = 0;
+    PPS = 1;
+    PROP = 2;
+    SOLO = 3;
+}
+
+enum MESSAGETYPE {
+    SHARE = 0;
+    BLOCK = 1;
+    INVALIDSHARE = 2;
+}
+
+message WSData {
+    required MESSAGETYPE msgType = 1;
+    required string key = 2;
+    required bytes msg = 3;
+    required int32 exInt = 4;
+}
+
+message InvalidShare{
+    required string paymentAddress = 1;
+    optional string paymentID = 2;
+    required string identifier = 3;
+}
+
+message Share {
+    required int32 shares = 1;
+    required string paymentAddress = 2;
+    required bool foundBlock = 3;
+    optional string paymentID = 4;
+    required bool trustedShare = 5;
+    required POOLTYPE poolType = 6;
+    required int32 poolID = 7;
+    required int64 blockDiff = 8;
+    required bool bitcoin = 9;
+    required int32 blockHeight = 10;
+    required int64 timestamp = 11;
+    required string identifier = 12;
+}
+
+message Block {
+    required string hash = 1;
+    required int64 difficulty = 2;
+    required int64 shares = 3;
+    required int64 timestamp = 4;
+    required POOLTYPE poolType = 5;
+    required bool unlocked = 6;
+    required bool valid = 7;
+    optional int64 value = 8;
+}
