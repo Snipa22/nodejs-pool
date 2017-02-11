@@ -14,9 +14,13 @@ global.schema = JSON.parse(sql_schema);
 let loopCount = 0;
 let updatedCount = 0;
 global.schema.forEach(function(entry){
-    loopCount += 1;
     global.mysql.query("SELECT * FROM config WHERE module = ? AND item = ?", [entry.module, entry.item]).then(function(rows){
+        loopCount += 1;
         if (rows.length > 0){
+            if(loopCount === global.schema.length){
+                console.log("Updated SQL schema with "+updatedCount+" new rows!  Exiting!");
+                process.exit();
+            }
             return;
         }
         updatedCount += 1;
