@@ -53,7 +53,7 @@ Deployment via Installer
 3. Once it's complete, copy config_example.json to config.json and change as appropriate.  It is pre-loaded for a local install of everything, running on 127.0.0.1.  This will work perfectly fine if you're using a single node setup.
 4. You'll need to change the API end point for the frontend code in the xmrpoolui folder, under app/utils/services.js -- This will usually be http://\<your server ip\>/api unless you tweak caddy!
 5. Change the path in config.json for your database directory to: /home/\<username\>/pool_db/  The directory's already been created during startup.  Or change as appropriate!  Just make sure your user has write permissions, then run: pm2 restart api to reload the API for usage
-6. Hop into the web interface (Should be at http://\<your server IP\>/#/admin), then login with Administrator/Password123, MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN.
+6. Hop into the web interface (Should be at http://\<your server IP\>/#/admin), then login with Administrator/Password123, MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN. <- This step is currently not active, we're waiting for the frontend to catch up!  Head down to the Manual SQL Configuration to take a look at what needs to be done by hand for now.
 7. From the admin panel, you can configure all of your pool's settings for addresses, payment thresholds, etc.
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
@@ -123,6 +123,8 @@ general/emailFrom
 SQL import command: sudo mysql pool < ~/nodejs-pool/sample_config.sql (Adjust name/path as needed!)
 ```
 
+The shareHost configuration is designed to be pointed at wherever the leafApi endpoint exists.  For xmrpool.net, we use https://api.xmrpool.net/leafApi.  If you're using the automated setup script, you can use: http://\<your IP\>/leafApi, as Caddy will proxy it.  If you're just using localhost and a local pool serv, http://127.0.0.1:8000/leafApi will do you quite nicely
+
 Additional ports can be added as desired, samples can be found at the end of base.sql.  If you're not comfortable with the MySQL command line, I highly suggest MySQL Workbench or a similar piece of software (I use datagrip!).  Your root MySQL password can be found in /root/.my.cnf
 
 Final Manual Steps
@@ -136,6 +138,8 @@ This will remove the administrator user until there's an easier way to change th
 UPDATE pool.users SET email='your new password here' WHERE username='Administrator';
 ```
 The email field is used as the default password field until the password is changed, at which point, it's hashed and dumped into the password field instead, and using the email field as a password is disabled.
+
+You should take a look at the [wiki](https://github.com/Snipa22/nodejs-pool/wiki/Configuration-Details) for specific configuration settings in the system.
 
 Pool Update Procedures
 ======================
