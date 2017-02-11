@@ -58,12 +58,12 @@ Deployment via Installer
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
 ```bash
-pm2 start init.js --name=blockManager -- --module=blockManager
-pm2 start init.js --name=worker -- --module=worker
-pm2 start init.js --name=payments -- --module=payments
-pm2 start init.js --name=remoteShare -- --module=remoteShare
-pm2 start init.js --name=longRunner -- --module=longRunner
-pm2 start init.js --name=pool -- --module=pool
+pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm Z"  -- --module=blockManager
+pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=worker
+pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=payments
+pm2 start init.js --name=remoteShare --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=remoteShare
+pm2 start init.js --name=longRunner --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=longRunner
+pm2 start init.js --name=pool --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=pool
 pm2 restart api
 ```
 
