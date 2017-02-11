@@ -3,7 +3,7 @@
     "id": 1,
     "module": "pool",
     "item": "address",
-    "item_value": "44GWfqCiW7PH3njtPPfAY5Q38x8QfQCeGjKFp4WejNoTAWq7apSrR2jRLERFmpbh4V9knMZz4GrG2bgQMfmc3w888p7x4sd",
+    "item_value": "",
     "item_type": "string",
     "Item_desc": "Address to mine to, this should be the wallet-rpc address."
   },
@@ -275,7 +275,7 @@
     "id": 39,
     "module": "payout",
     "item": "feeAddress",
-    "item_value": "48WnWpKMuLrfgy4YpjPjoYSDyqgVx5fCSgrSydVPy7Jmii4y2TwEi8DcH5TM9aRm56jGQnXmurXBeTWe3xjCKbjuAX1qYZt",
+    "item_value": "",
     "item_type": "string",
     "Item_desc": "Address that pool fees are sent to."
   },
@@ -347,7 +347,7 @@
     "id": 48,
     "module": "pool",
     "item": "geoDNS",
-    "item_value": "mine.xmrpool.net",
+    "item_value": "",
     "item_type": "string",
     "Item_desc": "geoDNS enabled address for the pool."
   },

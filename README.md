@@ -137,6 +137,14 @@ UPDATE pool.users SET email='your new password here' WHERE username='Administrat
 ```
 The email field is used as the default password field until the password is changed, at which point, it's hashed and dumped into the password field instead, and using the email field as a password is disabled.
 
+Pool Update Procedures
+======================
+If upgrading the pool, please do a git pull to get the latest code within the pool's directory.
+
+Once complete, please cd into sql_sync, then run node sql_sync.js
+
+This will update your pool with the latest config options with any defaults that the pools may set.
+
 Pool Troubleshooting
 ====================
 
