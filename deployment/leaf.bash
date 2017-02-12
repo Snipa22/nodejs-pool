@@ -47,5 +47,6 @@ openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey 
 cd ~
 sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin `pwd`/.nvm/versions/node/v6.9.2/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
 sudo chown -R $CURUSER. ~/.pm2
-pm2 install pm2-logrotate
+echo "Installing pm2-logrotate in the background!"
+pm2 install pm2-logrotate &
 echo "You're setup with a leaf node!  Congrats"
