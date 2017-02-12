@@ -19,3 +19,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+This work is a derivitive work from Zone117x's node-cryptonote-pool, permission
+has been granted from Zone117x via IRC conversation to re-license this code as
+MIT for all portions of the work derived from his original source as of 2/11/2017
+Original work: https://github.com/zone117x/node-cryptonote-pool
+
+Log snippet:
+Feb 11 15:59:02 <Snipa>	Hallo!  Wanted to reach out as we finally released the pool software w/ the FFS funded at this point.  https://github.com/Snipa22/nodejs-pool  <redacted>.  The following code: https://pb.junaos.xyz/view/cd3d7e27 is what was snagged, and mostly rebuilt along the way for good measure.
+Feb 11 15:59:02 <Snipa>	 I'm not sure how deeply the GPL requires me to go to claim it as "new code" given that the logic behind it all is about the same.
+<redacted>
+Feb 11 16:09:39 <Snipa>	.fr is now 1/5th of the overall mining power, DP is another 1/5th.
+Feb 11 16:09:48 <Snipa>	We're getting scary-close to the 50% attacks.
+Feb 11 16:10:08 <zone117x>	You have my permission to MIT
+Feb 11 16:10:31 <Snipa>	Thank you.  I'll get our licenses updated and such today.
+Feb 11 16:12:08 <zone117x>	What payment systems did you get implemented?
