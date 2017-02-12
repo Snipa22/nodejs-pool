@@ -224,6 +224,18 @@ This will restart all of your related daemons, and will clear any open reader co
 If on the other hand, you have no "Free pages" and your Pages used is equal to the Max Pages, then you've run out of disk space for LMDB.  You need to verify the cleaner is working.  For reference, 4.3 million shares are stored within approximately 2-3 Gb of space, so if you're vastly exceeding this, then your cleaner (longRunner) is likely broken.
 
 
+PPS Fee Thoughts
+================
+If you're considering PPS, I've spoken with [Fireice_UK](https://github.com/fireice-uk/) whom kindly did some math about what you're looking at in terms of requiements to run a PPS pool without it self-impoloding under particular risk factors, based on the work found [here](https://arxiv.org/pdf/1112.4980.pdf)
+
+```text
+Also I calculated the amount of XMR needed to for a PPS pool to stay afloat. Perhaps you should put them up in the README to stop some spectacular clusterfucks :D:
+For 1 in 1000000 chance that the pool will go bankrupt: 5% fee -> 1200 2% fee -> 3000
+For 1 in 1000000000 chance: 5% fee -> 1800 2% fee -> 4500
+```
+
+The developers of the pool have not verified this, but based on our own usage on https://xmrpool.net/ this seems rather reasonable.  You should be wary if you're consdering PPS and take you fees into account appropriately!
+
 Credits
 =======
 
