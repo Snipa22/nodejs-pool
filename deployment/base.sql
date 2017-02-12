@@ -32,7 +32,7 @@ CREATE TABLE block_log
     hex VARCHAR(128) PRIMARY KEY NOT NULL,
     find_time TIMESTAMP,
     reward BIGINT(20),
-    difficulty INT(11),
+    difficulty BIGINT(20),
     major_version INT(11),
     minor_version INT(11)
 );
