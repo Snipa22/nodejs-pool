@@ -515,7 +515,7 @@
     "id": 70,
     "module": "email",
     "item": "workerNotHashingBody",
-    "item_value": "Hello,\n\nYour worker: %(worker)s has stopped submitting hashes at: %(timestamp)s UTC\n\nThank you,\n%(poolEmailSig)",
+    "item_value": "Hello,\n\nYour worker: %(worker)s has stopped submitting hashes at: %(timestamp)s UTC\n\nThank you,\n%(poolEmailSig)s",
     "item_type": "string",
     "Item_desc": "Email sent to the miner when their worker stops hashing"
   },
