@@ -35,6 +35,7 @@
     "request": "^2.79.0",
     "request-json": "0.6.1",
     "shapeshift.io": "1.3.0",
+    "sprintf-js": "^1.0.3",
     "uuid": "3.0.1",
     "wallet-address-validator": "0.1.0"
   }

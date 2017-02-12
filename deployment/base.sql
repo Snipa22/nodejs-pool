@@ -42,7 +42,7 @@ CREATE TABLE config
     id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
     module VARCHAR(32),
     item VARCHAR(32),
-    item_value VARCHAR(128),
+    item_value TEXT,
     item_type VARCHAR(64),
     Item_desc VARCHAR(512)
 );

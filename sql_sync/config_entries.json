@@ -510,5 +510,29 @@
     "item_value": "",
     "item_type": "string",
     "Item_desc": "Host that receives share information"
+  },
+  {
+    "id": 70,
+    "module": "email",
+    "item": "workerNotHashingBody",
+    "item_value": "Hello,\n\nYour worker: %(worker)s has stopped submitting hashes at: %(timestamp)s UTC\n\nThank you,\n%(poolEmailSig)",
+    "item_type": "string",
+    "Item_desc": "Email sent to the miner when their worker stops hashing"
+  },
+  {
+    "id": 71,
+    "module": "email",
+    "item": "workerNotHashingSubject",
+    "item_value": "Worker %(worker)s stopped hashing",
+    "item_type": "string",
+    "Item_desc": "Subject of email sent to miner when worker stops hashing"
+  },
+  {
+    "id": 72,
+    "module": "general",
+    "item": "emailSig",
+    "item_value": "NodeJS-Pool Administration Team",
+    "item_type": "string",
+    "Item_desc": "Signature line for the emails."
   }
 ]
