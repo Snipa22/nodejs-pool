@@ -13,8 +13,8 @@ worker - Does regular processing of statistics and sends status e-mails for non-
 API listens on port 8001, remoteShare listens on 8000
 
 Xmrpool.net (The refrence implementation) uses the following setup:  
-https://xmrpool.net is hosted on it's own server, as the main website is a static frontend  
-https://api.xmrpool.net hosts api, remoteShare, longRunner, payments, blockManager, worker, as these must all be hosted with access to the same LMDB database.
+* https://xmrpool.net is hosted on it's own server, as the main website is a static frontend
+* https://api.xmrpool.net hosts api, remoteShare, longRunner, payments, blockManager, worker, as these must all be hosted with access to the same LMDB database.
 
 Sample Caddyfile for API:
 ```text
@@ -26,7 +26,7 @@ https://api.xmrpool.net {
 }
 ```
 
-It is critically important that your webserver does not truncate the /leafApi portion of the URL for the remoteShare daemon, or it will not function!  Local pool servers DO use the remoteShare daemon, as this provides a buffer in case of an error with LMDB or another bug within the system, allowing shares and blocks to queue for submission as soon as the leafApi/remoteShare daemons are back up and responding with 200's.
+It is critically important that your webserver does not truncate the `/leafApi` portion of the URL for the remoteShare daemon, or it will not function!  Local pool servers DO use the remoteShare daemon, as this provides a buffer in case of an error with LMDB or another bug within the system, allowing shares and blocks to queue for submission as soon as the leafApi/remoteShare daemons are back up and responding with 200's.
 
 Setup Instructions
 ==================
@@ -48,16 +48,16 @@ Pre-Deploy
 Deployment via Installer
 ------------------------
 
-1. Add your user to /etc/sudoers, this must be done so the script can sudo up and do it's job.  We suggest passwordless sudo.  Suggested line: \<USER\> ALL=(ALL) NOPASSWD:ALL.  Our sample builds use: pooldaemon ALL=(ALL) NOPASSWD:ALL
-2. Run the deploy script as a NON-ROOT USER.  This is very important!  This script will install the pool to whatever user it's running under!  Also.  Go get a coffee, this sucker bootstraps the monero installation
-3. Once it's complete, copy config_example.json to config.json and change as appropriate.  It is pre-loaded for a local install of everything, running on 127.0.0.1.  This will work perfectly fine if you're using a single node setup.
-4. You'll need to change the API end point for the frontend code in the xmrpoolui folder, under app/utils/services.js -- This will usually be http://\<your server ip\>/api unless you tweak caddy!
-5. Change the db_storage_path in config.json for your database directory to: /home/\<username\>/pool_db/  The directory's already been created during startup.  Or change as appropriate!  Just make sure your user has write permissions, then run: pm2 restart api to reload the API for usage  You'll also want to set bind_ip to the external IP of the pool server, and hostname to the resolvable hostname for the pool server.  pool_id is mostly used for multi-server installations to provide unique identifiers in the backend.
-6. Hop into the web interface (Should be at http://\<your server IP\>/#/admin), then login with Administrator/Password123, MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN. <- This step is currently not active, we're waiting for the frontend to catch up!  Head down to the Manual SQL Configuration to take a look at what needs to be done by hand for now.
+1. Add your user to `/etc/sudoers`, this must be done so the script can sudo up and do it's job.  We suggest passwordless sudo.  Suggested line: `<USER> ALL=(ALL) NOPASSWD:ALL`.  Our sample builds use: `pooldaemon ALL=(ALL) NOPASSWD:ALL`
+2. Run the [deploy script](https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/deploy.bash) as a **NON-ROOT USER**.  This is very important!  This script will install the pool to whatever user it's running under!  Also.  Go get a coffee, this sucker bootstraps the monero installation.
+3. Once it's complete, copy `config_example.json` to `config.json` and change as appropriate.  It is pre-loaded for a local install of everything, running on 127.0.0.1.  This will work perfectly fine if you're using a single node setup.
+4. You'll need to change the API end point for the frontend code in the `xmrpoolui/app/utils/services.js` -- This will usually be `http://<your server ip>/api` unless you tweak caddy!
+5. Change the `db_storage_path` in `config.json` for your database directory to: `/home/<username>/pool_db/`  The directory's already been created during startup.  Or change as appropriate!  Just make sure your user has write permissions, then run: `pm2 restart api` to reload the API for usage  You'll also want to set `bind_ip` to the external IP of the pool server, and hostname to the resolvable hostname for the pool server. `pool_id` is mostly used for multi-server installations to provide unique identifiers in the backend.
+6. Hop into the web interface (Should be at `http://<your server IP>/#/admin`), then login with `Administrator/Password123`, **MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN**. *<- This step is currently not active, we're waiting for the frontend to catch up!  Head down to the Manual SQL Configuration to take a look at what needs to be done by hand for now*.
 7. From the admin panel, you can configure all of your pool's settings for addresses, payment thresholds, etc.
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
-```bash
+```shell
 pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm Z"  -- --module=blockManager
 pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=worker
 pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=payments
@@ -78,11 +78,11 @@ The installer assumes that you will be running a single-node instance and using 
 * MySQL Username: pool
 * MySQL Password: 98erhfiuehw987fh23d
 * MySQL Host: 127.0.0.1
-* MySQL root access is only permitted as the root user, the password is in /root/.my.cnf
+* MySQL root access is only permitted as the root user, the password is in `/root/.my.cnf`
 * SSL Certificate is generated, self-signed, but is valid for Claymore Miners.
 * The server installs and deploys Caddy as it's choice of webserver!
 
-The following raw binaries MUST BE AVAILABLE FOR IT TO BOOTSTRAP:
+The following raw binaries **MUST BE AVAILABLE FOR IT TO BOOTSTRAP**:
 * sudo
 
 I've confirmed that the default server 16.04 installation has these requirements.
@@ -95,11 +95,11 @@ Wallet Setup
 ------------
 The pool is designed to have a dual-wallet design, one which is a fee wallet, one which is the live pool wallet.  The fee wallet is the default target for all fees owed to the pool owner.  PM2 can also manage your wallet daemon, and that is the suggested run state.
 
-1. Generate your wallets using /usr/local/src/monero/build/release/bin/monero-wallet-cli
+1. Generate your wallets using `/usr/local/src/monero/build/release/bin/monero-wallet-cli`
 2. Make sure to save your regeneration stuff!
-3. For the pool wallet, store the password in a file, the suggestion is ~/wallet_pass
-4. Change the mode of the file with chmod to 0400: chmod 0400 ~/wallet_pass
-5. Start the wallet using PM2: pm2 start /usr/local/src/monero/build/release/bin/monero-wallet-rpc -- --rpc-bind-port 18082 --password-file ~/wallet_pass --wallet-file \<Your wallet name here\> --disable-rpc-login
+3. For the pool wallet, store the password in a file, the suggestion is `~/wallet_pass`
+4. Change the mode of the file with chmod to 0400: `chmod 0400 ~/wallet_pass`
+5. Start the wallet using PM2: `pm2 start /usr/local/src/monero/build/release/bin/monero-wallet-rpc -- --rpc-bind-port 18082 --password-file ~/wallet_pass --wallet-file <Your wallet name here> --disable-rpc-login`
 6. If you don't use PM2, then throw the wallet into a screen and have fun.
 
 Manual Setup
@@ -123,9 +123,9 @@ general/emailFrom
 SQL import command: sudo mysql pool < ~/nodejs-pool/sample_config.sql (Adjust name/path as needed!)
 ```
 
-The shareHost configuration is designed to be pointed at wherever the leafApi endpoint exists.  For xmrpool.net, we use https://api.xmrpool.net/leafApi.  If you're using the automated setup script, you can use: http://\<your IP\>/leafApi, as Caddy will proxy it.  If you're just using localhost and a local pool serv, http://127.0.0.1:8000/leafApi will do you quite nicely
+The shareHost configuration is designed to be pointed at wherever the leafApi endpoint exists.  For xmrpool.net, we use https://api.xmrpool.net/leafApi.  If you're using the automated setup script, you can use: `http://<your IP>/leafApi`, as Caddy will proxy it.  If you're just using localhost and a local pool serv, http://127.0.0.1:8000/leafApi will do you quite nicely
 
-Additional ports can be added as desired, samples can be found at the end of base.sql.  If you're not comfortable with the MySQL command line, I highly suggest MySQL Workbench or a similar piece of software (I use datagrip!).  Your root MySQL password can be found in /root/.my.cnf
+Additional ports can be added as desired, samples can be found at the end of base.sql.  If you're not comfortable with the MySQL command line, I highly suggest MySQL Workbench or a similar piece of software (I use datagrip!).  Your root MySQL password can be found in `/root/.my.cnf`
 
 Final Manual Steps
 ------------------
@@ -145,7 +145,7 @@ Pool Update Procedures
 ======================
 If upgrading the pool, please do a git pull to get the latest code within the pool's directory.
 
-Once complete, please cd into sql_sync, then run node sql_sync.js
+Once complete, please `cd` into `sql_sync`, then run `node sql_sync.js`
 
 This will update your pool with the latest config options with any defaults that the pools may set.
 
@@ -206,7 +206,7 @@ Status of shares
   Entries: 4379344
 ```
 The important thing to verify here is that the "Number of pages used" value is less than the "Max Pages" value, and that there are "Free pages" under "Freelist Status".  If this is the case, them look at the "Reader Table Status" and look for the PID listed.  Run:
-```
+```shell
 ps fuax | grep <THE PID FROM ABOVE>
 
 ex:
@@ -215,7 +215,7 @@ ps fuax | grep 25763
 If the output is not blank, then one of your node processes is reading, this is fine.  If there is no output given on one of them, then proceed forwards.
 
 The second step is to run:
-```
+```shell
 pm2 stop blockManager worker payments remoteShare longRunner api
 pm2 start blockManager worker payments remoteShare longRunner api
 ```
