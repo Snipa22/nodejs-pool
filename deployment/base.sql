@@ -59,7 +59,8 @@ CREATE TABLE payments
     bitcoin TINYINT(1) DEFAULT '0',
     amount BIGINT(20),
     block_id INT(11),
-    payment_id VARCHAR(128)
+    payment_id VARCHAR(128),
+    transfer_fee BIGINT(20) DEFAULT '0'
 );
 CREATE UNIQUE INDEX payments_id_uindex ON payments (id);
 CREATE INDEX payments_transactions_id_fk ON payments (transaction_id);
