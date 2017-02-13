@@ -223,6 +223,9 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'rpcPasswordPath', '', 'string', 'Path and file for the RPC password file location');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'maxPaymentTxns', '5', 'int', 'Maximum number of transactions in a single payment');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'shareHost', '', 'string', 'Host that receives share information');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerNotHashingBody', 'Hello,\n\nYour worker: %(worker)s has stopped submitting hashes at: %(timestamp)s UTC\n\nThank you,\n%(poolEmailSig)s', 'string', 'Email sent to the miner when their worker stops hashing');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerNotHashingSubject', 'Worker %(worker)s stopped hashing', 'string', 'Subject of email sent to miner when worker stops hashing');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'emailSig', 'NodeJS-Pool Administration Team', 'string', 'Signature line for the emails.');
 INSERT INTO pool.users (username, pass, email, admin, payout_threshold) VALUES ('Administrator', null, 'Password123', 1, 0);
 INSERT INTO pool.port_config (poolPort, difficulty, portDesc, portType, hidden, `ssl`) VALUES (3333, 1000, 'Low-End Hardware (Up to 30-40 h/s)', 'pplns', 0, 0);
 INSERT INTO pool.port_config (poolPort, difficulty, portDesc, portType, hidden, `ssl`) VALUES (5555, 5000, 'Medium-Range Hardware (Up to 160 h/s)', 'pplns', 0, 0);
