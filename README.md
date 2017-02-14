@@ -241,6 +241,6 @@ Credits
 
 [Zone117x](https://github.com/zone117x) - Original [node-cryptonote-pool](https://github.com/zone117x/node-cryptonote-pool) from which, the stratum implementation has been borrowed.
 
-[Mesh00](https://github.com/hackfanatic) - Frontend build in Angular JS [XMRPoolUI](https://github.com/hackfanatic/xmrpoolui)
+[Mesh00](https://github.com/mesh0000) - Frontend build in Angular JS [XMRPoolUI](https://github.com/mesh0000/poolui)
 
 [Wolf0](https://github.com/wolf9466/)/[OhGodAGirl](https://github.com/ohgodagirl) - Rebuild of node-multi-hashing with AES-NI [node-multi-hashing](https://github.com/Snipa22/node-multi-hashing-aesni)

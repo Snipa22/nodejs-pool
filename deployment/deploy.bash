@@ -50,7 +50,7 @@ openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey 
 mkdir ~/pool_db/
 cp config_example.json config.json
 cd ~
-git clone https://github.com/hackfanatic/xmrpoolui
+git clone https://github.com/mesh0000/poolui.git
 cd xmrpoolui
 npm install
 cd app
