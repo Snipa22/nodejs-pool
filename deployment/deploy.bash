@@ -51,7 +51,7 @@ mkdir ~/pool_db/
 cp config_example.json config.json
 cd ~
 git clone https://github.com/mesh0000/poolui.git
-cd xmrpoolui
+cd poolui
 npm install
 cd app
 sudo ln -s `pwd` /var/www
