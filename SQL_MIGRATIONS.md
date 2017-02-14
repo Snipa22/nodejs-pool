@@ -1,7 +1,7 @@
 2/12/2017
 ---------
 ```sql
-ALTER TABLE monero_live.config MODIFY item_value TEXT;
+ALTER TABLE pool.config MODIFY item_value TEXT;
 ```
 
 2/13/2017
