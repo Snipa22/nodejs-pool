@@ -7,4 +7,5 @@
     }
     cors
     gzip
+    mime .manifest text/cache-manifest
 }
