@@ -51,9 +51,11 @@ mkdir ~/pool_db/
 cp config_example.json config.json
 cd ~
 git clone https://github.com/mesh0000/poolui.git
-cd xmrpoolui
+cd poolui
 npm install
-cd app
+./node_modules/bower/bin/bower update
+./node_modules/gulp/bin/gulp.js build
+cd build
 sudo ln -s `pwd` /var/www
 cd /tmp/
 wget -O caddy.tar.gz 'https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors'
