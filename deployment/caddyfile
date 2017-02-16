@@ -5,7 +5,11 @@
     proxy /api 127.0.0.1:8001 {
         without /api
     }
-    cors
+    header / {
+        Access-Control-Allow-Origin  *
+        Access-Control-Allow-Methods "GET, POST, OPTIONS"
+        Access-Control-Allow-Headers "Content-Type"
+    }
     gzip
     mime .manifest text/cache-manifest
 }
