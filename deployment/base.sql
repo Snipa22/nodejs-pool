@@ -3,166 +3,166 @@ GRANT ALL ON pool.* TO pool@`127.0.0.1` IDENTIFIED BY '98erhfiuehw987fh23d';
 GRANT ALL ON pool.* TO pool@localhost IDENTIFIED BY '98erhfiuehw987fh23d';
 FLUSH PRIVILEGES;
 USE pool;
-CREATE TABLE balance
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    last_edited TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    payment_address VARCHAR(128),
-    payment_id VARCHAR(128) DEFAULT NULL,
-    pool_type VARCHAR(64),
-    bitcoin TINYINT(1),
-    amount BIGINT(26) DEFAULT '0'
-);
-CREATE UNIQUE INDEX balance_id_uindex ON balance (id);
-CREATE UNIQUE INDEX balance_payment_address_pool_type_bitcoin_payment_id_uindex ON balance (payment_address, pool_type, bitcoin, payment_id);
-CREATE INDEX balance_payment_address_payment_id_index ON balance (payment_address, payment_id);
-CREATE TABLE bans
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    ip_address VARCHAR(40),
-    mining_address VARCHAR(200),
-    active TINYINT(1) DEFAULT '1',
-    ins_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
-);
-CREATE UNIQUE INDEX bans_id_uindex ON bans (id);
-CREATE TABLE block_log
-(
-    id INT(11) NOT NULL COMMENT 'Block Height',
-    orphan TINYINT(1) DEFAULT '1',
-    hex VARCHAR(128) PRIMARY KEY NOT NULL,
-    find_time TIMESTAMP,
-    reward BIGINT(20),
-    difficulty BIGINT(20),
-    major_version INT(11),
-    minor_version INT(11)
-);
-CREATE UNIQUE INDEX block_log_hex_uindex ON block_log (hex);
-CREATE TABLE config
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    module VARCHAR(32),
-    item VARCHAR(32),
-    item_value TEXT,
-    item_type VARCHAR(64),
-    Item_desc VARCHAR(512)
-);
-CREATE UNIQUE INDEX config_id_uindex ON config (id);
-CREATE UNIQUE INDEX config_module_item_uindex ON config (module, item);
-CREATE TABLE payments
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    unlocked_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    paid_time TIMESTAMP DEFAULT '1970-01-01 00:00:01' NOT NULL,
-    pool_type VARCHAR(64),
-    payment_address VARCHAR(125),
-    transaction_id INT(11) COMMENT 'Transaction ID in the transactions table',
-    bitcoin TINYINT(1) DEFAULT '0',
-    amount BIGINT(20),
-    block_id INT(11),
-    payment_id VARCHAR(128),
-    transfer_fee BIGINT(20) DEFAULT '0'
-);
-CREATE UNIQUE INDEX payments_id_uindex ON payments (id);
-CREATE INDEX payments_transactions_id_fk ON payments (transaction_id);
-CREATE INDEX payments_payment_address_payment_id_index ON payments (payment_address, payment_id);
-CREATE TABLE pools
-(
-    id INT(11) PRIMARY KEY NOT NULL,
-    ip VARCHAR(72) NOT NULL,
-    last_checkin TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    active TINYINT(1) NOT NULL,
-    blockID INT(11),
-    blockIDTime TIMESTAMP DEFAULT '1970-01-01 00:00:01',
-    hostname VARCHAR(128)
-);
-CREATE UNIQUE INDEX pools_id_uindex ON pools (id);
-CREATE TABLE ports
-(
-    pool_id INT(11),
-    network_port INT(11),
-    starting_diff INT(11),
-    port_type VARCHAR(64),
-    description VARCHAR(256),
-    hidden TINYINT(1) DEFAULT '0',
-    ip_address VARCHAR(256),
-    lastSeen TIMESTAMP DEFAULT '1970-01-01 00:00:01',
-    miners INT(11),
-    ssl_port TINYINT(1) DEFAULT '0'
-);
-CREATE TABLE shapeshiftTxn
-(
-    id VARCHAR(64) PRIMARY KEY NOT NULL,
-    address VARCHAR(128),
-    paymentID VARCHAR(128),
-    depositType VARCHAR(16),
-    withdrawl VARCHAR(128),
-    withdrawlType VARCHAR(16),
-    returnAddress VARCHAR(128),
-    returnAddressType VARCHAR(16),
-    txnStatus VARCHAR(64),
-    amountDeposited BIGINT(26),
-    amountSent FLOAT,
-    transactionHash VARCHAR(128)
-);
-CREATE UNIQUE INDEX shapeshiftTxn_id_uindex ON shapeshiftTxn (id);
-CREATE TABLE transactions
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    bitcoin TINYINT(1),
-    address VARCHAR(128),
-    payment_id VARCHAR(128),
-    xmr_amt BIGINT(26),
-    btc_amt BIGINT(26),
-    transaction_hash VARCHAR(128),
-    submitted_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    mixin INT(11),
-    fees BIGINT(26),
-    payees INT(11),
-    exchange_rate BIGINT(26),
-    confirmed TINYINT(1),
-    confirmed_time TIMESTAMP DEFAULT '1970-01-01 00:00:01',
-    exchange_name VARCHAR(64),
-    exchange_txn_id VARCHAR(128)
-);
-CREATE UNIQUE INDEX transactions_id_uindex ON transactions (id);
-CREATE INDEX transactions_shapeshiftTxn_id_fk ON transactions (exchange_txn_id);
-CREATE TABLE users
-(
-    id INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    username VARCHAR(256) NOT NULL,
-    pass VARCHAR(64),
-    email VARCHAR(256),
-    admin TINYINT(1) DEFAULT '0',
-    payout_threshold BIGINT(16) DEFAULT '0'
-);
-CREATE UNIQUE INDEX users_id_uindex ON users (id);
-CREATE UNIQUE INDEX users_username_uindex ON users (username);
-CREATE TABLE xmrtoTxn
-(
-    id VARCHAR(64) PRIMARY KEY NOT NULL,
-    address VARCHAR(128),
-    paymentID VARCHAR(128),
-    depositType VARCHAR(16),
-    withdrawl VARCHAR(128),
-    withdrawlType VARCHAR(16),
-    returnAddress VARCHAR(128),
-    returnAddressType VARCHAR(16),
-    txnStatus VARCHAR(64),
-    amountDeposited BIGINT(26),
-    amountSent FLOAT,
-    transactionHash VARCHAR(128)
-);
-CREATE UNIQUE INDEX xmrtoTxn_id_uindex ON xmrtoTxn (id);
-CREATE TABLE port_config
-(
-    poolPort INT(11) PRIMARY KEY NOT NULL,
-    difficulty INT(11) DEFAULT '1000',
-    portDesc VARCHAR(128),
-    portType VARCHAR(16),
-    hidden TINYINT(1) DEFAULT '0',
-    `ssl` TINYINT(1) DEFAULT '0'
-);
-CREATE UNIQUE INDEX port_config_poolPort_uindex ON port_config (poolPort);
+ALTER DATABASE pool DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE TABLE `balance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `last_edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `payment_address` varchar(128) DEFAULT NULL,
+  `payment_id` varchar(128) DEFAULT NULL,
+  `pool_type` varchar(64) DEFAULT NULL,
+  `bitcoin` tinyint(1) DEFAULT NULL,
+  `amount` bigint(26) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `balance_id_uindex` (`id`),
+  UNIQUE KEY `balance_payment_address_pool_type_bitcoin_payment_id_uindex` (`payment_address`,`pool_type`,`bitcoin`,`payment_id`),
+  KEY `balance_payment_address_payment_id_index` (`payment_address`,`payment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `bans` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ip_address` varchar(40) DEFAULT NULL,
+  `mining_address` varchar(200) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT '1',
+  `ins_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `bans_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `block_log` (
+  `id` int(11) NOT NULL COMMENT 'Block Height',
+  `orphan` tinyint(1) DEFAULT '1',
+  `hex` varchar(128) NOT NULL,
+  `find_time` timestamp NULL DEFAULT NULL,
+  `reward` bigint(20) DEFAULT NULL,
+  `difficulty` bigint(20) DEFAULT NULL,
+  `major_version` int(11) DEFAULT NULL,
+  `minor_version` int(11) DEFAULT NULL,
+  PRIMARY KEY (`hex`),
+  UNIQUE KEY `block_log_hex_uindex` (`hex`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `config` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `module` varchar(32) DEFAULT NULL,
+  `item` varchar(32) DEFAULT NULL,
+  `item_value` mediumtext,
+  `item_type` varchar(64) DEFAULT NULL,
+  `Item_desc` varchar(512) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `config_id_uindex` (`id`),
+  UNIQUE KEY `config_module_item_uindex` (`module`,`item`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `unlocked_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `paid_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `pool_type` varchar(64) DEFAULT NULL,
+  `payment_address` varchar(125) DEFAULT NULL,
+  `transaction_id` int(11) DEFAULT NULL COMMENT 'Transaction ID in the transactions table',
+  `bitcoin` tinyint(1) DEFAULT '0',
+  `amount` bigint(20) DEFAULT NULL,
+  `block_id` int(11) DEFAULT NULL,
+  `payment_id` varchar(128) DEFAULT NULL,
+  `transfer_fee` bigint(20) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `payments_id_uindex` (`id`),
+  KEY `payments_transactions_id_fk` (`transaction_id`),
+  KEY `payments_payment_address_payment_id_index` (`payment_address`,`payment_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `pools` (
+  `id` int(11) NOT NULL,
+  `ip` varchar(72) NOT NULL,
+  `last_checkin` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `active` tinyint(1) NOT NULL,
+  `blockID` int(11) DEFAULT NULL,
+  `blockIDTime` timestamp NULL DEFAULT NULL,
+  `hostname` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pools_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `port_config` (
+  `poolPort` int(11) NOT NULL,
+  `difficulty` int(11) DEFAULT '1000',
+  `portDesc` varchar(128) DEFAULT NULL,
+  `portType` varchar(16) DEFAULT NULL,
+  `hidden` tinyint(1) DEFAULT '0',
+  `ssl` tinyint(1) DEFAULT '0',
+  PRIMARY KEY (`poolPort`),
+  UNIQUE KEY `port_config_poolPort_uindex` (`poolPort`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `ports` (
+  `pool_id` int(11) DEFAULT NULL,
+  `network_port` int(11) DEFAULT NULL,
+  `starting_diff` int(11) DEFAULT NULL,
+  `port_type` varchar(64) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `hidden` tinyint(1) DEFAULT '0',
+  `ip_address` varchar(256) DEFAULT NULL,
+  `lastSeen` timestamp NULL DEFAULT NULL,
+  `miners` int(11) DEFAULT NULL,
+  `ssl_port` tinyint(1) DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `shapeshiftTxn` (
+  `id` varchar(64) NOT NULL,
+  `address` varchar(128) DEFAULT NULL,
+  `paymentID` varchar(128) DEFAULT NULL,
+  `depositType` varchar(16) DEFAULT NULL,
+  `withdrawl` varchar(128) DEFAULT NULL,
+  `withdrawlType` varchar(16) DEFAULT NULL,
+  `returnAddress` varchar(128) DEFAULT NULL,
+  `returnAddressType` varchar(16) DEFAULT NULL,
+  `txnStatus` varchar(64) DEFAULT NULL,
+  `amountDeposited` bigint(26) DEFAULT NULL,
+  `amountSent` float DEFAULT NULL,
+  `transactionHash` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `shapeshiftTxn_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bitcoin` tinyint(1) DEFAULT NULL,
+  `address` varchar(128) DEFAULT NULL,
+  `payment_id` varchar(128) DEFAULT NULL,
+  `xmr_amt` bigint(26) DEFAULT NULL,
+  `btc_amt` bigint(26) DEFAULT NULL,
+  `transaction_hash` varchar(128) DEFAULT NULL,
+  `submitted_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `mixin` int(11) DEFAULT NULL,
+  `fees` bigint(26) DEFAULT NULL,
+  `payees` int(11) DEFAULT NULL,
+  `exchange_rate` bigint(26) DEFAULT NULL,
+  `confirmed` tinyint(1) DEFAULT NULL,
+  `confirmed_time` timestamp NULL DEFAULT NULL,
+  `exchange_name` varchar(64) DEFAULT NULL,
+  `exchange_txn_id` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `transactions_id_uindex` (`id`),
+  KEY `transactions_shapeshiftTxn_id_fk` (`exchange_txn_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(256) NOT NULL,
+  `pass` varchar(64) DEFAULT NULL,
+  `email` varchar(256) DEFAULT NULL,
+  `admin` tinyint(1) DEFAULT '0',
+  `payout_threshold` bigint(16) DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_id_uindex` (`id`),
+  UNIQUE KEY `users_username_uindex` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `xmrtoTxn` (
+  `id` varchar(64) NOT NULL,
+  `address` varchar(128) DEFAULT NULL,
+  `paymentID` varchar(128) DEFAULT NULL,
+  `depositType` varchar(16) DEFAULT NULL,
+  `withdrawl` varchar(128) DEFAULT NULL,
+  `withdrawlType` varchar(16) DEFAULT NULL,
+  `returnAddress` varchar(128) DEFAULT NULL,
+  `returnAddressType` varchar(16) DEFAULT NULL,
+  `txnStatus` varchar(64) DEFAULT NULL,
+  `amountDeposited` bigint(26) DEFAULT NULL,
+  `amountSent` float DEFAULT NULL,
+  `transactionHash` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `xmrtoTxn_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'minerTimeout', '900', 'int', 'Length of time before a miner is flagged inactive.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'banEnabled', 'true', 'bool', 'Enables/disabled banning of "bad" miners.');
