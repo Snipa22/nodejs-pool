@@ -8,7 +8,7 @@
     header / {
         Access-Control-Allow-Origin  *
         Access-Control-Allow-Methods "GET, POST, OPTIONS"
-        Access-Control-Allow-Headers "Content-Type"
+        Access-Control-Allow-Headers "Content-Type, x-access-token"
     }
     gzip
     mime .manifest text/cache-manifest
