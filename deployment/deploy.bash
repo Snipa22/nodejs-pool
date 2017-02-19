@@ -48,7 +48,7 @@ npm install
 npm install -g pm2
 openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey rsa:2048 -nodes -keyout cert.key -x509 -out cert.pem -days 36500
 mkdir ~/pool_db/
-cp config_example.json config.json
+sed -r "s/(\"db_storage_path\": ).*/\1\"\/home\/$CURUSER\/pool_db\/\",/" config_example.json > config.json
 cd ~
 git clone https://github.com/mesh0000/poolui.git
 cd poolui
