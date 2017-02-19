@@ -57,10 +57,10 @@ npm install
 ./node_modules/gulp/bin/gulp.js build
 cd build
 sudo ln -s `pwd` /var/www
-cd /tmp/
-wget -O caddy.tar.gz 'https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors'
-tar -xf caddy.tar.gz
-sudo cp caddy /usr/local/bin
+CADDY_DOWNLOAD_DIR=$(mktemp -d)
+cd $CADDY_DOWNLOAD_DIR
+curl -sL "https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors" | tar -xz caddy init/linux-systemd/caddy.service
+sudo mv caddy /usr/local/bin
 sudo chown root:root /usr/local/bin/caddy
 sudo chmod 755 /usr/local/bin/caddy
 sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
@@ -74,13 +74,13 @@ sudo chmod 0770 /etc/ssl/caddy
 sudo cp ~/nodejs-pool/deployment/caddyfile /etc/caddy/Caddyfile
 sudo chown www-data:www-data /etc/caddy/Caddyfile
 sudo chmod 444 /etc/caddy/Caddyfile
-sudo cp /tmp/init/linux-systemd/caddy.service /etc/systemd/system/
+sudo sh -c "sed 's/ProtectHome=true/ProtectHome=false/' init/linux-systemd/caddy.service > /etc/systemd/system/caddy.service"
 sudo chown root:root /etc/systemd/system/caddy.service
 sudo chmod 744 /etc/systemd/system/caddy.service
-sudo sed -i 's/ProtectHome=true/ProtectHome=false/' /etc/systemd/system/caddy.service
 sudo systemctl daemon-reload
 sudo systemctl enable caddy.service
 sudo systemctl start caddy.service
+rm -rf $CADDY_DOWNLOAD_DIR
 cd ~
 sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin `pwd`/.nvm/versions/node/v6.9.2/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
 cd ~/nodejs-pool
