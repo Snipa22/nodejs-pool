@@ -31,7 +31,7 @@ sudo git clone https://github.com/monero-project/monero.git
 cd monero
 sudo git checkout 15eb2bcf6f2132c5410e937186b6a3121147d628
 sudo git apply ~/nodejs-pool/deployment/fluffy.patch
-sudo make -j 4
+sudo make -j$(nproc)
 sudo cp ~/nodejs-pool/deployment/monero.service /lib/systemd/system/
 sudo useradd -m monerodaemon -d /home/monerodaemon
 BLOCKCHAIN_DOWNLOAD_DIR=$(mktemp -d)
