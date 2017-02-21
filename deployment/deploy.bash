@@ -31,12 +31,13 @@ sudo git clone https://github.com/monero-project/monero.git
 cd monero
 sudo git checkout 15eb2bcf6f2132c5410e937186b6a3121147d628
 sudo git apply ~/nodejs-pool/deployment/fluffy.patch
-sudo make -j 4
+sudo make -j$(nproc)
 sudo cp ~/nodejs-pool/deployment/monero.service /lib/systemd/system/
 sudo useradd -m monerodaemon -d /home/monerodaemon
-wget -O /tmp/blockchain.raw https://downloads.getmonero.org/blockchain.raw
-sudo -u monerodaemon /usr/local/src/monero/build/release/bin/monero-blockchain-import --input-file /tmp/blockchain.raw --batch-size 20000 --database lmdb#fastest --verify off --data-dir /home/monerodaemon/.bitmonero
-rm -f /tmp/blockchain.raw
+BLOCKCHAIN_DOWNLOAD_DIR=$(mktemp -d)
+wget -O $BLOCKCHAIN_DOWNLOAD_DIR/blockchain.raw https://downloads.getmonero.org/blockchain.raw
+sudo -u monerodaemon /usr/local/src/monero/build/release/bin/monero-blockchain-import --input-file $BLOCKCHAIN_DOWNLOAD_DIR/blockchain.raw --batch-size 20000 --database lmdb#fastest --verify off --data-dir /home/monerodaemon/.bitmonero
+rm -rf $BLOCKCHAIN_DOWNLOAD_DIR
 sudo systemctl daemon-reload
 sudo systemctl enable monero
 sudo systemctl start monero
@@ -48,7 +49,7 @@ npm install
 npm install -g pm2
 openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey rsa:2048 -nodes -keyout cert.key -x509 -out cert.pem -days 36500
 mkdir ~/pool_db/
-cp config_example.json config.json
+sed -r "s/(\"db_storage_path\": ).*/\1\"\/home\/$CURUSER\/pool_db\/\",/" config_example.json > config.json
 cd ~
 git clone https://github.com/mesh0000/poolui.git
 cd poolui
@@ -57,10 +58,10 @@ npm install
 ./node_modules/gulp/bin/gulp.js build
 cd build
 sudo ln -s `pwd` /var/www
-cd /tmp/
-wget -O caddy.tar.gz 'https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors'
-tar -xf caddy.tar.gz
-sudo cp caddy /usr/local/bin
+CADDY_DOWNLOAD_DIR=$(mktemp -d)
+cd $CADDY_DOWNLOAD_DIR
+curl -sL "https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors" | tar -xz caddy init/linux-systemd/caddy.service
+sudo mv caddy /usr/local/bin
 sudo chown root:root /usr/local/bin/caddy
 sudo chmod 755 /usr/local/bin/caddy
 sudo setcap 'cap_net_bind_service=+ep' /usr/local/bin/caddy
@@ -74,13 +75,13 @@ sudo chmod 0770 /etc/ssl/caddy
 sudo cp ~/nodejs-pool/deployment/caddyfile /etc/caddy/Caddyfile
 sudo chown www-data:www-data /etc/caddy/Caddyfile
 sudo chmod 444 /etc/caddy/Caddyfile
-sudo cp /tmp/init/linux-systemd/caddy.service /etc/systemd/system/
+sudo sh -c "sed 's/ProtectHome=true/ProtectHome=false/' init/linux-systemd/caddy.service > /etc/systemd/system/caddy.service"
 sudo chown root:root /etc/systemd/system/caddy.service
 sudo chmod 744 /etc/systemd/system/caddy.service
-sudo sed -i 's/ProtectHome=true/ProtectHome=false/' /etc/systemd/system/caddy.service
 sudo systemctl daemon-reload
 sudo systemctl enable caddy.service
 sudo systemctl start caddy.service
+rm -rf $CADDY_DOWNLOAD_DIR
 cd ~
 sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin `pwd`/.nvm/versions/node/v6.9.2/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
 cd ~/nodejs-pool
