@@ -18,6 +18,7 @@
     "circular-buffer": "1.0.2",
     "cluster": "0.7.7",
     "concat-stream": "^1.6.0",
+    "cors": "^2.8.1",
     "crypto": "0.0.3",
     "cryptonote-util": "git://github.com/Snipa22/node-cryptonote-util.git#xmr-Nan-2.0",
     "debug": "2.5.1",
