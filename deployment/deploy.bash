@@ -29,8 +29,7 @@ sudo systemctl enable ntp
 cd /usr/local/src
 sudo git clone https://github.com/monero-project/monero.git
 cd monero
-sudo git checkout 15eb2bcf6f2132c5410e937186b6a3121147d628
-sudo git apply ~/nodejs-pool/deployment/fluffy.patch
+sudo git checkout v0.10.2
 sudo make -j$(nproc)
 sudo cp ~/nodejs-pool/deployment/monero.service /lib/systemd/system/
 sudo useradd -m monerodaemon -d /home/monerodaemon
