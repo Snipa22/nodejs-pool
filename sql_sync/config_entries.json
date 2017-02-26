@@ -534,5 +534,21 @@
     "item_value": "NodeJS-Pool Administration Team",
     "item_type": "string",
     "Item_desc": "Signature line for the emails."
+  },
+  {
+    "id": 73,
+    "module": "payout",
+    "item": "timer",
+    "item_value": "120",
+    "item_type": "int",
+    "Item_desc": "Number of minutes between main payment daemon cycles"
+  },
+  {
+    "id": 74,
+    "module": "payout",
+    "item": "timerRetry",
+    "item_value": "25",
+    "item_type": "int",
+    "Item_desc": "Number of minutes between payment daemon retrying due to not enough funds"
   }
 ]
