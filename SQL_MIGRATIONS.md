@@ -31,5 +31,5 @@ ALTER TABLE pool.xmrtoTxn CONVERT TO CHARACTER SET utf8 COLLATE utf8_general_ci;
 2/25/2017
 ---------
 ```sql
-ALTER TABLE monero_live.users ADD enable_email BOOL DEFAULT true NULL;
+ALTER TABLE pool.users ADD enable_email BOOL DEFAULT true NULL;
 ```
