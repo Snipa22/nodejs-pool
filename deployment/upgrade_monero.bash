@@ -5,7 +5,7 @@ echo "Continuing install, this will prompt you for your password if you didn't e
 cd /usr/local/src/monero
 sudo checkout .
 sudo checkout v0.10.2.1
-curl -L https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v --index
+curl -L https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v
 sudo rm -rf build
 sudo make -j$(nproc)
 echo "Done building the new Monero daemon!  Please go ahead and reboot monero with: sudo systemctl restart monero as soon as the pool source is updated!"
