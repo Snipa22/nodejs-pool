@@ -5,8 +5,11 @@
     proxy /api 127.0.0.1:8001 {
         without /api
     }
+    proxy /socket.io 127.0.0.1:8001 {
+        header_upstream Connection {>Connection}
+        header_upstream Upgrade {>Upgrade}
+    }
     header / {
-        Access-Control-Allow-Origin  *
         Access-Control-Allow-Methods "GET, POST, OPTIONS"
         Access-Control-Allow-Headers "Content-Type, x-access-token"
     }
