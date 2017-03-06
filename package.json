@@ -38,6 +38,7 @@
     "shapeshift.io": "1.3.0",
     "socketio": "^1.0.0",
     "sprintf-js": "^1.0.3",
+    "sticky-cluster": "^0.3.1",
     "uuid": "3.0.1",
     "wallet-address-validator": "0.1.0",
     "zmq": "^2.15.3"
