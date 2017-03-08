@@ -13,7 +13,7 @@ sudo ln -s /usr/share/zoneinfo/Zulu /etc/localtime
 sudo dpkg-reconfigure -f noninteractive tzdata
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
-sudo DEBIAN_FRONTEND=noninteractive apt-get -y install git python-virtualenv python3-virtualenv curl ntp build-essential screen cmake pkg-config libboost-all-dev libevent-dev libunbound-dev libminiupnpc-dev libunwind8-dev liblzma-dev libldns-dev libexpat1-dev libgtest-dev
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y install git python-virtualenv python3-virtualenv curl ntp build-essential screen cmake pkg-config libboost-all-dev libevent-dev libunbound-dev libminiupnpc-dev libunwind8-dev liblzma-dev libldns-dev libexpat1-dev libgtest-dev libzmq3-dev
 cd ~
 git clone https://github.com/Snipa22/nodejs-pool.git  # Change this depending on how the deployment goes.
 cd /usr/src/gtest

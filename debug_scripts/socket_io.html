@@ -1,0 +1,22 @@
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
+<script>
+    // set-up a connection between the client and the server
+    var socket = io.connect('https://api.xmrpool.net/');
+
+    // let's assume that the client page, once rendered, knows what room it wants to join
+
+    socket.on('connect', function() {
+        // Connected, let's sign-up for to receive messages for this room
+        socket.emit('room', "pool_stats");
+        socket.emit('room', "pool_stats_pplns");
+        socket.emit('room', "pool_stats_solo");
+        socket.emit('room', "block_update");
+        socket.emit('room', "address_stats_46XWBqE1iwsVxSDP1qDrxhE1XvsZV6eALG5LwnoMdjbT4GPdy2bZTb99kagzxp2MMjUamTYZ4WgvZdFadvMimTjvR6Gv8hL");
+    });
+
+    socket.on('message', function(data) {
+        console.log('Incoming message:', data);
+    });
+</script>
+</html>
