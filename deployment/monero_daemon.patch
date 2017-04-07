@@ -11,3 +11,4 @@ index da5e663..f7575e6 100644
      {
        auto tx_it = m_transactions.find(sorted_it->second);
        LOG_PRINT_L2("Considering " << tx_it->first << ", size " << tx_it->second.blob_size << ", current block size " << total_size << "/" << max_total_size << ", current coinbase " << print_money(best_coinbase));
+
