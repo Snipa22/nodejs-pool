@@ -1,9 +1,9 @@
 diff --git a/src/cryptonote_core/tx_pool.cpp b/src/cryptonote_core/tx_pool.cpp
-index e943c961..03381c4c 100644
+index da5e663..f7575e6 100644
 --- a/src/cryptonote_core/tx_pool.cpp
 +++ b/src/cryptonote_core/tx_pool.cpp
-@@ -628,7 +628,7 @@ namespace cryptonote
-
+@@ -636,7 +636,7 @@ namespace cryptonote
+ 
      LOG_PRINT_L2("Filling block template, median size " << median_size << ", " << m_txs_by_fee_and_receive_time.size() << " txes in the pool");
      auto sorted_it = m_txs_by_fee_and_receive_time.begin();
 -    while (sorted_it != m_txs_by_fee_and_receive_time.end())
