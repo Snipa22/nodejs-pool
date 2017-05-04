@@ -550,5 +550,13 @@
     "item_value": "25",
     "item_type": "int",
     "Item_desc": "Number of minutes between payment daemon retrying due to not enough funds"
+  },
+  {
+    "id": 75,
+    "module": "payout",
+    "item": "priority",
+    "item_value": "0",
+    "item_type": "int",
+    "Item_desc": "Payout priority setting. 0 = use default (4x fee); 1 = low prio (1x fee)"
   }
 ]
