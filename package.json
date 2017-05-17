@@ -28,7 +28,7 @@
     "moment": "2.17.1",
     "multi-hashing": "git+https://github.com/Snipa22/node-multi-hashing-aesni.git",
     "mysql": "2.12.0",
-    "node-lmdb": "^0.4.3",
+    "node-lmdb": "0.4.12",
     "promise-mysql": "3.0.0",
     "protocol-buffers": "^3.2.1",
     "range": "0.0.3",
