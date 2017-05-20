@@ -1,6 +1,7 @@
 const valid_actions = ['finder', 'stats', 'list'];
 let error = 0;
-if (!global.argv.hasOwnProperty('action') || !valid_actions.hasOwnProperty(global.argv.action)) {
+
+if (!global.argv.hasOwnProperty('action') || valid_actions.indexOf(global.argv.action) === -1) {
     console.error("No action provided to block module.");
     console.error("Valid actions: " + valid_actions.join(', '));
 }
