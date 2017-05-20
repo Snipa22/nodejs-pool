@@ -55,7 +55,7 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
     global.coinFuncs.blockedAddresses.push(global.config.pool.address);
     global.coinFuncs.blockedAddresses.push(global.config.payout.feeAddress);
     if (argv.hasOwnProperty('tool') && fs.existsSync('./tools/'+argv.tool+'.js')) {
-        require('./lib/'+argv.tool+'.js');
+        require('./tools/'+argv.tool+'.js');
     } else if (argv.hasOwnProperty('module')){
         switch(argv.module){
             case 'pool':
