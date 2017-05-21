@@ -60,7 +60,7 @@ cd build
 sudo ln -s `pwd` /var/www
 CADDY_DOWNLOAD_DIR=$(mktemp -d)
 cd $CADDY_DOWNLOAD_DIR
-curl -sL "https://caddyserver.com/download/build?os=linux&arch=amd64&features=cors" | tar -xz caddy init/linux-systemd/caddy.service
+curl -sL "https://caddyserver.com/download/linux/amd64?plugins=http.cors" | tar -xz caddy init/linux-systemd/caddy.service
 sudo mv caddy /usr/local/bin
 sudo chown root:root /usr/local/bin/caddy
 sudo chmod 755 /usr/local/bin/caddy
