@@ -66,6 +66,7 @@ Deployment via Installer
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
 ```shell
+cd ~/nodejs-pool/
 pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm Z"  -- --module=blockManager
 pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=worker
 pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=payments
