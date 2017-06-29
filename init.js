@@ -95,6 +95,9 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
             case 'longRunner':
                 require('./lib/longRunner.js');
                 break;
+            case 'longRunnerNew':
+                require('./lib/longRunnerNew.js');
+                break;
             default:
                 console.error("Invalid module provided.  Please provide a valid module");
                 process.exit(1);
