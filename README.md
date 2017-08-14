@@ -258,6 +258,8 @@ If you'd like assistance with setting up node-cryptonote-pool, please provide wh
 
 Assistance is not available for frontend customization at this time.
 
+For assitance, please contact Snipa at pool_install@snipanet.com or via IRC at irc.freenode.net in the #monero-pools channel.
+
 Credits
 =======
 
