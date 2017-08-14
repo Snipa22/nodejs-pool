@@ -245,6 +245,19 @@ For 1 in 1000000000 chance: 5% fee -> 1800 2% fee -> 4500
 
 The developers of the pool have not verified this, but based on our own usage on https://xmrpool.net/ this seems rather reasonable.  You should be wary if you're consdering PPS and take you fees into account appropriately!
 
+Installation/Configuration Assistance
+=====================================
+If you need help installing the pool from scratch, please have your servers ready, which would be Ubuntu 16.04 servers, blank and clean, DNS records pointed.  These need to be x86_64 boxes with AES-NI Available.
+
+Installation asstiance is 7 XMR, with a 3 XMR deposit, with remainder to be paid on completion.  
+Configuration assistance is 4 XMR with a 2 XMR deposit, and includes debugging your pool configurations, ensuring that everything is running, and tuning for your uses/needs.  
+
+SSH access with a sudo-enabled user will be needed, preferably the user that is slated to run the pool.
+
+If you'd like assistance with setting up node-cryptonote-pool, please provide what branch/repo you'd like to work from, as there's a variety of these.
+
+Assistance is not available for frontend customization at this time.
+
 Credits
 =======
 
