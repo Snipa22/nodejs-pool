@@ -6,7 +6,7 @@ cd /usr/local/src/monero
 sudo git checkout .
 sudo git checkout master
 sudo git pull
-sudo git checkout v0.10.3.1
+sudo git checkout v0.11.0.0
 curl -L https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v
 sudo rm -rf build
 sudo make -j$(nproc)
