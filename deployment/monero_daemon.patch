@@ -4,7 +4,7 @@ index 4b3fa787..a2340139 100644
 +++ b/src/cryptonote_core/tx_pool.cpp
 @@ -863,7 +863,7 @@ namespace cryptonote
      LockedTXN lock(m_blockchain);
-
+ 
      auto sorted_it = m_txs_by_fee_and_receive_time.begin();
 -    while (sorted_it != m_txs_by_fee_and_receive_time.end())
 +    while (sorted_it != m_txs_by_fee_and_receive_time.end() && bl.tx_hashes.size() <= 120)
