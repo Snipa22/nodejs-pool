@@ -77,7 +77,7 @@ sudo chown www-data:www-data /etc/caddy/Caddyfile
 sudo chmod 444 /etc/caddy/Caddyfile
 sudo sh -c "sed 's/ProtectHome=true/ProtectHome=false/' init/linux-systemd/caddy.service > /etc/systemd/system/caddy.service"
 sudo chown root:root /etc/systemd/system/caddy.service
-sudo chmod 744 /etc/systemd/system/caddy.service
+sudo chmod 644 /etc/systemd/system/caddy.service
 sudo systemctl daemon-reload
 sudo systemctl enable caddy.service
 sudo systemctl start caddy.service
