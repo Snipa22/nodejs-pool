@@ -1,6 +1,7 @@
 {
   "xmr": {
     "funcFile": "./lib/coins/xmr.js",
+    "paymentFile": "./lib/payment_systems/xmr.js",
     "sigDigits": 1000000000000,
     "shapeshift": "xmr_btc",
     "xmrTo": true,
@@ -10,6 +11,7 @@
   },
   "krb": {
     "funcFile": "./lib/coins/krb.js",
+    "paymentFile": "./lib/payment_systems/krb.js",
     "sigDigits": 1000000000000,
     "name": "Karbowanec",
     "mixIn": 4,
@@ -17,6 +19,7 @@
   },
   "aeon": {
     "funcFile": "./lib/coins/aeon.js",
+    "paymentFile": "./lib/payment_systems/aeon.js",
     "sigDigits": 1000000000000,
     "name": "Aeon Coin",
     "mixIn": 4,
