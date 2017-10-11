@@ -14,5 +14,12 @@
     "name": "Karbowanec",
     "mixIn": 4,
     "shortCode": "KRB"
+  },
+  "aeon": {
+    "funcFile": "./lib/coins/aeon.js",
+    "sigDigits": 1000000000000,
+    "name": "Aeon Coin",
+    "mixIn": 4,
+    "shortCode": "AEON"
   }
 }
