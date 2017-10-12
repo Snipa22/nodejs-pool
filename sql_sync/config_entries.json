@@ -558,5 +558,21 @@
     "item_value": "0",
     "item_type": "int",
     "Item_desc": "Payout priority setting. 0 = use default (4x fee); 1 = low prio (1x fee)"
+  },
+  {
+    "id": 76,
+    "module": "payout",
+    "item": "fee",
+    "item_value": "10000000000",
+    "item_type": "int",
+    "Item_desc": "Atomic units of coin to use ass a fee"
+  },
+  {
+    "id": 77,
+    "module": "payout",
+    "item": "unlock_time",
+    "item_value": "0",
+    "item_type": "int",
+    "Item_desc": "Number of blocks assumed before the payout unlocks."
   }
 ]
