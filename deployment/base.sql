@@ -230,6 +230,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'emailSig', 'NodeJS-Pool Administration Team', 'string', 'Signature line for the emails.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'timer', '120', 'int', 'Number of minutes between main payment daemon cycles');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'timerRetry', '25', 'int', 'Number of minutes between payment daemon retrying due to not enough funds');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'priority', '0', 'int', 'Payout priority setting. 0 = use default (4x fee); 1 = low prio (1x fee)');
 INSERT INTO pool.users (username, pass, email, admin, payout_threshold) VALUES ('Administrator', null, 'Password123', 1, 0);
 INSERT INTO pool.port_config (poolPort, difficulty, portDesc, portType, hidden, `ssl`) VALUES (3333, 1000, 'Low-End Hardware (Up to 30-40 h/s)', 'pplns', 0, 0);
 INSERT INTO pool.port_config (poolPort, difficulty, portDesc, portType, hidden, `ssl`) VALUES (5555, 5000, 'Medium-Range Hardware (Up to 160 h/s)', 'pplns', 0, 0);

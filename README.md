@@ -1,3 +1,11 @@
+SUPER IMPORTANT UPDATE UNTIL THIS UPDATE DISAPPEARS
+===================================================
+None of the following applies if you installed the pool AFTER June 2nd 2017, as the installers will do this work for you.
+
+The pool currently uses a version of LMDB that is not supported in Ubuntu 16.04 at this time.  Please run: bash deployment/install_lmdb_tools.sh once from the root of the installation to load the LMDB tools, this will put them somewhere handy on your path, and drop a new alias to them so they can be used to introspect your database.
+
+If you had installed the pool prior to 6/2/2017, PLEASE make sure you run a npm install before you restart services.
+
 Pool Design/Theory
 ==================
 The nodejs-pool is built around a small series of core daemons that share access to a single LMDB table for tracking of shares, with MySQL being used to centralize configurations and ensure simple access from local/remote nodes.  The core daemons follow:
@@ -34,7 +42,7 @@ Setup Instructions
 Server Requirements
 -------------------
 * 4 Gb Ram
-* 2 CPU Cores
+* 2 CPU Cores (with AES_NI)
 * 60 Gb SSD-Backed Storage - If you're doing a multi-server install, the leaf nodes do not need this much storage.  They just need enough storage to hold the blockchain for your node.  The pool comes configured to use up to 24Gb of storage for LMDB.  Assuming you have the longRunner worker running, it should never get near this size, but be aware that it /can/ bloat readily if things error, so be ready for this!
 * Notably, this happens to be approximately the size of a 4Gb linode instance, which is where the majority of automated deployment testing happened!
 
@@ -51,13 +59,14 @@ Deployment via Installer
 1. Add your user to `/etc/sudoers`, this must be done so the script can sudo up and do it's job.  We suggest passwordless sudo.  Suggested line: `<USER> ALL=(ALL) NOPASSWD:ALL`.  Our sample builds use: `pooldaemon ALL=(ALL) NOPASSWD:ALL`
 2. Run the [deploy script](https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/deploy.bash) as a **NON-ROOT USER**.  This is very important!  This script will install the pool to whatever user it's running under!  Also.  Go get a coffee, this sucker bootstraps the monero installation.
 3. Once it's complete, change as `config.json` appropriate.  It is pre-loaded for a local install of everything, running on 127.0.0.1.  This will work perfectly fine if you're using a single node setup.  You will also want to run: source ~/.bashrc  This will activate NVM and get things working for the following pm2 steps.
-4. You'll need to change the API end point for the frontend code in the `poolui/app/utils/services.js` -- This will usually be `http://<your server ip>/api` unless you tweak caddy!
+4. You'll need to change the API end point for the frontend code in the `poolui/build/globals.js` and `poolui/build/global.default.js` -- This will usually be `http(s)://<your server FQDN>/api` unless you tweak caddy!
 5. Check `config.json` and change as appropriate. The default database directory `/home/<username>/pool_db/` is already been created during startup. If you change the `db_storage_path` just make sure your user has write permissions for new path. Run: `pm2 restart api` to reload the API for usage.  You'll also want to set `bind_ip` to the external IP of the pool server, and `hostname` to the resolvable hostname for the pool server. `pool_id` is mostly used for multi-server installations to provide unique identifiers in the backend.
 6. Hop into the web interface (Should be at `http://<your server IP>/#/admin`), then login with `Administrator/Password123`, **MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN**. *<- This step is currently not active, we're waiting for the frontend to catch up!  Head down to the Manual SQL Configuration to take a look at what needs to be done by hand for now*.
 7. From the admin panel, you can configure all of your pool's settings for addresses, payment thresholds, etc.
 8. Once you're happy with the settings, go ahead and start all the pool daemons, commands follow.
 
 ```shell
+cd ~/nodejs-pool/
 pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm Z"  -- --module=blockManager
 pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=worker
 pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=payments
@@ -235,6 +244,21 @@ For 1 in 1000000000 chance: 5% fee -> 1800 2% fee -> 4500
 ```
 
 The developers of the pool have not verified this, but based on our own usage on https://xmrpool.net/ this seems rather reasonable.  You should be wary if you're consdering PPS and take you fees into account appropriately!
+
+Installation/Configuration Assistance
+=====================================
+If you need help installing the pool from scratch, please have your servers ready, which would be Ubuntu 16.04 servers, blank and clean, DNS records pointed.  These need to be x86_64 boxes with AES-NI Available.
+
+Installation asstiance is 7 XMR, with a 3 XMR deposit, with remainder to be paid on completion.  
+Configuration assistance is 4 XMR with a 2 XMR deposit, and includes debugging your pool configurations, ensuring that everything is running, and tuning for your uses/needs.  
+
+SSH access with a sudo-enabled user will be needed, preferably the user that is slated to run the pool.
+
+If you'd like assistance with setting up node-cryptonote-pool, please provide what branch/repo you'd like to work from, as there's a variety of these.
+
+Assistance is not available for frontend customization at this time.
+
+For assitance, please contact Snipa at pool_install@snipanet.com or via IRC at irc.freenode.net in the #monero-pools channel.
 
 Credits
 =======
