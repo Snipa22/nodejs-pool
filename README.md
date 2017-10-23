@@ -260,6 +260,13 @@ Assistance is not available for frontend customization at this time.
 
 For assitance, please contact Snipa at pool_install@snipanet.com or via IRC at irc.freenode.net in the #monero-pools channel.
 
+Developer Donations
+===================
+If you'd like to make a one time donation, the addresses are as follows:
+* XMR - 44Ldv5GQQhP7K7t3ZBdZjkPA7Kg7dhHwk3ZM3RJqxxrecENSFx27Vq14NAMAd2HBvwEPUVVvydPRLcC69JCZDHLT2X5a4gr
+* BTC - 114DGE2jmPb5CP2RGKZn6u6xtccHhZGFmM
+* AEON - WmtvM6SoYya4qzkoPB4wX7FACWcXyFPWAYzfz7CADECgKyBemAeb3dVb3QomHjRWwGS3VYzMJAnBXfUx5CfGLFZd1U7ssdXTu
+
 Credits
 =======
 
