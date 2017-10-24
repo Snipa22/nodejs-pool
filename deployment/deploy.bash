@@ -8,10 +8,7 @@ if [[ `whoami` == "root" ]]; then
 fi
 ROOT_SQL_PASS=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 CURUSER=$(whoami)
-echo "Etc/UTC" | sudo tee -a /etc/timezone
-sudo rm -rf /etc/localtime
-sudo ln -s /usr/share/zoneinfo/Zulu /etc/localtime
-sudo dpkg-reconfigure -f noninteractive tzdata
+sudo timedatectl set-timezone Etc/UTC
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $ROOT_SQL_PASS"
