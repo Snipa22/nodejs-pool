@@ -1,3 +1,11 @@
+SUPER IMPORTANT UPDATE UNTIL THIS UPDATE DISAPPEARS
+===================================================
+None of the following applies if you installed the pool AFTER June 2nd 2017, as the installers will do this work for you.
+
+The pool currently uses a version of LMDB that is not supported in Ubuntu 16.04 at this time.  Please run: bash deployment/install_lmdb_tools.sh once from the root of the installation to load the LMDB tools, this will put them somewhere handy on your path, and drop a new alias to them so they can be used to introspect your database.
+
+If you had installed the pool prior to 6/2/2017, PLEASE make sure you run a npm install before you restart services.
+
 Pool Design/Theory
 ==================
 The nodejs-pool is built around a small series of core daemons that share access to a single LMDB table for tracking of shares, with MySQL being used to centralize configurations and ensure simple access from local/remote nodes.  The core daemons follow:
