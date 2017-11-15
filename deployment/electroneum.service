@@ -1,0 +1,13 @@
+[Unit]
+Description=Electroneum Daemon
+After=network.target
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart=/usr/local/src/electroneum/build/release/bin/electroneumd --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc
+Restart=always
+User=electroneumdaemon
+
+[Install]
+WantedBy=multi-user.target
