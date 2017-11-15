@@ -17,6 +17,14 @@
     "mixIn": 4,
     "shortCode": "KRB"
   },
+  "etn": {
+    "funcFile": "./lib/coins/etn.js",
+    "paymentFile": "./payment_systems/etn.js",
+    "sigDigits": 1000000000000,
+    "name": "Electroneum",
+    "mixIn": 4,
+    "shortCode": "ETN"
+  },
   "aeon": {
     "funcFile": "./lib/coins/aeon.js",
     "paymentFile": "./payment_systems/aeon.js",
