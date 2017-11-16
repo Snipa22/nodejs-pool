@@ -28,6 +28,7 @@ sudo git clone https://github.com/electroneum/electroneum.git
 cd electroneum
 sudo git checkout
 curl https://raw.githubusercontent.com/3ditguy/nodejs-pool/master/deployment/electroneum_daemon.patch | sudo git apply -v
+sudo cmake .
 sudo make -j$(nproc)
 sudo cp ~/nodejs-pool/deployment/electroneum.service /lib/systemd/system/
 sudo useradd -m electroneumdaemon -d /home/electroneumdaemon
