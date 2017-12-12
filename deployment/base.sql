@@ -226,7 +226,9 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'maxPaymentTxns', '5', 'int', 'Maximum number of transactions in a single payment');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'shareHost', '', 'string', 'Host that receives share information');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerNotHashingBody', 'Your worker: %(worker)s has stopped submitting hashes at: %(timestamp)s UTC\n', 'string', 'Email sent to the miner when their worker stops hashing');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerNotHashingSubject', 'Some of your worker(s) stopped hashing', 'string', 'Subject of email sent to miner when worker stops hashing');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerNotHashingSubject', 'Status of your worker(s)', 'string', 'Subject of email sent to miner when worker stops hashing');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerStartHashingBody', 'Your worker: %(worker)s has started submitting hashes at: %(timestamp)s UTC\n', 'string', 'Email sent to the miner when their worker starts hashing');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerStartHashingSubject', 'Status of your worker(s)', 'string', 'Subject of email sent to miner when worker starts hashing');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'emailSig', 'NodeJS-Pool Administration Team', 'string', 'Signature line for the emails.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'timer', '120', 'int', 'Number of minutes between main payment daemon cycles');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'timerRetry', '25', 'int', 'Number of minutes between payment daemon retrying due to not enough funds');
