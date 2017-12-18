@@ -99,10 +99,8 @@ The pool is designed to have a dual-wallet design, one which is a fee wallet, on
 
 1. Generate your wallets using `/usr/local/src/electroneum/bin/electroneum-wallet-cli`
 2. Make sure to save your regeneration stuff!
-3. For the pool wallet, store the password in a file, the suggestion is `~/wallet`
-4. Change the mode of the file with chmod to 0400: `chmod 0400 ~/wallet`
-5. Start the wallet using PM2: `pm2 start /usr/local/src/electroneum/bin/monero-wallet-rpc -- --rpc-bind-port 26969 --wallet-file ~/wallet/<Your wallet name here> --password <Your wallet password here> --disable-rpc-login --trusted-daemon`
-6. If you don't use PM2, then throw the wallet into a screen and have fun.
+2. Start the wallet using PM2: `pm2 start /usr/local/src/electroneum/bin/electroneum-wallet-rpc -- --rpc-bind-port 26969 --wallet-file <Your wallet name here> --password <Your wallet password here> --disable-rpc-login --trusted-daemon`
+3. If you don't use PM2, then throw the wallet into a screen and have fun.
 
 Manual Setup
 ------------
