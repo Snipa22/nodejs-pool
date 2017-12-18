@@ -39,6 +39,7 @@ sudo curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.s
 source ~/.nvm/nvm.sh
 nvm install v6.9.2
 cd ~/nodejs-pool
+sudo chown -R $USER ~/nodejs-pool
 npm install
 npm install -g pm2
 sudo openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey rsa:2048 -nodes -keyout cert.key -x509 -out cert.pem -days 36500
@@ -47,6 +48,7 @@ sed -r "s/(\"db_storage_path\": ).*/\1\"\/home\/$CURUSER\/pool_db\/\",/" config_
 cd ~
 sudo git clone https://github.com/mesh0000/poolui.git
 cd poolui
+sudo chown -R $USER ~/poolui
 npm install
 ./node_modules/bower/bin/bower update
 ./node_modules/gulp/bin/gulp.js build
