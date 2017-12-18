@@ -16,7 +16,7 @@ sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again p
 echo -e "[client]\nuser=root\npassword=$ROOT_SQL_PASS" | sudo tee /root/.my.cnf
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install git python-virtualenv python3-virtualenv curl ntp build-essential screen cmake pkg-config libboost-all-dev libevent-dev libunbound-dev libminiupnpc-dev libunwind8-dev liblzma-dev libldns-dev libexpat1-dev libgtest-dev mysql-server lmdb-utils libzmq3-dev
 cd ~
-sudo git clone https://github.com/3ditguy/nodejs-pool.git  # Change this depending on how the deployment goes.
+sudo git clone https://github.com/sugoiporu/nodejs-pool.git  # Change this depending on how the deployment goes.
 cd /usr/src/gtest
 sudo cmake .
 sudo make
@@ -27,7 +27,7 @@ cd /usr/local/src
 sudo git clone https://github.com/electroneum/electroneum.git
 cd electroneum
 sudo git checkout
-sudo curl https://raw.githubusercontent.com/3ditguy/nodejs-pool/master/deployment/electroneum_daemon.patch | sudo git apply -v
+sudo curl https://raw.githubusercontent.com/sugoiporu/nodejs-pool/master/deployment/electroneum_daemon.patch | sudo git apply -v
 sudo cmake .
 sudo make -j$(nproc)
 sudo cp ~/nodejs-pool/deployment/electroneum.service /lib/systemd/system/
