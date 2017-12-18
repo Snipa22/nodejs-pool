@@ -6,6 +6,7 @@ After=network.target
 Type=forking
 GuessMainPID=no
 ExecStart=/usr/local/src/electroneum/build/release/bin/electroneumd --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc
+ExecStop=/usr/local/bin/electroneum/build/release/bin/electroneumd exit
 Restart=always
 User=electroneumdaemon
 
