@@ -16,7 +16,7 @@ sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again p
 echo -e "[client]\nuser=root\npassword=$ROOT_SQL_PASS" | sudo tee /root/.my.cnf
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install git python-virtualenv python3-virtualenv curl ntp build-essential screen cmake pkg-config libboost-all-dev libevent-dev libunbound-dev libminiupnpc-dev libunwind8-dev liblzma-dev libldns-dev libexpat1-dev libgtest-dev mysql-server lmdb-utils libzmq3-dev
 cd ~
-git clone https://github.com/3ditguy/nodejs-pool.git  # Change this depending on how the deployment goes.
+sudo git clone https://github.com/3ditguy/nodejs-pool.git  # Change this depending on how the deployment goes.
 cd /usr/src/gtest
 sudo cmake .
 sudo make
@@ -27,7 +27,7 @@ cd /usr/local/src
 sudo git clone https://github.com/electroneum/electroneum.git
 cd electroneum
 sudo git checkout
-curl https://raw.githubusercontent.com/3ditguy/nodejs-pool/master/deployment/electroneum_daemon.patch | sudo git apply -v
+sudo curl https://raw.githubusercontent.com/3ditguy/nodejs-pool/master/deployment/electroneum_daemon.patch | sudo git apply -v
 sudo cmake .
 sudo make -j$(nproc)
 sudo cp ~/nodejs-pool/deployment/electroneum.service /lib/systemd/system/
@@ -35,17 +35,17 @@ sudo useradd -m electroneumdaemon -d /home/electroneumdaemon
 sudo systemctl daemon-reload
 sudo systemctl enable electroneum
 sudo systemctl start electroneum
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+sudo curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 source ~/.nvm/nvm.sh
 nvm install v6.9.2
 cd ~/nodejs-pool
 npm install
 npm install -g pm2
-openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey rsa:2048 -nodes -keyout cert.key -x509 -out cert.pem -days 36500
+sudo openssl req -subj "/C=IT/ST=Pool/L=Daemon/O=Mining Pool/CN=mining.pool" -newkey rsa:2048 -nodes -keyout cert.key -x509 -out cert.pem -days 36500
 mkdir ~/pool_db/
 sed -r "s/(\"db_storage_path\": ).*/\1\"\/home\/$CURUSER\/pool_db\/\",/" config_example.json > config.json
 cd ~
-git clone https://github.com/mesh0000/poolui.git
+sudo git clone https://github.com/mesh0000/poolui.git
 cd poolui
 npm install
 ./node_modules/bower/bin/bower update
@@ -75,7 +75,7 @@ sudo chmod 644 /etc/systemd/system/caddy.service
 sudo systemctl daemon-reload
 sudo systemctl enable caddy.service
 sudo systemctl start caddy.service
-rm -rf $CADDY_DOWNLOAD_DIR
+sudo rm -rf $CADDY_DOWNLOAD_DIR
 cd ~
 sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin `pwd`/.nvm/versions/node/v6.9.2/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
 cd ~/nodejs-pool
