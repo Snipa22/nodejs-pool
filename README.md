@@ -71,7 +71,7 @@ pm2 restart api
 
 Install Script:
 ```bash
-curl -L https://raw.githubusercontent.com/sugoiporu/nodejs-pool/master/deployment/deploy.bash | bash
+curl -L https://raw.githubusercontent.com/ArqTras/nodejs-pool/master/deployment/deploy_electroneum.bash | bash
 ```
 
 Assumptions for the installer
