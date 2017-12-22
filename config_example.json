@@ -1,9 +1,9 @@
 {
   "pool_id": 0,
-  "bind_ip": "127.0.0.1",
+  "bind_ip": "0.0.0.0",
   "hostname": "testpool.com",
   "db_storage_path": "CHANGEME",
-  "coin": "xmr",
+  "coin": "etn",
   "mysql": {
     "connectionLimit": 20,
     "host": "127.0.0.1",
