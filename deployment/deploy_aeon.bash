@@ -18,26 +18,27 @@ sudo debconf-set-selections <<< "mysql-server mysql-server/root_password passwor
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $ROOT_SQL_PASS"
 echo -e "[client]\nuser=root\npassword=$ROOT_SQL_PASS" | sudo tee /root/.my.cnf
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install git python-virtualenv python3-virtualenv curl ntp build-essential screen cmake pkg-config libboost-all-dev libevent-dev libunbound-dev libminiupnpc-dev libunwind8-dev liblzma-dev libldns-dev libexpat1-dev libgtest-dev mysql-server lmdb-utils libzmq3-dev
+git clone https://github.com/Snipa22/nodejs-pool.git  # Change this depending on how the deployment goes.
 cd /usr/src/gtest
 sudo cmake .
 sudo make
 sudo mv libg* /usr/lib/
 cd ~
-#sudo systemctl enable ntp
-#cd /usr/local/src
-#sudo git clone https://github.com/aeonix/aeon.git
-#cd aeon
-#sudo git checkout v0.9.14.0
-#sudo make -j$(nproc)
-#sudo cp ~/nodejs-pool/deployment/aeon.service /lib/systemd/system/
-#sudo useradd -m aeondaemon -d /home/aeondaemon
-#sudo -u aeondaemon mkdir /home/aeondaemon/.aeon
+sudo systemctl enable ntp
+cd /usr/local/src
+sudo git clone https://github.com/aeonix/aeon.git
+cd aeon
+sudo git checkout v0.9.14.0
+sudo make -j$(nproc)
+sudo cp ~/nodejs-pool/deployment/aeon.service /lib/systemd/system/
+sudo useradd -m aeondaemon -d /home/aeondaemon
+sudo -u aeondaemon mkdir /home/aeondaemon/.aeon
 #BLOCKCHAIN_DOWNLOAD_DIR=$(sudo -u aeondaemon mktemp -d)
 #sudo -u aeondaemon wget --limit-rate=50m -O $BLOCKCHAIN_DOWNLOAD_DIR/blockchain.bin http://74.208.156.45/blockchain.raw
 #sudo -u aeondaemon mv $BLOCKCHAIN_DOWNLOAD_DIR/blockchain.bin /home/aeondaemon/.aeon/blockchain.bin
 #sudo -u aeondaemon rm -rf $BLOCKCHAIN_DOWNLOAD_DIR
-#sudo systemctl daemon-reload
-#sudo systemctl enable aeon
+sudo systemctl daemon-reload
+sudo systemctl enable aeon
 #sudo systemctl start aeon
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 source ~/.nvm/nvm.sh
@@ -85,7 +86,7 @@ sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin `pwd`/.nvm/versions/node
 cd ~/nodejs-pool
 sudo chown -R $CURUSER. ~/.pm2
 echo "Installing pm2-logrotate in the background!"
-pm2 install pm2-logrotate &
+pm2 install pm2-logrotate
 mysql -u root --password=$ROOT_SQL_PASS < deployment/base.sql
 mysql -u root --password=$ROOT_SQL_PASS pool -e "INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('api', 'authKey', '`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`', 'string', 'Auth key sent with all Websocket frames for validation.')"
 mysql -u root --password=$ROOT_SQL_PASS pool -e "INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('api', 'secKey', '`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`', 'string', 'HMAC key for Passwords.  JWT Secret Key.  Changing this will invalidate all current logins.')"
@@ -94,3 +95,4 @@ bash ~/nodejs-pool/deployment/install_lmdb_tools.sh
 cd ~/nodejs-pool/sql_sync/
 env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin node sql_sync.js
 echo "You're setup!  Please read the rest of the readme for the remainder of your setup and configuration.  These steps include: Setting your Fee Address, Pool Address, Global Domain, and the Mailgun setup!"
+echo "Don't forget to manually sync the aeon blockchain for your first time use"
