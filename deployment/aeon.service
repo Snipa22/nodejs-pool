@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=forking
 GuessMainPID=no
-ExecStart=/usr/local/src/aeon/build/release/bin/aeon --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc
+ExecStart=/usr/local/src/aeon/build/release/src/aeond --rpc-bind-ip 127.0.0.1 --restricted-rpc
 Restart=always
 User=aeondaemon
 
