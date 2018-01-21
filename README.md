@@ -12,8 +12,8 @@ worker - Does regular processing of statistics and sends status e-mails for non-
 ```
 API listens on port 8001, remoteShare listens on 8000
 
-Xmrpool.net (The refrence implementation) uses the following setup:  
-* https://xmrpool.net is hosted on it's own server, as the main website is a static frontend
+Xmrpool.net (The reference implementation) uses the following setup:  
+* https://xmrpool.net is hosted on its own server, as the main website is a static frontend
 * https://api.xmrpool.net hosts api, remoteShare, longRunner, payments, blockManager, worker, as these must all be hosted with access to the same LMDB database.
 
 Sample Caddyfile for API:
@@ -42,7 +42,7 @@ Pre-Deploy
 ----------
 * If you're planning on using e-mail, you'll want to setup an account at https://mailgun.com (It's free for 10k e-mails/month!), so you can notify miners.  This also serves as the backend for password reset emails, along with other sorts of e-mails from the pool, including pool startup, pool Monerod daemon lags, etc so it's highly suggested!
 * Pre-Generate the wallets, or don't, it's up to you!  You'll need the addresses after the install is complete, so I'd suggest making sure you have them available.  Information on suggested setups are found below.
-* If you're going to be offering PPS, PLEASE make sure you load the pool wallet with XMR before you get too far along.  Your pool will trigger PPS payments on it's own, and fairly readily, so you need some float in there!
+* If you're going to be offering PPS, PLEASE make sure you load the pool wallet with XMR before you get too far along.  Your pool will trigger PPS payments on its own, and fairly readily, so you need some float in there!
 * Make a non-root user, and run the installer from there!
 
 Deployment via Installer
@@ -51,7 +51,7 @@ Deployment via Installer
 1. Add your user to `/etc/sudoers`, this must be done so the script can sudo up and do it's job.  We suggest passwordless sudo.  Suggested line: `<USER> ALL=(ALL) NOPASSWD:ALL`.  Our sample builds use: `pooldaemon ALL=(ALL) NOPASSWD:ALL`
 2. Run the [deploy script](https://raw.githubusercontent.com/Snipa22/nodejs-pool/master/deployment/deploy.bash) as a **NON-ROOT USER**.  This is very important!  This script will install the pool to whatever user it's running under!  Also.  Go get a coffee, this sucker bootstraps the monero installation.
 3. Once it's complete, change as `config.json` appropriate.  It is pre-loaded for a local install of everything, running on 127.0.0.1.  This will work perfectly fine if you're using a single node setup.  You'll also want to set `bind_ip` to the external IP of the pool server, and `hostname` to the resolvable hostname for the pool server. `pool_id` is mostly used for multi-server installations to provide unique identifiers in the backend. You will also want to run: source ~/.bashrc  This will activate NVM and get things working for the following pm2 steps.
-4. You'll need to change the API end point for the frontend code in the `poolui/build/globals.js` and `poolui/build/globals.default.js` -- This will usually be `http(s)://<your server FQDN>/api` unless you tweak caddy!
+4. You'll need to change the API endpoint for the frontend code in the `poolui/build/globals.js` and `poolui/build/globals.default.js` -- This will usually be `http(s)://<your server FQDN>/api` unless you tweak caddy!
 5. The default database directory `/home/<username>/pool_db/` is already been created during startup. If you change the `db_storage_path` just make sure your user has write permissions for new path. Run: `pm2 restart api` to reload the API for usage.  
 6. Hop into the web interface (Should be at `http://<your server IP>/admin.html`), then login with `Administrator/Password123`, **MAKE SURE TO CHANGE THIS PASSWORD ONCE YOU LOGIN**. *<- This step is currently not active, we're waiting for the frontend to catch up!  Head down to the Manual SQL Configuration to take a look at what needs to be done by hand for now*.
 7. From the admin panel, you can configure all of your pool's settings for addresses, payment thresholds, etc.
@@ -81,7 +81,7 @@ The installer assumes that you will be running a single-node instance and using 
 * MySQL Host: 127.0.0.1
 * MySQL root access is only permitted as the root user, the password is in `/root/.my.cnf`
 * SSL Certificate is generated, self-signed, but is valid for Claymore Miners.
-* The server installs and deploys Caddy as it's choice of webserver!
+* The server installs and deploys Caddy as it's choice of web server!
 
 The following raw binaries **MUST BE AVAILABLE FOR IT TO BOOTSTRAP**:
 * sudo
@@ -227,7 +227,7 @@ If on the other hand, you have no "Free pages" and your Pages used is equal to t
 
 PPS Fee Thoughts
 ================
-If you're considering PPS, I've spoken with [Fireice_UK](https://github.com/fireice-uk/) whom kindly did some math about what you're looking at in terms of requiements to run a PPS pool without it self-impoloding under particular risk factors, based on the work found [here](https://arxiv.org/pdf/1112.4980.pdf)
+If you're considering PPS, I've spoken with [Fireice_UK](https://github.com/fireice-uk/) whom kindly did some math about what you're looking at in terms of requirements to run a PPS pool without it self-imploding under particular risk factors, based on the work found [here](https://arxiv.org/pdf/1112.4980.pdf)
 
 ```text
 Also I calculated the amount of XMR needed to for a PPS pool to stay afloat. Perhaps you should put them up in the README to stop some spectacular clusterfucks :D:
@@ -235,13 +235,13 @@ For 1 in 1000000 chance that the pool will go bankrupt: 5% fee -> 1200 2% fee ->
 For 1 in 1000000000 chance: 5% fee -> 1800 2% fee -> 4500
 ```
 
-The developers of the pool have not verified this, but based on our own usage on https://xmrpool.net/ this seems rather reasonable.  You should be wary if you're consdering PPS and take you fees into account appropriately!
+The developers of the pool have not verified this, but based on our own usage on https://xmrpool.net/ this seems rather reasonable.  You should be wary if you're considering PPS and take you fees into account appropriately!
 
 Installation/Configuration Assistance
 =====================================
 If you need help installing the pool from scratch, please have your servers ready, which would be Ubuntu 16.04 servers, blank and clean, DNS records pointed.  These need to be x86_64 boxes with AES-NI Available.
 
-Installation asstiance is 7 XMR, with a 3 XMR deposit, with remainder to be paid on completion.  
+Installation assistance is 7 XMR, with a 3 XMR deposit, with remainder to be paid on completion.  
 Configuration assistance is 4 XMR with a 2 XMR deposit, and includes debugging your pool configurations, ensuring that everything is running, and tuning for your uses/needs.  
 
 SSH access with a sudo-enabled user will be needed, preferably the user that is slated to run the pool.
@@ -250,7 +250,7 @@ If you'd like assistance with setting up node-cryptonote-pool, please provide wh
 
 Assistance is not available for frontend customization at this time.
 
-For assitance, please contact Snipa at pool_install@snipanet.com or via IRC at irc.freenode.net in the #monero-pools channel.
+For assistance, please contact Snipa at pool_install@snipanet.com or via IRC at irc.freenode.net in the #monero-pools channel.
 
 Developer Donations
 ===================
