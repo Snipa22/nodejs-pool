@@ -17,6 +17,13 @@
 %:
 	dh $@ --with systemd
 
+build-indep:
+	npm install
+
+override_dh_clean:
+	dh_clean
+	rm -rf node_modules
+
 
 # dh_make generated override targets
 # This is example for Cmake (See https://bugs.debian.org/641051 )
