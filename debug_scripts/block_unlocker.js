@@ -14,6 +14,6 @@ let comms;
 comms = require('../lib/local_comms');
 global.database = new comms();
 global.database.initEnv();
-global.database.unlockBlock(argv.hash);
-console.log("Block "+argv.hash+" unlocked!  Exiting!");
+global.database.unlockBlock(argv.blockHash);
+console.log("Block "+argv.blockHash+" un-locked!  Exiting!");
 process.exit();
