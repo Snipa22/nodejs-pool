@@ -1,28 +1,4 @@
-nodejs-pool (0~20180111-5) xenial; urgency=medium
-
-  * Fix postinstall script
-
- -- Gerik Bonaert <dev@adaxisoft.be>  Sat, 27 Jan 2018 15:53:59 +0100
-
-nodejs-pool (0~20180111-4) xenial; urgency=medium
-
-  * Fix dameon launch parameters
-
- -- Gerik Bonaert <dev@adaxisoft.be>  Sat, 27 Jan 2018 15:16:37 +0100
-
-nodejs-pool (0~20180111-3) xenial; urgency=medium
-
-  * Restore working directory to /usr/share/nodejs-pool
-
- -- Gerik Bonaert <dev@adaxisoft.be>  Sat, 27 Jan 2018 14:36:05 +0100
-
-nodejs-pool (0~20180111-2) xenial; urgency=medium
-
-  * Fix postinstall to be compabtible with /bin/sh
-
- -- Gerik Bonaert <dev@adaxisoft.be>  Sat, 27 Jan 2018 13:28:26 +0100
-
-nodejs-pool (0~20180111-1) unstable; urgency=medium
+nodejs-pool (0~20180205-1) unstable; urgency=medium
 
   * Initial Release.
 
