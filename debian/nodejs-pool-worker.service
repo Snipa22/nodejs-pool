@@ -1,0 +1,12 @@
+[Unit]
+Description=Mining poor for Monero - Worker
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/share/nodejs-pool
+ExecStart=/usr/bin/nodejs /usr/share/nodejs-pool/init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm Z" --module=worker
+Restart=always
+User=nodejs-pool
+
+[Install]
+WantedBy=multi-user.target

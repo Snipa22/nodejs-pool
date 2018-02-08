@@ -1,0 +1,12 @@
+[Unit]
+Description=Mining poor for Monero - Payments
+After=network.target
+
+[Service]
+WorkingDirectory=/usr/share/nodejs-pool
+ExecStart=/usr/bin/nodejs /usr/share/nodejs-pool/init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm Z" --module=payments
+Restart=always
+User=nodejs-pool
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,4 @@
+init.js /usr/share/nodejs-pool
+node_modules /usr/share/nodejs-pool
+lib /usr/share/nodejs-pool
+tools /usr/share/nodejs-pool
