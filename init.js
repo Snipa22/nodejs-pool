@@ -2,7 +2,7 @@
 let mysql = require("promise-mysql");
 let fs = require("fs");
 let argv = require('minimist')(process.argv.slice(2));
-let config = fs.readFileSync("./config.json");
+let config = fs.readFileSync("./" + (argv.config || "config.json"));
 let coinConfig = fs.readFileSync("./coinConfig.json");
 let protobuf = require('protocol-buffers');
 let path = require('path');
