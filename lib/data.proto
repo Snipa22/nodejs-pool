@@ -9,6 +9,7 @@ enum MESSAGETYPE {
     SHARE = 0;
     BLOCK = 1;
     INVALIDSHARE = 2;
+    ALTBLOCK = 3;
 }
 
 message WSData {
@@ -37,6 +38,7 @@ message Share {
     required int32 blockHeight = 10;
     required int64 timestamp = 11;
     required string identifier = 12;
+    optional int32 port = 13;
 }
 
 message Block {
@@ -48,4 +50,19 @@ message Block {
     required bool unlocked = 6;
     required bool valid = 7;
     optional int64 value = 8;
+}
+
+message AltBlock {
+    required string hash = 1;
+    required int64 difficulty = 2;
+    required int64 shares = 3;
+    required int64 timestamp = 4;
+    required POOLTYPE poolType = 5;
+    required bool unlocked = 6;
+    required bool valid = 7;
+    required int32 port = 8;
+    required int32 height = 9;
+    required int32 anchor_height = 10;
+    optional int64 value = 11;
+    optional int64 pay_value = 12;
 }
