@@ -45,7 +45,7 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
     global.config['coin'] = JSON.parse(coinConfig)[global.config.coin];
     coinInc = require("." + global.config.coin.funcFile);
     global.coinFuncs = new coinInc();
-    comms = require('../lib/remote_comms');
+    comms = require('../lib/local_comms');
     global.database = new comms();
     global.database.initEnv();
     global.coinFuncs.blockedAddresses.push(global.config.pool.address);
