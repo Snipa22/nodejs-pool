@@ -21,7 +21,7 @@ global.database.initEnv();
             for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
                  cursor.getCurrentBinary(function(key, data){  // jshint ignore:line
                      let blockData = global.protos.Block.decode(data);
-                     console.log(JSON.stringify(blockData))
+                     console.log(key + ": " + JSON.stringify(blockData))
                  });
             }
             cursor.close();
