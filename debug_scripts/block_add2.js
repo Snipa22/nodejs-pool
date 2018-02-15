@@ -45,48 +45,20 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
     global.config['coin'] = JSON.parse(coinConfig)[global.config.coin];
     coinInc = require("." + global.config.coin.funcFile);
     global.coinFuncs = new coinInc();
-    if (argv.module === 'pool'){
-        comms = require('../lib/remote_comms');
-    } else {
-        comms = require('../lib/local_comms');
-    }
+    comms = require('../lib/remote_comms');
     global.database = new comms();
     global.database.initEnv();
     global.coinFuncs.blockedAddresses.push(global.config.pool.address);
     global.coinFuncs.blockedAddresses.push(global.config.payout.feeAddress);
 }).then(function(){
-    /*
-     message Block {
-     required string hash = 1;
-     required int64 difficulty = 2;
-     required int64 shares = 3;
-     required int64 timestamp = 4;
-     required POOLTYPE poolType = 5;
-     required bool unlocked = 6;
-     required bool valid = 7;
-     optional int64 value = 8;
-     }
-     */
-    /*let invalidBlockProto = global.protos.Block.encode({
-        hash: "88cf2c37e1e4e8a273cbe3ec502b6975fd6c4ebe1e8889ad9d5e53a5e9cde007",
-        difficulty: 1002932,
-        shares: 0,
-        timestamp: Date.now(),
-        poolType: global.protos.POOLTYPE.PPS,
-        unlocked: false,
-        valid: true,
-        value:0
-    });
-    let wsData = global.protos.WSData.encode({
-        msgType: global.protos.MESSAGETYPE.BLOCK,
-        key: global.config.api.authKey,
-        msg: invalidBlockProto,
-        exInt: 1
-    });
-    request.post({url: global.config.general.shareHost, body: wsData}, function (error, response, body) {
-        console.log(error);
-        console.log(JSON.stringify(response));
-        console.log(JSON.stringify(body));
-    });*/
-});
+        /*global.database.storeBlock(1509990, global.protos.Block.encode({
+            hash: "a677ed7fb05ecb82bdb02f0cbb0f3099914392991225704559616658d7661748",
+            difficulty: 115634200078,
+            shares: 0,
+            timestamp: 1518686098779,
+            poolType: global.protos.POOLTYPE.PPLNS,
+            unlocked: false,
+            valid: true
+        }));*/
 
+});
