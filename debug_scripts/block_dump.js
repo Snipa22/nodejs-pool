@@ -14,7 +14,6 @@ let comms;
 comms = require('../lib/local_comms');
 global.database = new comms();
 global.database.initEnv();
-global.database.lockBlock(argv.blockID);
 
         let txn = global.database.env.beginTxn({readOnly: true});
 
