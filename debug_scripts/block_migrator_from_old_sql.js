@@ -94,11 +94,13 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
                default:
                    block.poolType = global.protos.POOLTYPE.PPLNS;
            }
-           global.coinFuncs.getBlockHeaderByHash(block.hash, function(header){
-               block.value = header.reward;
-               let txn = global.database.env.beginTxn();
-               txn.putBinary(global.database.blockDB, row.height, global.protos.Block.encode(block));
-               txn.commit();
+           global.coinFuncs.getBlockHeaderByHash(block.hash, function(err, header) {
+                if (!err) {
+                    block.value = header.reward;
+                    let txn = global.database.env.beginTxn();
+                    txn.putBinary(global.database.blockDB, row.height, global.protos.Block.encode(block));
+                    txn.commit();
+                }
            });
        });
    });
