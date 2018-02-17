@@ -65,4 +65,6 @@ message AltBlock {
     required int32 anchor_height = 10;
     optional int64 value = 11;
     optional int64 pay_value = 12;
+    optional string pay_stage = 13;
+    optional string pay_status = 14;
 }
