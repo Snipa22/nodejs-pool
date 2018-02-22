@@ -60,12 +60,12 @@ Deployment via Installer
 ```shell
 cd ~/nodejs-pool/
 pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z"  -- --module=blockManager
-pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm:SSS Z" -- --module=worker
-pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm:SSS Z" --no-autorestart -- --module=payments
-pm2 start init.js --name=remoteShare --log-date-format="YYYY-MM-DD HH:mm:SSS Z" -- --module=remoteShare
-pm2 start init.js --name=longRunner --log-date-format="YYYY-MM-DD HH:mm:SSS Z" -- --module=longRunner
-pm2 start init.js --name=pool --log-date-format="YYYY-MM-DD HH:mm:SSS Z" -- --module=pool
-pm2 start init.js --name=api --log-date-format="YYYY-MM-DD HH:mm:SSS Z" -- --module=api
+pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=worker
+pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" --no-autorestart -- --module=payments
+pm2 start init.js --name=remoteShare --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=remoteShare
+pm2 start init.js --name=longRunner --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=longRunner
+pm2 start init.js --name=pool --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=pool
+pm2 start init.js --name=api --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=api
 pm2 restart api
 ```
 
