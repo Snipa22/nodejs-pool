@@ -74,6 +74,7 @@ CREATE TABLE `pools` (
   `blockID` int(11) DEFAULT NULL,
   `blockIDTime` timestamp NULL DEFAULT NULL,
   `hostname` varchar(128) DEFAULT NULL,
+  `port` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pools_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
