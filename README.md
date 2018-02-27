@@ -242,8 +242,9 @@ Installation/Configuration Assistance
 =====================================
 If you need help installing the pool from scratch, please have your servers ready, which would be Ubuntu 16.04 servers, blank and clean, DNS records pointed.  These need to be x86_64 boxes with AES-NI Available.
 
-Installation assistance is 3 XMR, with a 1 XMR deposit, with remainder to be paid on completion.  
-Configuration assistance is 2 XMR with a 1 XMR deposit, and includes debugging your pool configurations, ensuring that everything is running, and tuning for your uses/needs.  
+Installation assistance is 3 XMR, with a 1 XMR deposit, with remainder to be paid on completion.
+Configuration assistance is 2 XMR with a 1 XMR deposit, and includes debugging your pool configurations, ensuring that everything is running, and tuning for your uses/needs.
+altblockManager module source (that determines the most profitable coin to mine and trades them to main coin on exchange) price is 20 XMR.
 
 SSH access with a sudo-enabled user will be needed, preferably the user that is slated to run the pool.
 
