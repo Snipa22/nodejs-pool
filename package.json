@@ -37,7 +37,7 @@
     "sprintf-js": "^1.0.3",
     "sticky-cluster": "^0.3.1",
     "uuid": "3.0.1",
-    "wallet-address-validator": "0.1.0",
+    "wallet-address-validator": "0.1.2",
     "zmq": "^2.15.3"
   },
   "optionalDependencies": {
