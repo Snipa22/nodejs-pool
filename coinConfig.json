@@ -17,6 +17,30 @@
     "mixIn": 4,
     "shortCode": "KRB"
   },
+  "etn": {
+    "funcFile": "./lib/coins/etn.js",
+    "paymentFile": "./payment_systems/etn.js",
+    "sigDigits": 100,
+    "name": "Electroneum",
+    "mixIn": 0,
+    "shortCode": "ETN"
+  },
+  "stl": {
+      "funcFile": "./lib/coins/stl.js",
+      "paymentFile": "./payment_systems/stl.js",
+      "sigDigits": 10000,
+      "name": "Stellitecoin",
+      "mixIn": 0,
+      "shortCode": "STL"
+  },
+  "sumo": {
+      "funcFile": "./lib/coins/sumo.js",
+      "paymentFile": "./payment_systems/sumo.js",
+      "sigDigits": 10,
+      "name": "Sumocoin",
+      "mixIn": 0,
+      "shortCode": "SUMO"
+  },
   "aeon": {
     "funcFile": "./lib/coins/aeon.js",
     "paymentFile": "./payment_systems/aeon.js",
