@@ -48,5 +48,21 @@
     "name": "Aeon Coin",
     "mixIn": 4,
     "shortCode": "AEON"
+  },
+  "omb": {
+    "funcFile": "./lib/coins/omb.js",
+    "paymentFile": "./payment_systems/omb.js",
+    "sigDigits": 1000000000000,
+    "name": "Ombre",
+    "mixIn": 12,
+    "shortCode": "OMB"
+  },
+  "msr": {
+    "funcFile": "./lib/coins/msr.js",
+    "paymentFile": "./payment_systems/msr.js",
+    "sigDigits": 1000000000000,
+    "name": "Masari",
+    "mixIn": 12,
+    "shortCode": "MSR"
   }
 }
