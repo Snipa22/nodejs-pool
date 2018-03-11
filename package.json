@@ -24,7 +24,7 @@
     "express": "4.14.0",
     "jsonwebtoken": "^7.2.1",
     "minimist": "1.2.0",
-    "moment": "2.17.1",
+    "moment": "2.21.0",
     "mysql": "2.15.0",
     "node-lmdb": "0.4.12",
     "promise-mysql": "3.0.0",
