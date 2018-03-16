@@ -21,6 +21,7 @@ CREATE TABLE `bans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(40) DEFAULT NULL,
   `mining_address` varchar(200) DEFAULT NULL,
+  `reason` varchar(200) DEFAULT NULL,
   `active` tinyint(1) DEFAULT '1',
   `ins_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
