@@ -27,6 +27,13 @@ CREATE TABLE `bans` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `bans_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `notifications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mining_address` varchar(200) DEFAULT NULL,
+  `message` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `notifications_id_uindex` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `block_log` (
   `id` int(11) NOT NULL COMMENT 'Block Height',
   `orphan` tinyint(1) DEFAULT '1',
