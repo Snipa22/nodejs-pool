@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/Snipa22/node-crypto-pool.git"
   },
-  "author": "Alexander Blair",
+  "author": "Multiple",
   "license": "MIT",
   "dependencies": {
     "async": "2.1.4",
