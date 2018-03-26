@@ -17,6 +17,30 @@
     "mixIn": 4,
     "shortCode": "KRB"
   },
+  "etn": {
+    "funcFile": "./lib/coins/etn.js",
+    "paymentFile": "./payment_systems/etn.js",
+    "sigDigits": 100,
+    "name": "Electroneum",
+    "mixIn": 0,
+    "shortCode": "ETN"
+  },
+  "stl": {
+      "funcFile": "./lib/coins/stl.js",
+      "paymentFile": "./payment_systems/stl.js",
+      "sigDigits": 10000,
+      "name": "Stellitecoin",
+      "mixIn": 0,
+      "shortCode": "STL"
+  },
+  "sumo": {
+      "funcFile": "./lib/coins/sumo.js",
+      "paymentFile": "./payment_systems/sumo.js",
+      "sigDigits": 10,
+      "name": "Sumocoin",
+      "mixIn": 0,
+      "shortCode": "SUMO"
+  },
   "aeon": {
     "funcFile": "./lib/coins/aeon.js",
     "paymentFile": "./payment_systems/aeon.js",
@@ -24,5 +48,21 @@
     "name": "Aeon Coin",
     "mixIn": 4,
     "shortCode": "AEON"
+  },
+  "omb": {
+    "funcFile": "./lib/coins/omb.js",
+    "paymentFile": "./payment_systems/omb.js",
+    "sigDigits": 1000000000000,
+    "name": "Ombre",
+    "mixIn": 12,
+    "shortCode": "OMB"
+  },
+  "msr": {
+    "funcFile": "./lib/coins/msr.js",
+    "paymentFile": "./payment_systems/msr.js",
+    "sigDigits": 1000000000000,
+    "name": "Masari",
+    "mixIn": 12,
+    "shortCode": "MSR"
   }
 }
