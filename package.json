@@ -43,6 +43,6 @@
   },
   "optionalDependencies": {
     "cryptonote-util": "git://github.com/Snipa22/node-cryptonote-util.git#xmr-Nan-2.0",
-    "multi-hashing": "git+https://github.com/Snipa22/node-multi-hashing-aesni.git"
+    "multi-hashing": "git+https://github.com/camthegeek/node-multi-hashing-aesni.git"
   }
 }
