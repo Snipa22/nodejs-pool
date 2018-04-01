@@ -24,5 +24,13 @@
     "name": "Aeon Coin",
     "mixIn": 4,
     "shortCode": "AEON"
+  },
+  "aeon-rebase": {
+    "funcFile": "./lib/coins/aeon-rebase.js",
+    "paymentFile": "./payment_systems/aeon-rebase.js",
+    "sigDigits": 1000000000000,
+    "name": "Aeon Coin",
+    "mixIn": 4,
+    "shortCode": "AEON"
   }
 }
