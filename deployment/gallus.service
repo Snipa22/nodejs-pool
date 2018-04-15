@@ -1,0 +1,13 @@
+[Unit]
+Description=Galluscoin Daemon
+After=network.target
+
+[Service]
+Type=forking
+GuessMainPID=no
+ExecStart=/usr/local/src/galluscoin/build/release/bin/galluscoind --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc
+Restart=always
+User=gallusdaemon
+
+[Install]
+WantedBy=multi-user.target
