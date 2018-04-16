@@ -9,28 +9,12 @@
     "mixIn": 4,
     "shortCode": "XMR"
   },
-  "krb": {
-    "funcFile": "./lib/coins/krb.js",
-    "paymentFile": "./payment_systems/krb.js",
-    "sigDigits": 1000000000000,
-    "name": "Karbowanec",
-    "mixIn": 4,
-    "shortCode": "KRB"
+  "gac": {
+    "funcFile": "./lib/coins/gac.js",
+    "paymentFile": "./payment_systems/gac.js",
+    "sigDigits": 10,
+    "name": "Galluscoin",
+    "mixIn": 12,
+    "shortCode": "GAC"
   },
-  "aeon": {
-    "funcFile": "./lib/coins/aeon.js",
-    "paymentFile": "./payment_systems/aeon.js",
-    "sigDigits": 1000000000000,
-    "name": "Aeon Coin",
-    "mixIn": 4,
-    "shortCode": "AEON"
-  },
-  "aeon-rebase": {
-    "funcFile": "./lib/coins/aeon-rebase.js",
-    "paymentFile": "./payment_systems/aeon-rebase.js",
-    "sigDigits": 1000000000000,
-    "name": "Aeon Coin",
-    "mixIn": 4,
-    "shortCode": "AEON"
-  }
 }
