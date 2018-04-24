@@ -260,6 +260,10 @@ If you'd like to make a one time donation, the addresses are as follows:
 * ETN - ```etnkQMp3Hmsay2p7uxokuHRKANrMDNASwQjDUgFb5L2sDM3jqUkYQPKBkooQFHVWBzEaZVzfzrXoETX6RbMEvg4R4csxfRHLo1```
 * SUMO - ```Sumoo1DGS7c9LEKZNipsiDEqRzaUB3ws7YHfUiiZpx9SQDhdYGEEbZjRET26ewuYEWAZ8uKrz6vpUZkEVY7mDCZyGnQhkLpxKmy```
 * GRFT - ```GACadqdXj5eNLnyNxvQ56wcmsmVCFLkHQKgtaQXNEE5zjMDJkWcMVju2aYtxbTnZgBboWYmHovuiH1Ahm4g2N5a7LuMQrpT```
+* BTC - ```3BzvMuLStA388kYZ9nudfm8L22937dSPS3```
+* BCH - ```qrhww48p5s6zw9twhc7cujgwp7vym2k4vutem6f92p```
+* ETH - ```0xCF8BABC074C487Ae17F9Ce0394eab492E6A35658```
+* LTC - ```MCkjQo99VzoeZQ1piDzLDb4uqNSDRZpx55```
 
 Credits
 =======
