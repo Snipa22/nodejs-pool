@@ -31,7 +31,7 @@ sudo cp ~/nodejs-pool/deployment/gallus.service /lib/systemd/system/
 sudo useradd -m gallusdaemon -d /home/gallusdaemon
 sudo systemctl daemon-reload
 sudo systemctl enable gallus
-sudo systemctl start galus
+sudo systemctl start gallus
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 source ~/.nvm/nvm.sh
 nvm install v8.9.3
