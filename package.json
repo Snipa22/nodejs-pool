@@ -39,10 +39,8 @@
     "sticky-cluster": "^0.3.1",
     "uuid": "3.0.1",
     "wallet-address-validator": "0.1.0",
-    "zmq": "^2.15.3"
-  },
-  "optionalDependencies": {
-    "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git",
-    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git"
+    "zmq": "^2.15.3",
+    "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v1.0.0",
+    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v1.0.0"
   }
 }
