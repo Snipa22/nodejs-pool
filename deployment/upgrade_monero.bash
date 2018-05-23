@@ -2,7 +2,7 @@
 echo "This assumes that you have a standard nodejs-pool install, and will patch and update it to the latest stable builds of Monero."
 sleep 15
 echo "Continuing install, this will prompt you for your password if you didn't enable passwordless sudo.  Please do not run me as root!"
-	
+cd /usr/local/src/monero
 sudo git checkout .
 sudo git checkout master
 sudo git pull
