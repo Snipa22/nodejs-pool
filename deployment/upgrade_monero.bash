@@ -11,5 +11,5 @@ curl -L https://raw.githubusercontent.com/MoneroOcean/nodejs-pool/master/deploym
 sudo git submodule init
 sudo git submodule update
 sudo rm -rf build
-sudo make -j$(nproc)
+sudo nice make
 echo "Done building the new Monero daemon!  Please go ahead and reboot monero with: sudo systemctl restart monero as soon as the pool source is updated!"
