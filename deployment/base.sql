@@ -6,7 +6,7 @@ USE pool;
 ALTER DATABASE pool DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE TABLE `balance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `last_edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_edited` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `payment_address` varchar(128) DEFAULT NULL,
   `payment_id` varchar(128) DEFAULT NULL,
   `pool_type` varchar(64) DEFAULT NULL,
