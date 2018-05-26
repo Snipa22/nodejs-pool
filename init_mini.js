@@ -28,7 +28,7 @@ function init(callback) {
 
 	}).then(function(){
 		global.config['coin'] = JSON.parse(coinConfig)[global.config.coin];
-		let coinInc = require("." + global.config.coin.funcFile);
+		let coinInc = require(global.config.coin.funcFile);
 		global.coinFuncs = new coinInc();
 		let comms = require('./lib/local_comms');
 		global.database = new comms();
