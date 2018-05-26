@@ -49,11 +49,11 @@ require("../init_mini.js").init(function() {
 				} else {
 					let stats = global.database.getCache("stats:" + key);
 					if (!stats) {
-						console.log(key + ": found key without stats");
+						console.log(key + ": found key without stats: " + data);
 						return;
 					}
 					if (!global.database.getCache("history:" + key)) {
-						console.log(key + ": found key without history");
+						console.log(key + ": found key without history: " + data);
 						return;
 					}
 					if (Date.now() - stats.lastHash > 7*24*60*60*1000) {
