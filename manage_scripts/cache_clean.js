@@ -3,6 +3,8 @@
 const argv = require('minimist')(process.argv.slice(2));
 const user = argv.user ? argv.user : null;
 
+let count = 0;
+
 require("../init_mini.js").init(function() {
 	let txn = global.database.env.beginTxn({readOnly: true});
 	let cursor = new global.database.lmdb.Cursor(txn, global.database.cacheDB);
@@ -22,7 +24,7 @@ require("../init_mini.js").init(function() {
 				if (!global.database.getCache(key2)) {
 					console.log(key + ": found orphan key");
 					//txn2.del(global.database.cacheDB, key);
-					return;
+					++ count;
 				}
 			} else {
 				let stats = global.database.getCache("stats:" + key);
@@ -39,6 +41,7 @@ require("../init_mini.js").init(function() {
 					//txn2.del(global.database.cacheDB, key);
 					//txn2.del(global.database.cacheDB, "history:" + key);
 					//txn2.del(global.database.cacheDB, "stats:" + key);
+					++ count;
 				}
 				
 			}
@@ -47,5 +50,6 @@ require("../init_mini.js").init(function() {
 	}
 	cursor.close();
         txn.commit();
+	console.log("Deleted items: " + count);
 	process.exit(0);
 });
