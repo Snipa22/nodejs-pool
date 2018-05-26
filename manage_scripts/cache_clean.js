@@ -50,10 +50,18 @@ require("../init_mini.js").init(function() {
 					let stats = global.database.getCache("stats:" + key);
 					if (!stats) {
 						console.log(key + ": found key without stats: " + data);
+						let txn2 = global.database.env.beginTxn();
+						txn2.del(global.database.cacheDB, key);
+						if (global.database.getCache("history:" + key)) txn2.del(global.database.cacheDB, "history:" + key);
+					        txn2.commit();
 						return;
 					}
 					if (!global.database.getCache("history:" + key)) {
 						console.log(key + ": found key without history: " + data);
+						let txn2 = global.database.env.beginTxn();
+						txn2.del(global.database.cacheDB, key);
+						txn2.del(global.database.cacheDB, "stats:" + key);
+					        txn2.commit();
 						return;
 					}
 					if (Date.now() - stats.lastHash > 7*24*60*60*1000) {
