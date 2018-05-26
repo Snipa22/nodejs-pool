@@ -47,7 +47,7 @@ require("../init_mini.js").init(function() {
 				old_amount = rows[0].amount;
 				console.log("Old address amount: " + global.support.coinToDecimal(old_amount));
 				console.log("Old address last update time: " + rows[0].last_edited);
-				if (Date.now() - global.support.formatDateFromSQL(rows[0].last_edited) < 24*60*60) {
+				if (Date.now()/1000 - global.support.formatDateFromSQL(rows[0].last_edited) < 24*60*60) {
 					console.error("There was recent amount update. Refusing to continue!");
 					process.exit(1);
 				}
