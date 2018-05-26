@@ -5,14 +5,14 @@ function init(callback) {
 	let fs = require("fs");
 	let mysql = require("promise-mysql");
 
-	let config = fs.readFileSync("./config.json");
-	let coinConfig = fs.readFileSync("./coinConfig.json");
+	let config = fs.readFileSync("../config.json");
+	let coinConfig = fs.readFileSync("../coinConfig.json");
 	let protobuf = require('protocol-buffers');
 
-	global.support = require("./lib/support.js")();
+	global.support = require("../lib/support.js")();
 	global.config = JSON.parse(config);
 	global.mysql = mysql.createPool(global.config.mysql);
-	global.protos = protobuf(fs.readFileSync('./lib/data.proto'));
+	global.protos = protobuf(fs.readFileSync('../lib/data.proto'));
 
 	global.mysql.query("SELECT * FROM config").then(function (rows) {
 		rows.forEach(function (row){
@@ -30,7 +30,7 @@ function init(callback) {
 		global.config['coin'] = JSON.parse(coinConfig)[global.config.coin];
 		let coinInc = require("." + global.config.coin.funcFile);
 		global.coinFuncs = new coinInc();
-		let comms = require('./lib/local_comms');
+		let comms = require('../lib/local_comms');
 		global.database = new comms();
 		global.database.initEnv();
 	
