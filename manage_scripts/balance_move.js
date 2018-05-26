@@ -65,16 +65,16 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
-			global.mysql.query("UPDATE balance SET amount = '0' FROM balance WHERE " + old_where_str).then(function (rows) {
+			//global.mysql.query("UPDATE balance SET amount = '0' FROM balance WHERE " + old_where_str).then(function (rows) {
 				console.log("UPDATE balance SET amount = '0' FROM balance WHERE " + old_where_str);
 				callback();
-			});
+			//});
 		},
 		function (callback) {
-			global.mysql.query("UPDATE balance SET amount = amount + " + old_amount + " FROM balance WHERE " + new_where_str).then(function (rows) {
+			//global.mysql.query("UPDATE balance SET amount = amount + " + old_amount + " FROM balance WHERE " + new_where_str).then(function (rows) {
 				console.log("UPDATE balance SET amount = amount + " + old_amount + " FROM balance WHERE " + new_where_str);
 				callback();
-			});
+			//});
 		},
 		function (callback) {
 			global.mysql.query("SELECT * FROM balance WHERE " + old_where_str).then(function (rows) {
