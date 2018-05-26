@@ -67,6 +67,21 @@ require("../init_mini.js").init(function() {
 					
 				}
 			        txn2.commit();
+
+			} else if (key.includes("stats:")) {
+	                        try {
+		                	let data2 = JSON.parse(data);
+					if ((data2.hash || data2.hash2) && Date.now() - data2.lastHash > 24*60*60*1000) {
+						console.log(key + ": found dead account");
+						data2.hash = data2.hash2 = 0;
+						//let txn2 = global.database.env.beginTxn();
+						//txn2.putString(global.database.cacheDB, key, JSON.stringify(data2));
+						//txn2.commit();
+					}
+				} catch (e) {
+					console.error("Bad cache data with " + key + " key");
+				}
+				
 			}
 		});
 	}
