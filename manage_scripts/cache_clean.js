@@ -23,23 +23,22 @@ require("../init_mini.js").init(function() {
 		                	let data2 = JSON.parse(data);
 					let isAlive = false;
 					for (let i in data2) {
-						console.log("stats:" + key2 + "_" + data2[i]);
 						let stats = global.database.getCache("stats:" + key2 + "_" + data2[i]);
 						if (stats && Date.now() - stats.lastHash <= 24*60*60*1000) isAlive = true;
 					}
 					if (!isAlive) {
 						data2 = [];
 						console.log(key + ": found dead key");
-						//let txn2 = global.database.env.beginTxn();
-						//txn2.putString(global.database.cacheDB, key, JSON.stringify(data2));
-						//txn2.commit();
+						let txn2 = global.database.env.beginTxn();
+						txn2.putString(global.database.cacheDB, key, JSON.stringify(data2));
+						txn2.commit();
 					}
 				} catch (e) {
 					console.error("Bad cache data with " + key + " key");
 				}
 			} else if (key.includes("_")) {
 
-				//let txn2 = global.database.env.beginTxn();
+				let txn2 = global.database.env.beginTxn();
 				if (key.includes("history:") || key.includes("stats:")) {
 					let parts = key.split(/:(.+)/);
 					let key2 = parts[1];
@@ -60,14 +59,14 @@ require("../init_mini.js").init(function() {
 					}
 					if (Date.now() - stats.lastHash > 7*24*60*60*1000) {
 						console.log(key + ": found outdated key");
-						//txn2.del(global.database.cacheDB, key);
-						//txn2.del(global.database.cacheDB, "history:" + key);
-						//txn2.del(global.database.cacheDB, "stats:" + key);
+						txn2.del(global.database.cacheDB, key);
+						txn2.del(global.database.cacheDB, "history:" + key);
+						txn2.del(global.database.cacheDB, "stats:" + key);
 						++ count;
 					}
 					
 				}
-			        //txn2.commit();
+			        txn2.commit();
 			}
 		});
 	}
