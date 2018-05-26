@@ -9,6 +9,13 @@ require("../init_mini.js").init(function() {
 	for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
         	cursor.getCurrentString(function(key, data){  // jshint ignore:line
 			if (key.length < 95) {
+				if (key.includes("history:") || key.includes("stats:") || key.includes("identifiers:")) {
+					console.log(key + ": removing bad key");
+					let txn2 = global.database.env.beginTxn();
+					txn2.del(global.database.cacheDB, key);
+					txn2.commit();
+					return;
+				}
 				console.log("Skipping " + key + " key");
 				return;
 			}
