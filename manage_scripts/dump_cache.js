@@ -6,7 +6,8 @@ require("../init_mini.js").init(function() {
 	let cursor = new global.database.lmdb.Cursor(txn, global.database.cacheDB);
 	for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
         	cursor.getCurrentBinary(function(key, data){  // jshint ignore:line
-			console.log(key + ": " + JSON.stringify(data));
+			const data2 = JSON.parse(data);
+			console.log(key + ": " + JSON.stringify(data2));
 			if (++ x > 10) {
 				cursor.close();
 			        txn.commit();
