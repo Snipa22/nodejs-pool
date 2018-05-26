@@ -60,12 +60,12 @@ require("../init_mini.js").init(function() {
 			const address     = global.database.getCache(user);
 			const stats       = global.database.getCache("stats:" + user);
 			const history     = global.database.getCache("history:" + user);
-			const identifiers = global.database.getCache(user + '_identifiers');
+			const identifiers = global.database.getCache("identifiers:" + user);
 
 			if (address != false) console.log("Cache key is not empty: " + user);
 			if (stats != false) console.log("Cache key is not empty: " + "stats:" + user);
 			if (history != false) console.log("Cache key is not empty: " + "history:" + user);
-			if (identifiers != false) console.log("Cache key is not empty: " + user + '_identifiers');
+			if (identifiers != false) console.log("Cache key is not empty: " + "identifiers:" + user);
 			callback();
 
 		},
@@ -101,7 +101,7 @@ require("../init_mini.js").init(function() {
                         if (global.database.getCache(user))                  txn.del(global.database.cacheDB, user);
                         if (global.database.getCache("stats:" + user))       txn.del(global.database.cacheDB, "stats:" + user);
                         if (global.database.getCache("history:" + user))     txn.del(global.database.cacheDB, "history:" + user);
-                        if (global.database.getCache(user + '_identifiers')) txn.del(global.database.cacheDB, user + '_identifiers');
+                        if (global.database.getCache("identifiers:" + user)) txn.del(global.database.cacheDB, "identifiers:" + user);
 			txn.commit();
 			callback();
 		},
