@@ -3,26 +3,28 @@ const mysql = require("promise-mysql");
 const async = require("async");
 const argv = require('minimist')(process.argv.slice(2));
 
+if (!argv.user) {
+	console.error("Please specify user address to delete");
+	process.exit(1);
+}
+const user = argv.user;
+
 require("../init_mini.js").init(function() {
-	if (!argv.user) {
-		console.error("Please specify user address to delete");
-		process.exit(1);
-	}
-	let parts = argv.user.split(".");
-	let address = parts.length === 1 ? argv.user : parts[0];
-	let payment_id = parts.length === 2 ? parts[1] : null;
+	const parts = user.split(".");
+	const address = parts.length === 1 ? user : parts[0];
+	const payment_id = parts.length === 2 ? parts[1] : null;
 
 	console.log("Address: " + address);
 	console.log("PaymentID: " + payment_id);
 	console.log("Max payment to remove: " + global.config.payout.walletMin);
 	let rows2remove = 0;
 
-	let where_str = payment_id === null ? "payment_address = '" + address + "' AND payment_id IS NULL"
-	                                    : "payment_address = '" + address + "' AND payment_id = '" + payment_id + "'";
+	const where_str = payment_id === null ? "payment_address = '" + address + "' AND payment_id IS NULL"
+	                                      : "payment_address = '" + address + "' AND payment_id = '" + payment_id + "'";
 
 	async.waterfall([
 		function (callback) {
-			global.mysql.query("SELECT * FROM users WHERE username = ?", [argv.user]).then(function (rows) {
+			global.mysql.query("SELECT * FROM users WHERE username = ?", [user]).then(function (rows) {
 				if (rows.length > 1) {
 					console.error("Too many users were selected!");
 					process.exit(1);
@@ -55,15 +57,15 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
-			let address     = global.database.getCache(argv.user);
-			let stats       = global.database.getCache("stats:" + argv.user);
-			let history     = global.database.getCache("history:" + argv.user);
-			let identifiers = global.database.getCache(argv.user + '_identifiers');
+			const address     = global.database.getCache(user);
+			const stats       = global.database.getCache("stats:" + user);
+			const history     = global.database.getCache("history:" + user);
+			const identifiers = global.database.getCache(user + '_identifiers');
 
-			if (address != false) console.log("Cache key is not empty: " + argv.user);
-			if (stats != false) console.log("Cache key is not empty: " + "stats:" + argv.user);
-			if (history != false) console.log("Cache key is not empty: " + "history:" + argv.user);
-			if (identifiers != false) console.log("Cache key is not empty: " + argv.user + '_identifiers');
+			if (address != false) console.log("Cache key is not empty: " + user);
+			if (stats != false) console.log("Cache key is not empty: " + "stats:" + user);
+			if (history != false) console.log("Cache key is not empty: " + "history:" + user);
+			if (identifiers != false) console.log("Cache key is not empty: " + user + '_identifiers');
 			callback();
 
 		},
@@ -76,19 +78,19 @@ require("../init_mini.js").init(function() {
 
 		},
 		function (callback) {
-			global.mysql.query("DELETE FROM users WHERE username = ?", [argv.user]).then(function (rows) {
-				console.log("DELETE FROM users WHERE username = " + argv.user);
+			global.mysql.query("DELETE FROM users WHERE username = ?", [user]).then(function (rows) {
+				console.log("DELETE FROM users WHERE username = " + user);
 				callback();
 			});
 		},
 		function (callback) {
-			global.mysql.query("DELETE FROM balance WHERE " + where_str, [argv.user]).then(function (rows) {
+			global.mysql.query("DELETE FROM balance WHERE " + where_str, [user]).then(function (rows) {
 				console.log("DELETE FROM balance WHERE " + where_str);
 				callback();
 			});
 		},
 		function (callback) {
-			global.mysql.query("DELETE FROM payments WHERE " + where_str, [argv.user]).then(function (rows) {
+			global.mysql.query("DELETE FROM payments WHERE " + where_str, [user]).then(function (rows) {
 				console.log("DELETE FROM payments WHERE " + where_str);
 				callback();
 			});
@@ -96,10 +98,10 @@ require("../init_mini.js").init(function() {
 		function (callback) {
 			console.log("Deleting LMDB cache keys");
 			let txn = global.database.env.beginTxn();
-                        if (global.database.getCache(argv.user))                  txn.del(global.database.cacheDB, argv.user);
-                        if (global.database.getCache("stats:" + argv.user))       txn.del(global.database.cacheDB, "stats:" + argv.user);
-                        if (global.database.getCache("history:" + argv.user))     txn.del(global.database.cacheDB, "history:" + argv.user);
-                        if (global.database.getCache(argv.user + '_identifiers')) txn.del(global.database.cacheDB, argv.user + '_identifiers');
+                        if (global.database.getCache(user))                  txn.del(global.database.cacheDB, user);
+                        if (global.database.getCache("stats:" + user))       txn.del(global.database.cacheDB, "stats:" + user);
+                        if (global.database.getCache("history:" + user))     txn.del(global.database.cacheDB, "history:" + user);
+                        if (global.database.getCache(user + '_identifiers')) txn.del(global.database.cacheDB, user + '_identifiers');
 			txn.commit();
 			callback();
 		},
