@@ -10,6 +10,6 @@ const hash = argv.hash;
 
 require("../init_mini.js").init(function() {
 	global.database.unlockAltBlock(hash);
-	console.log("Altblock " + hash + " un-locked! Exiting!");
+	console.log("Altblock with " + hash + " hash un-locked! Exiting!");
 	process.exit(0);
 });

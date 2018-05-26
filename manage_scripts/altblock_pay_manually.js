@@ -35,6 +35,6 @@ require("../init_mini.js").init(function() {
         }
         cursor.close();
         txn.commit();
-	console.log("Not found altblock");
+	console.log("Not found altblock with " + hash + " hash");
 	process.exit(1);
 });

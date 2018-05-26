@@ -14,9 +14,9 @@ require("../init_mini.js").init(function() {
         if (blockProto !== null) {
             let blockData = global.protos.Block.decode(blockProto);
             blockData.unlocked = false;
-            txn.putBinary(this.blockDB, height, global.protos.Block.encode(blockData));
+            txn.putBinary(global.database.blockDB, height, global.protos.Block.encode(blockData));
         }
         txn.commit();
-	console.log("Block " + height + " re-locked! Exiting!");
+	console.log("Block on " + height + " height re-locked! Exiting!");
 	process.exit(0);
 });

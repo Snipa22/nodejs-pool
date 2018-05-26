@@ -10,6 +10,6 @@ const hash = argv.hash;
 
 require("../init_mini.js").init(function() {
 	global.database.unlockBlock(hash);
-	console.log("Block " + hash + " un-locked! Exiting!");
+	console.log("Block on " + hash + " height un-locked! Exiting!");
 	process.exit(0);
 });
