@@ -54,6 +54,7 @@ require("../init_mini.js").init(function() {
 						txn2.del(global.database.cacheDB, key);
 						if (global.database.getCache("history:" + key)) txn2.del(global.database.cacheDB, "history:" + key);
 					        txn2.commit();
+						++ count;
 						return;
 					}
 					if (!global.database.getCache("history:" + key)) {
@@ -62,6 +63,7 @@ require("../init_mini.js").init(function() {
 						txn2.del(global.database.cacheDB, key);
 						txn2.del(global.database.cacheDB, "stats:" + key);
 					        txn2.commit();
+						++ count;
 						return;
 					}
 					if (Date.now() - stats.lastHash > 7*24*60*60*1000) {
