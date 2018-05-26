@@ -8,6 +8,11 @@ require("../init_mini.js").init(function() {
 	let cursor = new global.database.lmdb.Cursor(txn, global.database.cacheDB);
 	for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
         	cursor.getCurrentString(function(key, data){  // jshint ignore:line
+			if (key.length < 95) {
+				console.log("Skipping " + key + " key");
+				return;
+			}
+			return;
 			if (key.includes("history:") || key.includes("stats:") || key.includes("identifiers:")) return;
 			if (!user || key.includes(user)) {
 				let txn2 = global.database.env.beginTxn();
