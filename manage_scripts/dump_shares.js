@@ -12,7 +12,7 @@ const user = argv.user;
 let worker;
 if (argv.worker) worker = argv.worker;
 
-let depth = 100;
+let depth = 10;
 if (argv.depth) depth = argv.depth;
 
 require("../init_mini.js").init(function() {
