@@ -29,7 +29,7 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
-			console.log("DONE");
+			console.log("DONE: Please do not forget to restart your miner to apply new password and set payment thresold since it was reset as well");
 			process.exit(0);
 	        }
 	]);
