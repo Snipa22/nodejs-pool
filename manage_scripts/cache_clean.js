@@ -25,7 +25,7 @@ require("../init_mini.js").init(function() {
 					for (let i in data2) {
 						console.log("stats:" + key2 + "_" + data2[i]);
 						let stats = global.database.getCache("stats:" + key2 + "_" + data2[i]);
-						if (stats && Date.now() - stats.lastHash > 24*60*60*1000) isAlive = true;
+						if (stats && Date.now() - stats.lastHash <= 24*60*60*1000) isAlive = true;
 					}
 					if (!isAlive) {
 						data2 = [];
