@@ -44,7 +44,7 @@ require("../init_mini.js").init(function() {
 					let parts = key.split(/:(.+)/);
 					let key2 = parts[1];
 					if (!global.database.getCache(key2)) {
-						console.log(key + ": found orphan key");
+						//console.log(key + ": found orphan key");
 					}
 				} else {
 					let stats = global.database.getCache("stats:" + key);
