@@ -9,7 +9,7 @@ require("../init_mini.js").init(function() {
 	let cursor = new global.database.lmdb.Cursor(txn, global.database.cacheDB);
 	for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
         	cursor.getCurrentString(function(key, data){  // jshint ignore:line
-			i (!user || key.includes(user)) console.log(key + ": " + data);
+			if (!user || key.includes(user)) console.log(key + ": " + data);
 		});
 	}
 	cursor.close();
