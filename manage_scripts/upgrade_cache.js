@@ -60,6 +60,8 @@ require("../init_mini.js").init(function() {
 		});
 	}
 	cursor.close();
+	console.log("Starting write to LMDB");
         txn.commit();
+	console.log("Finishing write to LMDB");
 	process.exit(0);
 });
