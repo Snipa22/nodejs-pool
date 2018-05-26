@@ -3,9 +3,7 @@ const mysql = require("promise-mysql");
 const async = require("async");
 const argv = require('minimist')(process.argv.slice(2));
 
-const c = require("./common.js");
-
-c.init(function() {
+require("../tool_init.js").init(function() {
 	if (!argv.user) {
 		console.error("Please specify user address to delete");
 		process.exit(1);
