@@ -44,6 +44,11 @@ require("../init_mini.js").init(function() {
 					console.error("Too big payment left: " + global.support.coinToDecimal(rows[0].amount));
 					process.exit(1);
 				}
+				console.log("Balance last update time: " + rows[0].last_edited);
+				if (Date.now() - global.support.formatDateFromSQL(rows[0].last_edited) < 24*60*60) {
+					console.error("There was recent amount update. Refusing to continue!");
+					process.exit(1);
+				}
 				console.log("Found rows in balance table: " + rows.length);
 				rows2remove += rows.length;
 				callback();
