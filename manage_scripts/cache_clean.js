@@ -40,14 +40,11 @@ require("../init_mini.js").init(function() {
 				}
 			} else if (key.includes("_")) {
 
-				let txn2 = global.database.env.beginTxn();
 				if (key.includes("history:") || key.includes("stats:")) {
 					let parts = key.split(/:(.+)/);
 					let key2 = parts[1];
 					if (!global.database.getCache(key2)) {
 						console.log(key + ": found orphan key");
-						//txn2.del(global.database.cacheDB, key);
-						++ count;
 					}
 				} else {
 					let stats = global.database.getCache("stats:" + key);
@@ -61,14 +58,15 @@ require("../init_mini.js").init(function() {
 					}
 					if (Date.now() - stats.lastHash > 7*24*60*60*1000) {
 						console.log(key + ": found outdated key");
+						let txn2 = global.database.env.beginTxn();
 						txn2.del(global.database.cacheDB, key);
 						txn2.del(global.database.cacheDB, "history:" + key);
 						txn2.del(global.database.cacheDB, "stats:" + key);
+					        txn2.commit();
 						++ count;
 					}
 					
 				}
-			        txn2.commit();
 
 			} else if (key.includes("stats:")) {
 	                        try {
