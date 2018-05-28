@@ -21,25 +21,25 @@ require("../init_mini.js").init(function() {
 
 	                        try {
 		                	let data2 = JSON.parse(data);
-					if (data2.length) {
-						let isAlive = false;
-						for (let i in data2) {
-							let stats = global.database.getCache("stats:" + key2 + "_" + data2[i]);
-							if (stats && Date.now() - stats.lastHash <= 24*60*60*1000) isAlive = true;
-						}
-						if (!isAlive) {
-							data2 = [];
-							console.log(key + ": found dead key");
-							let txn2 = global.database.env.beginTxn();
-							txn2.putString(global.database.cacheDB, key, JSON.stringify(data2));
-							txn2.commit();
-						}
+					if (data2.length == 0) return;
+					let isAlive = false;
+					for (let i in data2) {
+						let stats = global.database.getCache("stats:" + key2 + "_" + data2[i]);
+						if (stats && Date.now() - stats.lastHash <= 24*60*60*1000) isAlive = true;
 					}
+					if (!isAlive) {
+						data2 = [];
+						console.log(key + ": found dead key");
+						let txn2 = global.database.env.beginTxn();
+						txn2.putString(global.database.cacheDB, key, JSON.stringify(data2));
+						txn2.commit();
+					}
+					
 				} catch (e) {
 					console.error("Bad cache data with " + key + " key");
 				}
-			} else if (key.includes("_")) {
 
+			} else if (key.includes("_")) {
 				if (key.includes("history:") || key.includes("stats:")) {
 					let parts = key.split(/:(.+)/);
 					let key2 = parts[1];
