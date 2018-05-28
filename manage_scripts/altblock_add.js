@@ -20,8 +20,6 @@ try { body2 = JSON.parse(body); } catch(e) {
 	process.exit(1);
 }
 
-1527369252: {,"pay_stage":"Unlocking wallet balance","pay_status":"OK"}
-
 require("../init_mini.js").init(function() {
 	const body3 = {
 		"hash":          body2.hash,
