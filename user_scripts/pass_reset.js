@@ -14,7 +14,7 @@ require("../init_mini.js").init(function() {
 		function (callback) {
 			global.mysql.query("SELECT * FROM users WHERE username = ?", [user]).then(function (rows) {
 				if (rows.length != 1) {
-					console.error("User was not found!");
+					console.error("Your password is not yet set. To do that you need to set password field in your miner to \"<your miner name>:<password>\", where <your miner name> is any name (without : character) and <password> is your password (depending on miner password can be in in command line, config.json or config.txt files). Optionally you can use your email as your password if you want notifications about miner downtimes from the pool. You need to make sure you restart your miner and your miner submits at least one valid share for password to be set.");
 					process.exit(1);
 				}
 				console.log("Found rows in users table: " + rows.length);
@@ -28,7 +28,7 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
-			console.log("DONE: Please do not forget to restart your miner to apply new password and set payment thresold since it was reset as well");
+			console.log("Done. Please do not forget to restart your miner to apply new password and set payment threshold since it was reset as well");
 			process.exit(0);
 	        }
 	]);
