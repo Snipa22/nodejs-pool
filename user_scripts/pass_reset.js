@@ -18,7 +18,6 @@ require("../init_mini.js").init(function() {
 					process.exit(1);
 				}
 				console.log("Found rows in users table: " + rows.length);
-				rows2remove += rows.length;
 				callback();
 			});
 		},
