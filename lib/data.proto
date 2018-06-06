@@ -40,6 +40,7 @@ message Share {
     required string identifier = 12;
     optional int32 port = 13;
     optional int32 shares2 = 14;
+    optional int32 share_num = 15;
 }
 
 message Block {
