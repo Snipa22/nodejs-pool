@@ -13,7 +13,7 @@ if (!argv.reason) {
 	console.error("Please specify reason to ban");
 	process.exit(1);
 }
-const reason = argv.reson;
+const reason = argv.reason;
 
 require("../init_mini.js").init(function() {
 	async.waterfall([
