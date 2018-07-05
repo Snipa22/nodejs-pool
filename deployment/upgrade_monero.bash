@@ -6,7 +6,7 @@ cd /usr/local/src/monero &&\
 sudo git checkout .  &&\
 sudo git checkout master &&\
 sudo git pull &&\
-sudo git checkout v0.12.1.0 &&\
+sudo git checkout v0.12.2.0 &&\
 curl -L https://raw.githubusercontent.com/MoneroOcean/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v &&\
 sudo git submodule init &&\
 sudo git submodule update &&\
