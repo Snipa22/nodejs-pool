@@ -241,7 +241,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_11181', '', 'string', 'Address to mine to for 11181 (Aeon) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_17750', '', 'string', 'Address to mine to for 17750 (Haven) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_24182', '', 'string', 'Address to mine to for 24182 (BitTube) port.');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_20189', '', 'string', 'Address to mine to for 12211 (Stellite) port.');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_20189', '', 'string', 'Address to mine to for 20189 (Stellite) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'feeAddress', '', 'string', 'Address that pool fees are sent to.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'mailgunKey', '', 'string', 'MailGun API Key for notification');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'mailgunURL', '', 'string', 'MailGun URL for notifications');
