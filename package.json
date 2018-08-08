@@ -7,7 +7,7 @@
     "type": "git",
     "url": "https://github.com/Snipa22/node-crypto-pool.git"
   },
-  "author": "Alexander Blair",
+  "author": "Multiple",
   "license": "MIT",
   "dependencies": {
     "async": "2.1.4",
@@ -22,9 +22,10 @@
     "crypto": "0.0.3",
     "debug": "2.5.1",
     "express": "4.14.0",
+    "apicache": "1.2.1",
     "jsonwebtoken": "^7.2.1",
     "minimist": "1.2.0",
-    "moment": "2.17.1",
+    "moment": "2.21.0",
     "mysql": "2.15.0",
     "node-lmdb": "0.4.12",
     "promise-mysql": "3.0.0",
@@ -39,11 +40,8 @@
     "sticky-cluster": "^0.3.1",
     "uuid": "3.0.1",
     "wallet-address-validator": "0.1.0",
-    "zmq": "^2.15.3"
-  },
-  "optionalDependencies": {
-    "cryptonote-util": "git://github.com/Snipa22/node-cryptonote-util.git#xmr-Nan-2.0",
-    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git",
-    "multi-hashing": "git+https://github.com/Snipa22/node-multi-hashing-aesni.git#v0.1"
+    "zmq": "^2.15.3",
+    "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v1.0.0",
+    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v2.2.0"
   }
 }

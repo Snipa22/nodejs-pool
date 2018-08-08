@@ -8,40 +8,36 @@ if [[ `whoami` == "root" ]]; then
 fi
 ROOT_SQL_PASS=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 CURUSER=$(whoami)
-echo "Etc/UTC" | sudo tee -a /etc/timezone
-sudo rm -rf /etc/localtime
-sudo ln -s /usr/share/zoneinfo/Zulu /etc/localtime
-sudo dpkg-reconfigure -f noninteractive tzdata
+sudo timedatectl set-timezone Etc/UTC
 sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $ROOT_SQL_PASS"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $ROOT_SQL_PASS"
 echo -e "[client]\nuser=root\npassword=$ROOT_SQL_PASS" | sudo tee /root/.my.cnf
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install git python-virtualenv python3-virtualenv curl ntp build-essential screen cmake pkg-config libboost-all-dev libevent-dev libunbound-dev libminiupnpc-dev libunwind8-dev liblzma-dev libldns-dev libexpat1-dev libgtest-dev mysql-server lmdb-utils libzmq3-dev
+cd ~
+git clone https://github.com/MoneroOcean/nodejs-pool.git  # Change this depending on how the deployment goes.
 cd /usr/src/gtest
 sudo cmake .
 sudo make
 sudo mv libg* /usr/lib/
 cd ~
-#sudo systemctl enable ntp
-#cd /usr/local/src
-#sudo git clone https://github.com/aeonix/aeon.git
-#cd aeon
-#sudo git checkout v0.9.14.0
-#sudo make -j$(nproc)
-#sudo cp ~/nodejs-pool/deployment/aeon.service /lib/systemd/system/
-#sudo useradd -m aeondaemon -d /home/aeondaemon
-#sudo -u aeondaemon mkdir /home/aeondaemon/.aeon
-#BLOCKCHAIN_DOWNLOAD_DIR=$(sudo -u aeondaemon mktemp -d)
-#sudo -u aeondaemon wget --limit-rate=50m -O $BLOCKCHAIN_DOWNLOAD_DIR/blockchain.bin http://74.208.156.45/blockchain.raw
-#sudo -u aeondaemon mv $BLOCKCHAIN_DOWNLOAD_DIR/blockchain.bin /home/aeondaemon/.aeon/blockchain.bin
-#sudo -u aeondaemon rm -rf $BLOCKCHAIN_DOWNLOAD_DIR
-#sudo systemctl daemon-reload
-#sudo systemctl enable aeon
-#sudo systemctl start aeon
+sudo systemctl enable ntp
+cd /usr/local/src
+sudo git clone https://github.com/monero-project/monero.git
+cd monero
+sudo git checkout release-v0.12
+curl https://raw.githubusercontent.com/MoneroOcean/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v
+sudo make -j$(nproc)
+sudo cp ~/nodejs-pool/deployment/monero_test.service /lib/systemd/system/monero.service
+sudo useradd -m monerodaemon -d /home/monerodaemon
+sudo systemctl daemon-reload
+sudo systemctl enable monero
+sudo systemctl start monero
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 source ~/.nvm/nvm.sh
-nvm install v6.9.2
+nvm install v8.11.3
+nvm alias default v8.11.3
 cd ~/nodejs-pool
 npm install
 npm install -g pm2
@@ -81,7 +77,7 @@ sudo systemctl enable caddy.service
 sudo systemctl start caddy.service
 rm -rf $CADDY_DOWNLOAD_DIR
 cd ~
-sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin `pwd`/.nvm/versions/node/v6.9.2/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
+sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v8.11.3/bin `pwd`/.nvm/versions/node/v8.11.3/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
 cd ~/nodejs-pool
 sudo chown -R $CURUSER. ~/.pm2
 echo "Installing pm2-logrotate in the background!"
@@ -92,5 +88,5 @@ mysql -u root --password=$ROOT_SQL_PASS pool -e "INSERT INTO pool.config (module
 pm2 start init.js --name=api --log-date-format="YYYY-MM-DD HH:mm Z" -- --module=api
 bash ~/nodejs-pool/deployment/install_lmdb_tools.sh
 cd ~/nodejs-pool/sql_sync/
-env PATH=$PATH:`pwd`/.nvm/versions/node/v6.9.2/bin node sql_sync.js
+env PATH=$PATH:`pwd`/.nvm/versions/node/v8.11.3/bin node sql_sync.js
 echo "You're setup!  Please read the rest of the readme for the remainder of your setup and configuration.  These steps include: Setting your Fee Address, Pool Address, Global Domain, and the Mailgun setup!"
