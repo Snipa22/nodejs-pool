@@ -20,7 +20,7 @@
     "concat-stream": "^1.6.0",
     "cors": "^2.8.1",
     "crypto": "0.0.3",
-    "debug": "2.5.1",
+    "debug": "2.6.9",
     "express": "4.14.0",
     "apicache": "1.2.1",
     "jsonwebtoken": "^7.2.1",
