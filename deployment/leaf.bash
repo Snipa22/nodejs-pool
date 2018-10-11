@@ -28,7 +28,7 @@ sudo git submodule init
 sudo git submodule update
 sudo make -j$(nproc)
 sudo mkdir -p /usr/local/src/monero/build/release/bin
-sudo cp -r /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.13.0.2_/release/* /usr/local/src/monero/build/release/bin
+sudo cp /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.13.0.2_/release/bin/* /usr/local/src/monero/build/release/bin
 sudo cp ~/nodejs-pool/deployment/monero.service /lib/systemd/system/
 sudo useradd -m monerodaemon -d /home/monerodaemon
 BLOCKCHAIN_DOWNLOAD_DIR=$(sudo -u monerodaemon mktemp -d)
