@@ -11,7 +11,5 @@ sudo git checkout v0.13.0.2 &&\
 sudo git submodule init &&\
 sudo git submodule update &&\
 sudo rm -rf build &&\
-sudo nice make &&\
-sudo mkdir -p /usr/local/src/monero/build/release/bin &&\
-sudo cp /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.13.0.2_/release/bin/* /usr/local/src/monero/build/release/bin &&\
+USE_SINGLE_BUILDDIR=1 sudo nice make &&\
 echo "Done building the new Monero daemon! Please go ahead and reboot monero with: sudo systemctl restart monero as soon as the pool source is updated!"
