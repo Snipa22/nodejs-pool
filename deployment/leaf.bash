@@ -27,6 +27,8 @@ curl https://raw.githubusercontent.com/MoneroOcean/nodejs-pool/master/deployment
 sudo git submodule init
 sudo git submodule update
 USE_SINGLE_BUILDDIR=1 sudo make -j$(nproc)
+sudo mkdir -p /usr/local/src/monero/build/release/bin
+sudo cp /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.13.0.3_/release/bin/* /usr/local/src/monero/build/release/bin
 sudo cp ~/nodejs-pool/deployment/monero.service /lib/systemd/system/
 sudo useradd -m monerodaemon -d /home/monerodaemon
 BLOCKCHAIN_DOWNLOAD_DIR=$(sudo -u monerodaemon mktemp -d)
