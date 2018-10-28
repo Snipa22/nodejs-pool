@@ -201,6 +201,8 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortTRTL',  '0', 'int', 'Turtle coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorRYO',  '0', 'float', 'Ryo algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorLOKI', '0', 'float', 'Loki algo hash price factor relative to coinHashFactor');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXRN', '0', 'float', 'Saronite algo hash price factor relative to coinHashFactor');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorWOW', '0', 'float', 'Wownero algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorTUBE', '0', 'float', 'BitTube algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXHV',  '0', 'float', 'Haven algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorAEON', '0', 'float', 'Aeon algo hash price factor relative to coinHashFactor');
@@ -256,6 +258,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_24182', '', 'string', 'Address to mine to for 24182 (BitTube) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_20189', '', 'string', 'Address to mine to for 20189 (Stellite) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_22023', '', 'string', 'Address to mine to for 22023 (Loki) port.');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_31014', '', 'string', 'Address to mine to for 31014 (Saronite) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_11898', '', 'string', 'Address to mine to for 11898 (Turtle) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'feeAddress', '', 'string', 'Address that pool fees are sent to.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'mailgunKey', '', 'string', 'MailGun API Key for notification');
