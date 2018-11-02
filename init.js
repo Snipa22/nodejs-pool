@@ -83,6 +83,9 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
             case 'altblockManager':
                 require('./lib2/altblockManager.js');
                 break;
+            case 'altblockExchange':
+                require('./lib2/altblockExchange.js');
+                break;
             case 'payments':
                 require('./lib/payments.js');
                 break;
