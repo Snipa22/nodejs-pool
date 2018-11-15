@@ -9,11 +9,18 @@ if (!argv.user) {
 }
 const user = argv.user;
 
+let paymentid;
+if (argv.paymentid) paymentid = argv.paymentid;
+
 let worker;
 if (argv.worker) worker = argv.worker;
 
 let depth = 10;
 if (argv.depth) depth = argv.depth;
+
+console.log("Dumping shares for " + user + " user");
+if (paymentid) console.log("Dumping shares for " + paymentid + " paymentid");
+if (worker)    console.log("Dumping shares for " + worker + " worker");
 
 require("../init_mini.js").init(function() {
 
@@ -30,7 +37,7 @@ require("../init_mini.js").init(function() {
                         for (let found = (cursor.goToRange(parseInt(blockID)) === blockID); found; found = cursor.goToNextDup()) {
                                 cursor.getCurrentBinary(function(key, data){  // jshint ignore:line
                                         let shareData = global.protos.Share.decode(data);
-                                        if (shareData.paymentAddress === user && (!worker || shareData.identifier === worker)) {
+                                        if (shareData.paymentAddress === user && (!paymentid || shareData.paymentID === paymentid) && (!worker || shareData.identifier === worker)) {
                                                 var d = new Date(shareData.timestamp);
                                                 console.log(d.toString() + ": " + JSON.stringify(shareData))
                                         }
