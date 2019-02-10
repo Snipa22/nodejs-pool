@@ -42,6 +42,6 @@
     "wallet-address-validator": "0.1.0",
     "zmq": "^2.15.3",
     "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v4.0.2",
-    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v6.0.3"
+    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v7.0.0"
   }
 }
