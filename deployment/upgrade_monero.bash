@@ -6,12 +6,11 @@ cd /usr/local/src/monero &&\
 sudo git checkout .  &&\
 sudo git checkout master &&\
 sudo git pull &&\
-sudo git checkout v0.13.0.4 &&\
-#curl -L https://raw.githubusercontent.com/MoneroOcean/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v &&\
+sudo git checkout v0.14.0.0 &&\
 sudo git submodule init &&\
 sudo git submodule update &&\
 sudo rm -rf build &&\
 USE_SINGLE_BUILDDIR=1 sudo nice make &&\
 sudo mkdir -p /usr/local/src/monero/build/release/bin &&\
-sudo cp /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.13.0.4_/release/bin/* /usr/local/src/monero/build/release/bin &&\
+sudo cp /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.14.0.0_/release/bin/* /usr/local/src/monero/build/release/bin &&\
 echo "Done building the new Monero daemon! Please go ahead and reboot monero with: sudo systemctl restart monero as soon as the pool source is updated!"
