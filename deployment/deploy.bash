@@ -26,11 +26,11 @@ sudo systemctl enable ntp
 cd /usr/local/src
 sudo git clone --recursive https://github.com/monero-project/monero.git
 cd monero
-sudo git checkout v0.13.0.4
+sudo git checkout v0.14.0.0
 #curl https://raw.githubusercontent.com/MoneroOcean/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v
 USE_SINGLE_BUILDDIR=1 sudo make -j$(nproc)
 sudo mkdir -p /usr/local/src/monero/build/release/bin
-sudo cp /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.13.0.4_/release/bin/* /usr/local/src/monero/build/release/bin
+sudo cp /usr/local/src/monero/build/Linux/_HEAD_detached_at_v0.14.0.0_/release/bin/* /usr/local/src/monero/build/release/bin
 sudo cp ~/nodejs-pool/deployment/monero.service /lib/systemd/system/
 sudo useradd -m monerodaemon -d /home/monerodaemon
 #BLOCKCHAIN_DOWNLOAD_DIR=$(sudo -u monerodaemon mktemp -d)
