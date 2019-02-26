@@ -22,8 +22,8 @@ require("../init_mini.js").init(function() {
 			let blockData = global.protos.AltBlock.decode(data);
 			if (blockData.hash === hash) {
 				console.log("Found altblock with " + blockData.hash + " hash");
-				blockData.stage = stage;
-				console.log("Put \"" + blockData.stage + "\" stage to block");
+				blockData.pay_stage = stage;
+				console.log("Put \"" + blockData.pay_stage + "\" stage to block");
 				txn.putBinary(global.database.altblockDB, key, global.protos.AltBlock.encode(blockData));
 				txn.commit();
 				cursor.close();
