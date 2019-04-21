@@ -52,6 +52,7 @@ message Block {
     required bool unlocked = 6;
     required bool valid = 7;
     optional int64 value = 8;
+    optional bool pay_ready = 9;
 }
 
 message AltBlock {
@@ -69,4 +70,5 @@ message AltBlock {
     optional int64 pay_value = 12;
     optional string pay_stage = 13;
     optional string pay_status = 14;
+    optional bool pay_ready = 15;
 }

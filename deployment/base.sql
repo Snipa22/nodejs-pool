@@ -17,6 +17,18 @@ CREATE TABLE `balance` (
   UNIQUE KEY `balance_payment_address_pool_type_bitcoin_payment_id_uindex` (`payment_address`,`pool_type`,`bitcoin`,`payment_id`),
   KEY `balance_payment_address_payment_id_index` (`payment_address`,`payment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `block_balance` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `hex` varchar(128) NOT NULL,
+  `payment_address` varchar(128) DEFAULT NULL,
+  `payment_id` varchar(128) DEFAULT NULL,
+  `amount` float(53) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `block_balance_id_uindex` (`id`),
+  UNIQUE KEY `block_balance_hex_payment_address_payment_id_uindex` (`hex`, `payment_address`,`payment_id`),
+  KEY `block_balance_hex_index` (`hex`),
+  KEY `block_balance_payment_address_payment_id_index` (`payment_address`,`payment_id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `bans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `ip_address` varchar(40) DEFAULT NULL,
