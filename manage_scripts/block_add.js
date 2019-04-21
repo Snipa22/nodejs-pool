@@ -42,7 +42,7 @@ require("../init_mini.js").init(function() {
 		console.error("Block body is invalid: " + JSON.stringify(body3));
 		process.exit(1);
         }
-	const body4 = global.protos.AltBlock.encode(body3);
+	const body4 = global.protos.Block.encode(body3);
         let txn = global.database.env.beginTxn();
 	txn.putBinary(global.database.blockDB, height, body4);
         txn.commit();
