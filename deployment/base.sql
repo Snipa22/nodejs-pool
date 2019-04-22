@@ -27,7 +27,7 @@ CREATE TABLE `block_balance` (
   UNIQUE KEY `block_balance_id_uindex` (`id`),
   UNIQUE KEY `block_balance_hex_payment_address_payment_id_uindex` (`hex`, `payment_address`,`payment_id`),
   KEY `block_balance_hex_index` (`hex`),
-  KEY `block_balance_payment_address_payment_id_index` (`payment_address`,`payment_id`),
+  KEY `block_balance_payment_address_payment_id_index` (`payment_address`,`payment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `bans` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
