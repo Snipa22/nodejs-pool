@@ -202,6 +202,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'port', '18081', 'int', 'Monero Daemon RPC Port');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePort',     '18081', 'int', 'Main coin active daemon RPC port');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortRYO',  '0', 'int', 'Ryo coin daemon RPC port or 0');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortSUMO',  '0', 'int', 'SUMO coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortLOKI', '0', 'int', 'Loki coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortXRN', '0', 'int', 'Saronite coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortXTNC', '0', 'int', 'XtencCash coin daemon RPC port or 0');
@@ -215,6 +216,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortGRFT',  '0', 'int', 'Graft coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortTRTL',  '0', 'int', 'Turtle coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorRYO',  '0', 'float', 'Ryo algo hash price factor relative to coinHashFactor');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorSUMO',  '0', 'float', 'SUMO algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorLOKI', '0', 'float', 'Loki algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXRN', '0', 'float', 'Saronite algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXTNC', '0', 'float', 'XtendCash algo hash price factor relative to coinHashFactor');
