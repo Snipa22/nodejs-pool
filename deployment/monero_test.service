@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=forking
 GuessMainPID=no
-ExecStart=/usr/local/src/monero/build/release/bin/monerod --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc --testnet
+ExecStart=/usr/local/src/monero/build/release/bin/monerod --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc --testnet --prune-blockchain
 Restart=always
 User=monerodaemon
 

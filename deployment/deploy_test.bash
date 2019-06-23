@@ -16,19 +16,13 @@ sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again p
 echo -e "[client]\nuser=root\npassword=$ROOT_SQL_PASS" | sudo tee /root/.my.cnf
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y install git python-virtualenv python3-virtualenv curl ntp build-essential screen cmake pkg-config libboost-all-dev libevent-dev libunbound-dev libminiupnpc-dev libunwind8-dev liblzma-dev libldns-dev libexpat1-dev libgtest-dev mysql-server lmdb-utils libzmq3-dev
 cd ~
-git clone https://github.com/MoneroOcean/nodejs-pool.git  # Change this depending on how the deployment goes.
-cd /usr/src/gtest
-sudo cmake .
-sudo make
-sudo mv libg* /usr/lib/
-cd ~
+git clone https://github.com/MoneroOcean/nodejs-pool.git
 sudo systemctl enable ntp
 cd /usr/local/src
-sudo git clone https://github.com/monero-project/monero.git
+sudo git clone --recursive https://github.com/monero-project/monero.git
 cd monero
-sudo git checkout release-v0.12
-curl https://raw.githubusercontent.com/MoneroOcean/nodejs-pool/master/deployment/monero_daemon.patch | sudo git apply -v
-sudo make -j$(nproc)
+sudo git checkout v0.14.1.0
+sudo USE_SINGLE_BUILDDIR=1 make -j$(nproc) || sudo USE_SINGLE_BUILDDIR=1 make || exit 0
 sudo cp ~/nodejs-pool/deployment/monero_test.service /lib/systemd/system/monero.service
 sudo useradd -m monerodaemon -d /home/monerodaemon
 sudo systemctl daemon-reload
@@ -79,7 +73,7 @@ rm -rf $CADDY_DOWNLOAD_DIR
 cd ~
 sudo env PATH=$PATH:`pwd`/.nvm/versions/node/v8.11.3/bin `pwd`/.nvm/versions/node/v8.11.3/lib/node_modules/pm2/bin/pm2 startup systemd -u $CURUSER --hp `pwd`
 cd ~/nodejs-pool
-sudo chown -R $CURUSER. ~/.pm2
+sudo chown -R $CURUSER ~/.pm2
 echo "Installing pm2-logrotate in the background!"
 pm2 install pm2-logrotate &
 mysql -u root --password=$ROOT_SQL_PASS < deployment/base.sql
