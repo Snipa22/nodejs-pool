@@ -12,7 +12,7 @@ if (!argv.hash) {
 	console.error("Please specify height");
 	process.exit(1);
 }
-const height = argv.hash;
+const hash = argv.hash;
 
 require("../init_mini.js").init(function() {
   global.coinFuncs.getPortAnyBlockHeaderByHash(port, hash, function (err_header, body_header) {
