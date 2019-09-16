@@ -27,8 +27,8 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
-			global.mysql.query("INSERT INTO users (username, email) VALUES (?, ?)", [user, pass]).then(function (rows) {
-				console.log("INSERT INTO users (username, email) VALUES (" + user + ", " + pass + ")");
+			global.mysql.query("INSERT INTO users (username, email, enable_email) VALUES (?, ?, 0)", [user, pass]).then(function (rows) {
+				console.log("INSERT INTO users (username, email, enable_email) VALUES (" + user + ", " + pass + ", 0)");
 				callback();
 			});
 		},
