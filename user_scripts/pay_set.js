@@ -8,7 +8,7 @@ if (!argv.user) {
 	process.exit(1);
 }
 const user = argv.user;
-const pass = "pasword";
+const pass = "password";
 
 require("../init_mini.js").init(function() {
 	async.waterfall([
