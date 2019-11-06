@@ -1,4 +1,5 @@
-Pool Design/Theory
+泳池设计/理论，中国境内可用
+
 ==================
 The nodejs-pool is built around a small series of core daemons that share access to a single LMDB table for tracking of shares, with MySQL being used to centralize configurations and ensure simple access from local/remote nodes.  The core daemons follow:
 ```text
