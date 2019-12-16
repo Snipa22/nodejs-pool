@@ -43,6 +43,6 @@
     "zmq": "^2.15.3",
     "utf8": "^3.0.0",
     "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v6.0.0",
-    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v15.1.0"
+    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v15.1.1"
   }
 }
