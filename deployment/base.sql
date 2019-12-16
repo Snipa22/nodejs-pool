@@ -217,6 +217,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortTRTL',  '0', 'int', 'Turtle coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortIRD',  '0', 'int', 'Iridium coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortARQ',  '0', 'int', 'ArqMa coin daemon RPC port or 0');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortXMV',  '0', 'int', 'MoneroV coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorRYO',  '0', 'float', 'Ryo algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorSUMO',  '0', 'float', 'SUMO algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorLOKI', '0', 'float', 'Loki algo hash price factor relative to coinHashFactor');
@@ -233,6 +234,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorTRTL',  '0', 'float', 'Turtle algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorIRD',  '0', 'float', 'Iridium algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorARQ',  '0', 'float', 'ArqMa algo hash price factor relative to coinHashFactor');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXMV',  '0', 'float', 'MoneroV algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'enableAlgoSwitching', 'false', 'bool', 'Enable smart miners (need additional altblockManager module)');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address', '127.0.0.1', 'string', 'Monero Daemon RPC Wallet IP');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'port', '18082', 'int', 'Monero Daemon RPC Wallet Port');
@@ -274,7 +276,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_38081', '', 'string', 'Address to mine to for 38081 (MSR) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_48782', '', 'string', 'Address to mine to for 48782 (ITNS) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_34568', '', 'string', 'Address to mine to for 34568 (WOW) port.');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_19091', '', 'string', 'Address to mine to for 19091 (XMV) port.');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_19281', '', 'string', 'Address to mine to for 19281 (XMV) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_12211', '', 'string', 'Address to mine to for 12211 (RYO) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_11181', '', 'string', 'Address to mine to for 11181 (Aeon) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_17750', '', 'string', 'Address to mine to for 17750 (Haven) port.');
