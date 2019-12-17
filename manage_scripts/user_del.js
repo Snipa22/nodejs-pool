@@ -46,7 +46,7 @@ require("../init_mini.js").init(function() {
 				}
                                 if (rows.length) {
 					console.log("Balance last update time: " + rows[0].last_edited);
-					if (Date.now()/1000 - global.support.formatDateFromSQL(rows[0].last_edited) < 24*60*60) {
+					if (Date.now()/1000 - global.support.formatDateFromSQL(rows[0].last_edited) < 12*60*60) {
 						console.error("There was recent amount update. Refusing to continue!");
 						process.exit(1);
 					}
