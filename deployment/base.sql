@@ -218,6 +218,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortIRD',  '0', 'int', 'Iridium coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortARQ',  '0', 'int', 'ArqMa coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortXMV',  '0', 'int', 'MoneroV coin daemon RPC port or 0');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'activePortXWP',  '0', 'int', 'Swap coin daemon RPC port or 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorRYO',  '0', 'float', 'Ryo algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorSUMO',  '0', 'float', 'SUMO algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorLOKI', '0', 'float', 'Loki algo hash price factor relative to coinHashFactor');
@@ -235,6 +236,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorIRD',  '0', 'float', 'Iridium algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorARQ',  '0', 'float', 'ArqMa algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXMV',  '0', 'float', 'MoneroV algo hash price factor relative to coinHashFactor');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXWP',  '0', 'float', 'Swap algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'enableAlgoSwitching', 'false', 'bool', 'Enable smart miners (need additional altblockManager module)');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address', '127.0.0.1', 'string', 'Monero Daemon RPC Wallet IP');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'port', '18082', 'int', 'Monero Daemon RPC Wallet Port');
@@ -288,6 +290,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_11898', '', 'string', 'Address to mine to for 11898 (Turtle) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_13007', '', 'string', 'Address to mine to for 13007 (Iridium) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_19994', '', 'string', 'Address to mine to for 19994 (ArqMa) port.');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_19950', '', 'string', 'Address to mine to for 19950 (Swap) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'feeAddress', '', 'string', 'Address that pool fees are sent to.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'mailgunKey', '', 'string', 'MailGun API Key for notification');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'mailgunURL', '', 'string', 'MailGun URL for notifications');
