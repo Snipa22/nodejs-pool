@@ -61,6 +61,7 @@ Deployment via Installer
 cd ~/nodejs-pool/
 pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z"  -- --module=blockManager
 pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=worker
+pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=pool_stats
 pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" --no-autorestart -- --module=payments
 pm2 start init.js --name=remoteShare --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=remoteShare
 pm2 start init.js --name=longRunner --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=longRunner
