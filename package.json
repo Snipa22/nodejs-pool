@@ -25,7 +25,7 @@
     "minimist": "1.2.0",
     "moment": "2.21.0",
     "mysql": "2.15.0",
-    "node-lmdb": "0.4.12",
+    "node-lmdb": "0.7.0",
     "promise-mysql": "3.0.0",
     "protocol-buffers": "^3.2.1",
     "range": "0.0.3",
