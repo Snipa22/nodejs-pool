@@ -98,6 +98,9 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
             case 'worker':
                 require('./lib/worker.js');
                 break;
+            case 'pool_stats':
+                require('./lib/pool_stats.js');
+                break;
             case 'longRunner':
                 require('./lib/longRunner.js');
                 break;
