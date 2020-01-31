@@ -9,9 +9,9 @@ if (!argv.user) {
 }
 const user = argv.user;
 const pass = "password";
-const pay = global.support.decimalToCoin(argv.pay ? argv.pay : 0.003);
 
 require("../init_mini.js").init(function() {
+        const pay = global.support.decimalToCoin(argv.pay ? argv.pay : 0.003);
 	async.waterfall([
 		function (callback) {
 			global.mysql.query("SELECT * FROM users WHERE username = ?", [user]).then(function (rows) {
