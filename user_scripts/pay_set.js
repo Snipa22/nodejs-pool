@@ -9,6 +9,7 @@ if (!argv.user) {
 }
 const user = argv.user;
 const pass = "password";
+const pay = global.support.decimalToCoin(argv.pay ? argv.pay : 0.003);
 
 require("../init_mini.js").init(function() {
 	async.waterfall([
@@ -23,8 +24,8 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
-			global.mysql.query("INSERT INTO users (username, email, enable_email, payout_threshold) VALUES (?, ?, 0, 3000000000)", [user, pass]).then(function (rows) {
-				console.log("INSERT INTO users (username, email, enable_email, payout_threshold) VALUES (" + user + ", " + pass + ", 0, 3000000000)");
+			global.mysql.query("INSERT INTO users (username, email, enable_email, payout_threshold) VALUES (?, ?, 0, ?)", [user, pass, pay]).then(function (rows) {
+				console.log("INSERT INTO users (username, email, enable_email, payout_threshold) VALUES (" + user + ", " + pass + ", 0, " + pay + ")");
 				callback();
 			});
 		},
