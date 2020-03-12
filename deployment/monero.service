@@ -5,7 +5,7 @@ After=network.target
 [Service]
 Type=forking
 GuessMainPID=no
-ExecStart=/usr/local/src/monero/build/release/bin/monerod --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc --prune-blockchain
+ExecStart=/usr/local/src/monero/build/release/bin/monerod --rpc-bind-ip 127.0.0.1 --detach --restricted-rpc --prune-blockchain --block-notify '/bin/bash /home/user/nodejs-pool/block_notify.sh'
 Restart=always
 User=monerodaemon
 
