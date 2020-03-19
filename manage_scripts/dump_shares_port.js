@@ -12,9 +12,7 @@ const port = argv.port;
 let depth = 10;
 if (argv.depth) depth = argv.depth;
 
-console.log("Dumping shares for " + user + " user");
-if (paymentid) console.log("Dumping shares for " + paymentid + " paymentid");
-if (worker)    console.log("Dumping shares for " + worker + " worker");
+console.log("Dumping shares for " + port + " port");
 
 require("../init_mini.js").init(function() {
 
