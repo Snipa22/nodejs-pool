@@ -9,7 +9,7 @@ if (!argv.port) {
 const port = argv.port;
 
 if (!argv.hash) {
-	console.error("Please specify height");
+	console.error("Please specify hash");
 	process.exit(1);
 }
 const hash = argv.hash;
