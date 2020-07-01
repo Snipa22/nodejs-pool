@@ -1,7 +1,7 @@
 {
   "name": "nodejs-pool",
   "version": "0.0.1",
-  "description": "IMproved version of Snipa22 nodejs-pool",
+  "description": "Improved version of Snipa22 nodejs-pool",
   "main": "init.js",
   "repository": {
     "type": "git",
