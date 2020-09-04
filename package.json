@@ -36,7 +36,7 @@
     "sprintf-js": "^1.0.3",
     "wallet-address-validator": "0.1.0",
     "utf8": "^3.0.0",
-    "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v8.1.1",
-    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v20.0.0"
+    "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v8.2.0",
+    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v21.0.0"
   }
 }
