@@ -165,6 +165,7 @@ CREATE TABLE `users` (
   `admin` tinyint(1) DEFAULT '0',
   `payout_threshold` bigint(16) DEFAULT '0',
   `enable_email` tinyint(1) DEFAULT '1',
+  `payout_threshold_lock` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_id_uindex` (`id`),
   UNIQUE KEY `users_username_uindex` (`username`)
