@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "async": "3.2.0",
-    "bignum": "^0.12.5",
+    "bignum": "^0.13.1",
     "body-parser": "^1.16.0",
     "circular-buffer": "1.0.2",
     "cluster": "0.7.7",
