@@ -280,6 +280,7 @@ If you'd like to make a one time donation, the addresses are as follows:
 * XTA - ```ipN5cNhm7RXAGACP4ZXki4afT3iJ1A6Ka5U4cswE6fBPDcv8JpivurBj3vu1bXwPyb8KZEGsFUYMmToFG4N9V9G72X4WpAQ8L```
 * DERO - ```dERokvcrnuWH1ai1QmZQc9cgxrLwE3rX3TbhdrnLmi3BVZmf197qd5FaFqmPMp5dZ3igXfVQwUUMgTSjpVKDtUeb6DT2xp64XJ```
 * CCX - ```ccx7dmnBBoRPuVcpKJSAVZKdSDo9rc7HVijFbhG34jsXL3qiqfRwu7A5ecem44s2rngDd8y8N4QnYK6WR3mXAcAZ5iXun9BQBx```
+* RVN - ```RLVJv9rQNHzXS3Zn4JH8hfAHmm1LfECMxy```
 * BTC - ```3BzvMuLStA388kYZ9nudfm8L22937dSPS3```
 * BCH - ```qrhww48p5s6zw9twhc7cujgwp7vym2k4vutem6f92p```
 * ETH - ```0xCF8BABC074C487Ae17F9Ce0394eab492E6A35658```
