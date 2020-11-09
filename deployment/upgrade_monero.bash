@@ -6,7 +6,7 @@ cd /usr/local/src/monero &&\
 sudo git checkout .  &&\
 sudo git checkout master &&\
 sudo git pull &&\
-sudo git checkout v0.17.1.1 &&\
+sudo git checkout v0.17.1.3 &&\
 sudo git submodule init &&\
 sudo git submodule update &&\
 sudo rm -rf build &&\
