@@ -41,7 +41,7 @@ message Share {
     optional int32 port = 13;
     optional int64 shares2 = 14;
     optional int64 share_num = 15;
-    required float raw_shares = 16;
+    optional float raw_shares = 16;
 }
 
 message Block {
