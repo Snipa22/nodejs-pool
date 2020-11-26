@@ -26,7 +26,7 @@ message InvalidShare{
 }
 
 message Share {
-    required int64 shares = 1;
+    optional int64 shares = 1;
     required string paymentAddress = 2;
     required bool foundBlock = 3;
     optional string paymentID = 4;
@@ -41,7 +41,7 @@ message Share {
     optional int32 port = 13;
     optional int64 shares2 = 14;
     optional int64 share_num = 15;
-    optional float raw_shares = 16;
+    required float raw_shares = 16;
 }
 
 message Block {
