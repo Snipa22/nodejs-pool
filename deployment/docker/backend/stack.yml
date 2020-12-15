@@ -1,0 +1,37 @@
+---
+apps:
+  - name: api
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=api"
+
+  - name: remoteShare
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=remoteShare"
+
+  - name: pool
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=pool"
+
+  - name: longRunner
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=longRunner"
+
+  - name: payments
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=payments"
+
+  - name: blockManager
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=blockManager"
+
+  - name: worker
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=worker"
+
