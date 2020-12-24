@@ -24,18 +24,18 @@ require("../init_mini.js").init(function() {
 	const body3 = {
 		"hash":          body2.hash,
 		"difficulty":    body2.difficulty,
-		"shares":        body2.shares,
-		"timestamp":     body2.timestamp,
-		"poolType":      body2.poolType,
-		"unlocked":      body2.unlocked,
-		"valid":         body2.valid,
 		"port":          body2.port,
 		"height":        body2.height,
-		"anchor_height": body2.anchor_height,
 		"value":         body2.value,
-		"pay_value":     body2.pay_value,
-		"pay_stage":     body2.pay_stage,
-		"pay_status":    body2.pay_status
+		"anchor_height": body2.anchor_height,
+		"timestamp":     timestamp * 1000,
+		"shares":        body2.shares || body2.difficulty,
+		"poolType":      body2.poolType || 0,
+		"unlocked":      body2.unlocked || false,
+		"valid":         body2.valid || true,
+		"pay_value":     body2.pay_value || 0,
+		"pay_stage":     body2.pay_stage || "",
+		"pay_status":    body2.pay_status || ""
 	};
 	if (typeof (body3.hash) === 'undefined' ||
 	    typeof (body3.difficulty) === 'undefined' ||
