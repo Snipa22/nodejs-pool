@@ -1,0 +1,131 @@
+version: '3.8'
+services:
+  monero-init:
+    entrypoint: /bin/sh -c "chown -Rv monero /home/monero/.bitmonero"
+    user: root
+    restart: "no"
+    volumes:
+      - monero-data:/home/monero/.bitmonero
+    build:
+      context: ./deployment/docker/monerod
+
+  monerod:
+    container_name: pool-monerod
+    image: tari/monerod
+    build:
+      context: ./deployment/docker/monerod
+    user: monero
+    network_mode: host
+#    networks:
+#      - monero
+    volumes:
+      - monero-data:/home/monero/.bitmonero
+    depends_on:
+      - monero-init
+    ports:
+      - 18080:18080
+      - 18081:18081
+    entrypoint: "/monero/monerod"
+    command:
+      - "--non-interactive"
+      - "--restricted-rpc"
+      - "--rpc-bind-ip=0.0.0.0"
+      - "--rpc-bind-port=18081"
+      - "--confirm-external-bind"
+      - "--max-concurrency=4"
+      - "--public-node"
+      - "--limit-rate-up=1024"
+      - "--limit-rate-down=2048"
+      - "--stagenet"
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: 'pool'
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: 'pool'
+      # You can use whatever password you like
+      MYSQL_PASSWORD: 'password'
+      # Password for root access
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      # <Port exposed> : < MySQL Port running inside container>
+      - '3306:3306'
+    expose:
+      # Opens port 3306 on the container
+      - '3306'
+      # Where our data will be persisted
+    volumes:
+      - backend-db:/var/lib/mysql
+    network_mode: host
+#    networks:
+#      - database
+
+  pool-backend:
+    image: nodejs-pool
+    build:
+      context: ./
+      dockerfile: ./deployment/docker/backend/Dockerfile
+      args:
+        - DB_STORAGE_PATH=/home/pool/pool_db
+        - DB_HOST=db
+        - DB_NAME=pool
+        - DB_USER=pool
+        - DB_PASS=password
+    volumes:
+      - lmdb:/home/pool/pool_db
+      - ./lib:/home/pool/pool/lib
+    ports:
+      - 8001:8001
+      - 3333:3333
+      - 5555:5555
+      - 7777:7777
+      - 9000:9000
+#    networks:
+#      - monero
+#      - database
+#      - web-proxy
+    network_mode: host
+    environment:
+      # - ENABLED_DAEMONS=blockManager
+      # - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,payments,blockManager
+      - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,payments,blockManager,worker
+      - DB_HOST=db
+      - DB_PORT=3306
+      - DB_NAME=pool
+      - DB_USER=pool
+      - DB_PASS=password
+      - ROOT_SQL_PASS=password
+      - HOSTNAME=xmrtaripool.test
+      - COIN=xtr
+
+  pool-web:
+    image: pool-web
+    build:
+      context: ./deployment/docker/web
+    volumes:
+      - web-assets:/var/www
+      - ./deployment/docker/web/templates/:/etc/nginx/templates
+    environment:
+        # Can set these in your hosts file when testing
+        - API_HOSTNAME=api.xmrtaripool.test
+        - WEB_HOSTNAME=xmrtaripool.test
+#    depends_on:
+#      - pool-backend
+    ports:
+      - 80:80
+      - 443:443
+    network_mode: host
+#    networks:
+#      - web-proxy
+
+volumes:
+  backend-db:
+  lmdb:
+  monero-data:
+  web-assets:
+
+networks:
+  database:
+  web-proxy:
+  monero:
