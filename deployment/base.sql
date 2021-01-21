@@ -98,6 +98,13 @@ CREATE TABLE `pools` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `pools_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `pool_workers` (
+  `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
+  `pool_id` int(11) NOT NULL,
+  `worker_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pool_workers_id_uindex` (`pool_id`, `worker_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `port_config` (
   `poolPort` int(11) NOT NULL,
   `difficulty` int(11) DEFAULT '1000',
