@@ -19,7 +19,7 @@ require("../init_mini.js").init(function() {
 	console.log("Max payment to remove: " + global.config.payout.walletMin);
 	let rows2remove = 0;
 
-	const where_str = payment_id === null ? "payment_address = '" + address + "' AND payment_id IS NULL"
+	const where_str = payment_id === null ? "payment_address = '" + address + "' AND (payment_id IS NULL OR payment_id = '')"
 	                                      : "payment_address = '" + address + "' AND payment_id = '" + payment_id + "'";
 
 	async.waterfall([
@@ -91,13 +91,13 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
-			global.mysql.query("DELETE FROM balance WHERE " + where_str, [user]).then(function (rows) {
+			global.mysql.query("DELETE FROM balance WHERE " + where_str).then(function (rows) {
 				console.log("DELETE FROM balance WHERE " + where_str);
 				callback();
 			});
 		},
 		function (callback) {
-			global.mysql.query("DELETE FROM payments WHERE " + where_str, [user]).then(function (rows) {
+			global.mysql.query("DELETE FROM payments WHERE " + where_str).then(function (rows) {
 				console.log("DELETE FROM payments WHERE " + where_str);
 				callback();
 			});
