@@ -57,6 +57,13 @@ require("../init_mini.js").init(function() {
 			});
 		},
 		function (callback) {
+			global.mysql.query("SELECT * FROM block_balance WHERE " + where_str).then(function (rows) {
+				console.log("Found rows in block_balance table: " + rows.length);
+				rows2remove += rows.length;
+				callback();
+			});
+		},
+		function (callback) {
 			const address     = global.database.getCache(user);
 			const stats       = global.database.getCache("stats:" + user);
 			const history     = global.database.getCache("history:" + user);
@@ -92,6 +99,12 @@ require("../init_mini.js").init(function() {
 		function (callback) {
 			global.mysql.query("DELETE FROM payments WHERE " + where_str, [user]).then(function (rows) {
 				console.log("DELETE FROM payments WHERE " + where_str);
+				callback();
+			});
+		},
+		function (callback) {
+			global.mysql.query("DELETE FROM block_balance WHERE " + where_str, [user]).then(function (rows) {
+				console.log("DELETE FROM block_balance WHERE " + where_str);
 				callback();
 			});
 		},
