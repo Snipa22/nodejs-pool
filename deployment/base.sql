@@ -99,7 +99,7 @@ CREATE TABLE `pools` (
   UNIQUE KEY `pools_id_uindex` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `pool_workers` (
-  `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT,
+  `id` tinyint(1) unsigned NOT NULL AUTO_INCREMENT=0,
   `pool_id` int(11) NOT NULL,
   `worker_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
