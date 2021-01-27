@@ -15,9 +15,8 @@ services:
     build:
       context: ./deployment/docker/monerod
     user: monero
-    network_mode: host
-#    networks:
-#      - monero
+    networks:
+      - monero
     volumes:
       - monero-data:/home/monero/.bitmonero
     depends_on:
@@ -57,9 +56,8 @@ services:
       # Where our data will be persisted
     volumes:
       - backend-db:/var/lib/mysql
-    network_mode: host
-#    networks:
-#      - database
+    networks:
+      - database
 
   pool-backend:
     image: nodejs-pool
@@ -81,15 +79,14 @@ services:
       - 5555:5555
       - 7777:7777
       - 9000:9000
-#    networks:
-#      - monero
-#      - database
-#      - web-proxy
-    network_mode: host
+    networks:
+      - monero
+      - database
+      - web-proxy
     environment:
       # - ENABLED_DAEMONS=blockManager
-      # - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,payments,blockManager
-      - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,payments,blockManager,worker
+      - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,blockManager,worker
+      # - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,payments,blockManager,worker
       - DB_HOST=db
       - DB_PORT=3306
       - DB_NAME=pool
@@ -107,17 +104,16 @@ services:
       - web-assets:/var/www
       - ./deployment/docker/web/templates/:/etc/nginx/templates
     environment:
-        # Can set these in your hosts file when testing
-        - API_HOSTNAME=api.xmrtaripool.test
-        - WEB_HOSTNAME=xmrtaripool.test
-#    depends_on:
-#      - pool-backend
+      # Can set these in your hosts file when testing
+      - API_HOSTNAME=api.xmrtaripool.test
+      - WEB_HOSTNAME=xmrtaripool.test
+    #    depends_on:
+    #      - pool-backend
     ports:
       - 80:80
       - 443:443
-    network_mode: host
-#    networks:
-#      - web-proxy
+    networks:
+      - web-proxy
 
 volumes:
   backend-db:

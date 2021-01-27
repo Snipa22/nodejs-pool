@@ -42,8 +42,8 @@ global.mysql.query("SELECT * FROM config").then(function (rows) {
         }
     });
 }).then(function(){
+    console.log(`Selected coin: ${global.config.coin}`);
     global.config['coin'] = JSON.parse(coinConfig)[global.config.coin];
-    console.log(`Selected coin config: ${JSON.stringify(global.config.coin)}`);
     coinInc = require(global.config.coin.funcFile);
     global.coinFuncs = new coinInc();
     if (argv.module === 'pool'){

@@ -57,7 +57,7 @@ CREATE TABLE `block_log` (
   PRIMARY KEY (`hex`),
   UNIQUE KEY `block_log_hex_uindex` (`hex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `config` (
+CREATE TABLE IF NOT EXISTS `config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `module` varchar(32) DEFAULT NULL,
   `item` varchar(32) DEFAULT NULL,
