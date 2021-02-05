@@ -48,7 +48,7 @@ cd build
 sudo ln -s `pwd` /var/www
 CADDY_DOWNLOAD_DIR=$(mktemp -d)
 cd $CADDY_DOWNLOAD_DIR
-curl -sL "https://github.com/caddyserver/caddy/releases/download/v2.3.0/caddy_2.3.0_linux_amd64.tar.gz" | tar -xz caddy init/linux-systemd/caddy.service
+curl -sL "https://github.com/caddyserver/caddy/releases/download/v0.10.8/caddy_v0.10.8_linux_amd64.tar.gz" | tar -xz caddy init/linux-systemd/caddy.service
 sudo mv caddy /usr/local/bin
 sudo chown root:root /usr/local/bin/caddy
 sudo chmod 755 /usr/local/bin/caddy
