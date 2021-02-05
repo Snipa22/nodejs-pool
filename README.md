@@ -33,6 +33,7 @@ Setup Instructions
 
 Server Requirements
 -------------------
+* Ubuntu 16.04, 18.04 (confirmed working)
 * 4 Gb Ram
 * 2 CPU Cores (with AES_NI)
 * 150 Gb SSD-Backed Storage - If you're doing a multi-server install, the leaf nodes do not need this much storage.  They just need enough storage to hold the blockchain for your node.  The pool comes configured to use up to 60Gb of storage for LMDB.  Assuming you have the longRunner worker running, it should never get near this size, but be aware that it /can/ bloat readily if things error, so be ready for this!
@@ -87,8 +88,6 @@ The installer assumes that you will be running a single-node instance and using 
 
 The following raw binaries **MUST BE AVAILABLE FOR IT TO BOOTSTRAP**:
 * sudo
-
-I've confirmed that the default server 16.04 installation has these requirements.
 
 The pool comes pre-configured with values for Monero (XMR), these may need to be changed depending on the exact requirements of your coin.  Other coins will likely be added down the road, and most likely will have configuration.sqls provided to overwrite the base configurations for their needs, but can be configured within the frontend as well.
 
