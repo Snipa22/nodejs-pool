@@ -11,12 +11,14 @@ const hash = argv.hash;
 require("../init_mini.js").init(function() {
 	let txn = global.database.env.beginTxn();
         let cursor = new global.database.lmdb.Cursor(txn, global.database.altblockDB);
+	let is_found = 0;
         for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
         	cursor.getCurrentBinary(function(key, data){  // jshint ignore:line
 			let blockData = global.protos.AltBlock.decode(data);
-			if (blockData.hash === hash) {
+			if (!is_found && blockData.hash === hash) {
 				console.log("Found altblock with " + blockData.hash + " hash");
                                 global.coinFuncs.getPortAnyBlockHeaderByHash(blockData.port, argv.hash, false, function (err, body) {
+					is_found = 1;
 					if (err) {
 					        cursor.close();
 					        txn.commit();
@@ -34,8 +36,10 @@ require("../init_mini.js").init(function() {
 			}
 		});
         }
-        cursor.close();
-        txn.commit();
-	console.log("Not found altblock with " + hash + " hash");
-	process.exit(1);
+	if (!is_found) {
+	        cursor.close();
+        	txn.commit();
+		console.log("Not found altblock with " + hash + " hash");
+		process.exit(1);
+	}
 });
