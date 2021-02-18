@@ -26,8 +26,8 @@ require("../init_mini.js").init(function() {
 						process.exit(1);
 					}
 					console.log("Changing raw block reward from " + blockData.value + " to " + body.reward);
-					//blockData.value = body.reward;
-					//txn.putBinary(global.database.altblockDB, key, global.protos.AltBlock.encode(blockData));
+					blockData.value = body.reward;
+					txn.putBinary(global.database.altblockDB, key, global.protos.AltBlock.encode(blockData));
 					txn.commit();
 					cursor.close();
 					console.log("Changed altblock");
