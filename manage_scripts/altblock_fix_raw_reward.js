@@ -17,8 +17,8 @@ require("../init_mini.js").init(function() {
 			let blockData = global.protos.AltBlock.decode(data);
 			if (!is_found && blockData.hash === hash) {
 				console.log("Found altblock with " + blockData.hash + " hash");
+				is_found = 1;
                                 global.coinFuncs.getPortAnyBlockHeaderByHash(blockData.port, argv.hash, false, function (err, body) {
-					is_found = 1;
 					if (err) {
 					        cursor.close();
 					        txn.commit();
