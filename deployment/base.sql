@@ -17,6 +17,15 @@ CREATE TABLE `balance` (
   UNIQUE KEY `balance_payment_address_pool_type_bitcoin_payment_id_uindex` (`payment_address`,`pool_type`,`bitcoin`,`payment_id`),
   KEY `balance_payment_address_payment_id_index` (`payment_address`,`payment_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `paid_blocks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `paid_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `hex` varchar(128) NOT NULL,
+  `amount` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `paid_blocks_paid_time` (`paid_time`),
+  UNIQUE KEY `paid_blocks_hex` (`hex`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `block_balance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `hex` varchar(128) NOT NULL,
@@ -45,18 +54,6 @@ CREATE TABLE `notifications` (
   `message` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `notifications_id_uindex` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-CREATE TABLE `block_log` (
-  `id` int(11) NOT NULL COMMENT 'Block Height',
-  `orphan` tinyint(1) DEFAULT '1',
-  `hex` varchar(128) NOT NULL,
-  `find_time` timestamp NULL DEFAULT NULL,
-  `reward` bigint(20) DEFAULT NULL,
-  `difficulty` bigint(20) DEFAULT NULL,
-  `major_version` int(11) DEFAULT NULL,
-  `minor_version` int(11) DEFAULT NULL,
-  PRIMARY KEY (`hex`),
-  UNIQUE KEY `block_log_hex_uindex` (`hex`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
