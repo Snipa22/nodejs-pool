@@ -24,7 +24,7 @@ require("../init_mini.js").init(function() {
 						txn.commit();
 						process.exit(1);
 					}
-		                        console.log("Changing alt-block pay_ready from " + blockData.pay_ready + " to true");
+		                        console.log("Changing alt-block pay_ready from " + blockData.pay_ready + " to false");
 					blockData.pay_ready = false;
 					txn.putBinary(global.database.altblockDB, key, global.protos.AltBlock.encode(blockData));
 					cursor.close();
