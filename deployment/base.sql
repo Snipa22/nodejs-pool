@@ -19,8 +19,8 @@ CREATE TABLE `balance` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `paid_blocks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `found_time` timestamp NOT NULL,
   `paid_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `found_time` timestamp NOT NULL,
   `port` int NOT NULL,
   `hex` varchar(128) NOT NULL,
   `amount` bigint(20) DEFAULT NULL,
