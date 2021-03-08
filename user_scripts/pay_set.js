@@ -13,7 +13,7 @@ require("../init_mini.js").init(function() {
         const pay = global.support.decimalToCoin(argv.pay ? argv.pay : 0.003);
 	async.waterfall([
 		function (callback) {
-			global.mysql.query("UPDATE users SET payout_threshold=? WHERE user=?", [pay, user]).then(function (rows) {
+			global.mysql.query("UPDATE users SET payout_threshold=? WHERE username=?", [pay, user]).then(function (rows) {
 				console.log("UPDATE users SET payout_threshold=" + pay + " WHERE username=" + user);
 				callback();
 			});
