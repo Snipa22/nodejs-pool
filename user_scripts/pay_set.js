@@ -14,7 +14,7 @@ require("../init_mini.js").init(function() {
 	async.waterfall([
 		function (callback) {
 			global.mysql.query("UPDATE users SET payout_threshold=? WHERE user=?", [pay, user]).then(function (rows) {
-				console.log("UPDATE users SET payout_threshold=" + pay + " WHERE user=" + user);
+				console.log("UPDATE users SET payout_threshold=" + pay + " WHERE username=" + user);
 				callback();
 			});
 		},
