@@ -18,7 +18,7 @@ require("../init_mini.js").init(function() {
 			if (blockData.hash === hash) {
 			        is_found = true;
 				global.coinFuncs.getPortBlockHeaderByHash(blockData.port, hash, (err, body) => {
-					if (err !== null) {
+					if (err !== null || !body.reward) {
 		        			console.log("Altblock with " + hash + " hash still has invalid hash for " + blockData.port + " port! Exiting!");
 						cursor.close();
 						txn.commit();
