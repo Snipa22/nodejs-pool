@@ -26,8 +26,8 @@ require("../init_mini.js").init(function() {
 					}
 					blockData.valid = true;
 					blockData.unlocked = false;
-		                        if (blockData.value != body.reward) console.log("Changing alt-block value from " + blockData.value + " to " + body.reward);
-                                        blockData.value = body.reward;
+		                        //if (blockData.value != body.reward) console.log("Changing alt-block value from " + blockData.value + " to " + body.reward);
+                                        //blockData.value = body.reward;
 					txn.putBinary(global.database.altblockDB, key, global.protos.AltBlock.encode(blockData));
 					cursor.close();
 					txn.commit();
