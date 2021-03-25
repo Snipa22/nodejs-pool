@@ -1,6 +1,8 @@
 CREATE DATABASE pool;
-GRANT ALL ON pool.* TO pool@`127.0.0.1` IDENTIFIED BY '98erhfiuehw987fh23d';
-GRANT ALL ON pool.* TO pool@localhost IDENTIFIED BY '98erhfiuehw987fh23d';
+CREATE USER pool@`127.0.0.1` IDENTIFIED WITH mysql_native_password BY '98erhfiuehw987fh23d';
+CREATE USER pool@localhost IDENTIFIED WITH mysql_native_password BY '98erhfiuehw987fh23d';
+GRANT ALL ON pool.* TO pool@`127.0.0.1`;
+GRANT ALL ON pool.* TO pool@localhost;
 FLUSH PRIVILEGES;
 USE pool;
 ALTER DATABASE pool DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;

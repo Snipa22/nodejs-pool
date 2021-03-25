@@ -14,5 +14,4 @@
         Access-Control-Allow-Headers "Content-Type, x-access-token"
     }
     gzip
-    mime .manifest text/cache-manifest
 }
