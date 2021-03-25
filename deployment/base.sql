@@ -264,8 +264,8 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'bestExchange', 'xmrto', 'string', 'Current best exchange');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'mixIn', '10', 'int', 'Mixin count for coins that support such things.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'ethWalletPass', '', 'string', 'Ethereum wallet password');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'statsBufferLength', '480', 'int', 'Number of items to be cached in the stats buffers.');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'statsBufferHours', '24', 'int', 'Number of hours to be cached in the stats buffers.');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'statsBufferLength', '1000', 'int', 'Number of items to be cached in the stats buffers.');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'statsBufferHours', '72', 'int', 'Number of hours to be cached in the stats buffers.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pps', 'enable', 'false', 'bool', 'Enable PPS or not');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pplns', 'shareMulti', '2', 'int', 'Multiply this times difficulty to set the N in PPLNS');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pplns', 'shareMultiLog', '3', 'int', 'How many times the difficulty of the current block do we keep in shares before clearing them out');
@@ -307,12 +307,12 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'blockCleanWarning', '360', 'int', 'Blocks before longRunner cleaner module will start to warn.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pplns', 'enable', 'true', 'bool', 'Enable PPLNS on the pool.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('solo', 'enable', 'true', 'bool', 'Enable SOLO mining on the pool');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'feeSlewAmount', '.001', 'float', 'Amount to charge for the txn fee');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'feeSlewAmount', '.0001', 'float', 'Amount to charge for the txn fee');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'feeSlewEnd', '4', 'float', 'Value at which txn fee amount drops to 0');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'rpcPasswordEnabled', 'false', 'bool', 'Does the wallet use a RPC password?');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'rpcPasswordPath', '', 'string', 'Path and file for the RPC password file location');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'maxPaymentTxns', '15', 'int', 'Maximum number of transactions in a single payment');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'shareHost', '', 'string', 'Host that receives share information');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'shareHost', 'http://localhost/leafApi', 'string', 'Host that receives share information');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerNotHashingBody', 'Your worker: %(worker)s has stopped submitting hashes at: %(timestamp)s UTC\n', 'string', 'Email sent to the miner when their worker stops hashing');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerNotHashingSubject', 'Status of your worker(s)', 'string', 'Subject of email sent to miner when worker stops hashing');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('email', 'workerStartHashingBody', 'Your worker: %(worker)s has started submitting hashes at: %(timestamp)s UTC\n', 'string', 'Email sent to the miner when their worker starts hashing');
@@ -321,7 +321,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'emailSig', 'NodeJS-Pool Administration Team', 'string', 'Signature line for the emails.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'timer', '120', 'int', 'Number of minutes between main payment daemon cycles');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'timerRetry', '25', 'int', 'Number of minutes between payment daemon retrying due to not enough funds');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'priority', '0', 'int', 'Payout priority setting. 0 = use default (4x fee); 1 = low prio (1x fee)');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('payout', 'priority', '1', 'int', 'Payout priority setting. 0 = use default (4x fee); 1 = low prio (1x fee)');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('general', 'allowStuckPoolKill', 'false', 'bool', 'Allow to kill the pool in case of stuck block template');
 INSERT INTO pool.users (username, pass, email, admin, payout_threshold) VALUES ('Administrator', null, 'Password123', 1, 0);
 INSERT INTO pool.port_config (poolPort, difficulty, portDesc, portType, hidden, `ssl`) VALUES (3333, 1000, 'Low-End Hardware (Up to 30-40 h/s)', 'pplns', 0, 0);
