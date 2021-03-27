@@ -203,8 +203,8 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'banPercent', '25', 'int', 'Percentage of shares that need to be invalid to be banned.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'banThreshold', '30', 'int', 'Number of shares before bans can begin');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'trustedMiners', 'true', 'bool', 'Enable the miner trust system');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'minerThrottleSharePerSec', '5', 'bool', 'Number of shares per second (per thread) after pool will throttle shares');
-INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'minerThrottleShareWindow', '5', 'bool', 'Length of share throttle window in seconds');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'minerThrottleSharePerSec', '5', 'int', 'Number of shares per second (per thread) after pool will throttle shares');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'minerThrottleShareWindow', '5', 'int', 'Length of share throttle window in seconds');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'trustChange', '1', 'int', 'Change in the miner trust in percent');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'trustMin', '20', 'int', 'Minimum level of miner trust');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'trustPenalty', '30', 'int', 'Number of shares that must be successful to be trusted, reset to this value if trust share is broken');
