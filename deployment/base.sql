@@ -214,6 +214,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'port', '18081', 'int', 'Monero Daemon RPC Port');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'basicAuth', '', 'string', 'Basic auth header if needed by daemon');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'X-API-KEY', '', 'string', 'Turtle wallet API auth header');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'pollInterval', '100', 'int', 'Time in ms between pool daemon checks for new blocks');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorRYO',  '0', 'float', 'Ryo algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorSUMO',  '0', 'float', 'SUMO algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorLOKI', '0', 'float', 'Loki algo hash price factor relative to coinHashFactor');
