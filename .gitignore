@@ -75,3 +75,9 @@ jspm_packages
 .yarn-integrity
 
 config.json
+
+# Artifacts when running from the repo
+wallet_trust_*
+miner_agents
+cert.key
+cert.pem

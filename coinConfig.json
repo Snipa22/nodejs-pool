@@ -7,15 +7,15 @@
     "xmrTo": true,
     "name": "Monero",
     "mixIn": 4,
-    "shortCode": "XMR"
+    "shortCode": "xmr"
   },
   "xtr": {
     "funcFile": "./lib/coins/xtr.js",
     "paymentFile": "./payment_systems/xtr.js",
-    "sigDigits": 1000000000000,
+    "sigDigits": 1000000,
     "xmrTo": true,
     "name": "Tari",
     "mixIn": 4,
-    "shortCode": "XTR"
+    "shortCode": "xtr"
   }
 }

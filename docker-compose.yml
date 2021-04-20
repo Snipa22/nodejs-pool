@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.2'
 services:
   monero-init:
     entrypoint: /bin/sh -c "chown -Rv monero /home/monero/.bitmonero"
@@ -35,6 +35,30 @@ services:
       - "--public-node"
       - "--limit-rate-up=1024"
       - "--limit-rate-down=2048"
+      - "--stagenet"
+
+  monero-wallet-rpc:
+    container_name: pool-monero-wallet
+    image: tari/monerod
+    build:
+      context: ./deployment/docker/monerod
+    user: monero
+    networks:
+      - monero
+    volumes:
+      - monero-wallet:/home/monero/wallet
+    ports:
+      - 18082:18082
+    entrypoint: "/monero/monero-wallet-rpc"
+    command:
+      - "--non-interactive"
+      - "--daemon-address=monerod:18081"
+      - "--wallet-file"
+      - "/home/monero/wallet/1"
+      - "--password=''"
+      - "--disable-rpc-login"
+      - "--rpc-bind-ip=0.0.0.0"
+      - "--rpc-bind-port=18082"
       - "--stagenet"
 
   db:
@@ -84,9 +108,9 @@ services:
       - database
       - web-proxy
     environment:
-      # - ENABLED_DAEMONS=blockManager
-      - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,blockManager,worker
-      # - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,payments,blockManager,worker
+      # - ENABLED_DAEMONS=blockManager,remoteShare
+      # - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,blockManager,worker
+      - ENABLED_DAEMONS=api,remoteShare,pool,longRunner,payments,blockManager,worker
       - DB_HOST=db
       - DB_PORT=3306
       - DB_NAME=pool
@@ -95,6 +119,7 @@ services:
       - ROOT_SQL_PASS=password
       - HOSTNAME=xmrtaripool.test
       - COIN=xtr
+      - DEBUG=coinFuncs
 
   pool-web:
     image: pool-web
@@ -119,6 +144,7 @@ volumes:
   backend-db:
   lmdb:
   monero-data:
+  monero-wallet:
   web-assets:
 
 networks:

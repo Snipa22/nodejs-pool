@@ -1,16 +1,19 @@
 {
   "name": "nodejs-pool",
   "version": "0.0.1",
-  "description": "Improved version of Snipa22 nodejs-pool",
+  "description": "Version of Snipa22 nodejs-pool, with code from moneroocean's fork that supports merge mining with Tari",
   "main": "init.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/MoneroOcean/nodejs-pool.git"
+    "url": "https://github.com/tari-project/nodejs-pool.git"
+  },
+  "scripts": {
+    "test": "mocha"
   },
   "author": "Multiple",
   "license": "MIT",
   "dependencies": {
-    "@tari/wallet-grpc-client": "git://github.com/tari-project/tari-wallet-grpc-client.git#c961bdf0107ff464566382f200c194ecbe976893",
+    "@tari/wallet-grpc-client": "git://github.com/tari-project/tari-wallet-grpc-client.git#3601dd52ceb5ff09835e5cfdbc6bd5c07e899a85",
     "apicache": "1.2.1",
     "async": "3.2.0",
     "bignum": "^0.13.1",
@@ -20,8 +23,8 @@
     "concat-stream": "^1.6.0",
     "cors": "^2.8.1",
     "crypto": "0.0.3",
-    "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v9.0.18",
-    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v22.1.1",
+    "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v9.1.4",
+    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#743a6d62f44e6e3de645033f7b54d9f37c38cc81",
     "debug": "2.6.9",
     "express": "4.14.0",
     "express-rate-limit": "5.2.3",
@@ -40,5 +43,11 @@
     "sprintf-js": "^1.0.3",
     "utf8": "^3.0.0",
     "wallet-address-validator": "0.1.0"
+  },
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "fast-csv": "^4.3.6",
+    "mocha": "^8.2.1",
+    "prettier": "2.2.1"
   }
 }

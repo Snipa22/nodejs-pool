@@ -1,3 +1,5 @@
+syntax = "proto2";
+
 enum POOLTYPE {
     PPLNS = 0;
     PPS = 1;
@@ -67,9 +69,11 @@ message AltBlock {
     required int32 port = 8;
     required int32 height = 9;
     required int32 anchor_height = 10;
-    optional int64 value = 11;
-    optional int64 pay_value = 12;
-    optional string pay_stage = 13;
-    optional string pay_status = 14;
-    optional bool pay_ready = 15;
+    required string coin = 11;
+    optional int64 value = 12;
+    optional int64 pay_value = 13;
+    optional string pay_stage = 14;
+    optional string pay_status = 15;
+    optional bool pay_ready = 16;
+    optional string parent_chain_hash = 17;
 }

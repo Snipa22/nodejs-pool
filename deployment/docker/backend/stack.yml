@@ -8,11 +8,15 @@ apps:
   - name: remoteShare
     log_date_format: "YYYY-MM-DD HH:mm Z"
     script: init.js
+    env:
+      DEBUG: remoteShare,db
     args: "--module=remoteShare"
 
   - name: pool
     log_date_format: "YYYY-MM-DD HH:mm Z"
     script: init.js
+    env:
+      DEBUG: pool,db
     args: "--module=pool"
 
   - name: longRunner
@@ -23,15 +27,24 @@ apps:
   - name: payments
     log_date_format: "YYYY-MM-DD HH:mm Z"
     script: init.js
+    env:
+      DEBUG: payments,db
     args: "--module=payments"
 
   - name: blockManager
     log_date_format: "YYYY-MM-DD HH:mm Z"
     script: init.js
+    env:
+      DEBUG: blockManager,db
     args: "--module=blockManager"
 
   - name: worker
     log_date_format: "YYYY-MM-DD HH:mm Z"
     script: init.js
     args: "--module=worker"
+
+  - name: pool_stats
+    log_date_format: "YYYY-MM-DD HH:mm Z"
+    script: init.js
+    args: "--module=pool_stats"
 

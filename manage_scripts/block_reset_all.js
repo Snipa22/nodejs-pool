@@ -1,42 +1,33 @@
 'use strict';
 
-const argv = require('minimist')(process.argv.slice(2));
-
-const predicate = (block) => {
-    let result = true;
-    result &= !argv.unlocked || block.unlocked;
-    result &= !argv.locked || !block.unlocked;
-    result &= !argv['pay-ready'] || block.pay_ready;
-    result &= !argv.valid || block.valid;
-    return result;
-};
-
 require('../init_mini.js').init(function () {
-    let txn = global.database.env.beginTxn({ readOnly: true });
-
+    let txn = global.database.env.beginTxn();
     let cursor = new global.database.lmdb.Cursor(txn, global.database.blockDB);
+
     let count = 0;
     let total = 0;
-    let totalReward = 0;
     for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
         cursor.getCurrentBinary(function (key, data) {
             // jshint ignore:line
             try {
                 let block = global.protos.Block.decode(data);
-                if (predicate(block)) {
+                if (block.unlocked || block.pay_ready) {
+                    block.unlocked = false;
+                    block.pay_ready = false;
+
+                    let buf = global.protos.Block.encode(block);
+                    txn.putBinary(global.database.blockDB, key, buf);
                     console.log(key + ': ' + JSON.stringify(block));
                     count += 1;
-                    totalReward += block.value;
                 }
                 total += 1;
             } catch (e) {
-                console.error(`Failed to decode ${key}`);
+                console.error(`Failed to reset ${key}`);
                 console.error(e);
             }
         });
     }
-    console.log(`${count} block(s) found (total ${total})`);
-    console.log(`Total reward value: ${totalReward}`);
+    console.log(`${count}/${total} block(s) reset`);
     cursor.close();
     txn.commit();
     process.exit(0);

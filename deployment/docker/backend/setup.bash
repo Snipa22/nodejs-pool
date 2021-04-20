@@ -11,10 +11,10 @@ curl -Lo ./wait-util https://github.com/ufoscout/docker-compose-wait/releases/do
 chmod +x ./wait-util
 
 echo "+ Setting up NodeJS"
-curl -o$WORKDIR/node.tar.gz  https://nodejs.org/dist/latest-v10.x/node-v10.23.1-linux-x64.tar.gz
+curl -o$WORKDIR/node.tar.gz  https://nodejs.org/dist/latest-v10.x/node-v10.24.0-linux-x64.tar.gz
 cd $WORKDIR
 tar -xf node.tar.gz
-mv node-v10.23.1-linux-x64/ $POOL_DIR/.nodejs/
+mv node-v10.24.0-linux-x64/ $POOL_DIR/.nodejs/
 
 # echo "+ Cloning nodejs-pool source"
 # cd $POOL_DIR
