@@ -44,6 +44,7 @@ message Share {
     optional int64 shares2 = 14;
     optional int64 share_num = 15;
     optional float raw_shares = 16;
+    optional int64 altHeight = 17;
 }
 
 message Block {

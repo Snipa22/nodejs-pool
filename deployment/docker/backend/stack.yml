@@ -16,7 +16,7 @@ apps:
     log_date_format: "YYYY-MM-DD HH:mm Z"
     script: init.js
     env:
-      DEBUG: pool,db
+      DEBUG: pool,db,coinFuncs
     args: "--module=pool"
 
   - name: longRunner
