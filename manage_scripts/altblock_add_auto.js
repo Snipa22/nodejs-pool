@@ -44,7 +44,7 @@ require("../init_mini.js").init(function() {
         hash:          hash,
         difficulty:    body_header.difficulty,
         shares:        0,
-        timestamp:     body_header.timestamp,
+        timestamp:     body_header.timestamp * 1000,
         poolType:      global.protos.POOLTYPE.PPLNS,
         unlocked:      false,
         valid:         true,
