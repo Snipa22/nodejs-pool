@@ -55,7 +55,7 @@ require("../init_mini.js").init(function() {
         if (!data){
           console.error("Block not stored");
         } else {
-          console.log("Block stored");
+          console.log("Block with " + port + " port and " + hash + " stored");
         }
         process.exit(0);
       });
