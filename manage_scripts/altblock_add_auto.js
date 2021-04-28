@@ -15,7 +15,6 @@ if (!argv.hash) {
 const hash = argv.hash;
 
 require("../init_mini.js").init(function() {
-  global.coinFuncs.getLastBlockHeader()
   global.coinFuncs.getLastBlockHeader(function (err, last_block_body) {
     if (err !== null){
       console.error("Can't get last block info");
