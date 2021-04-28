@@ -49,7 +49,7 @@ require("../init_mini.js").init(function() {
         unlocked:      false,
         valid:         true,
         port:          port,
-        height:        body_header.timestamp,
+        height:        body_header.height,
         anchor_height: last_block_body.height
       }), function(data){
         if (!data){
