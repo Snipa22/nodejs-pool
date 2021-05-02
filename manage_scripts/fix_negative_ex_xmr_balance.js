@@ -5,7 +5,7 @@ const argv = require('minimist')(process.argv.slice(2));
 require("../init_mini.js").init(function() {
 	const xmr_balance = global.database.getCache("xmr_balance");
 	if (xmr_balance !== false) {
-		if (xmr_balance.value && xmr_balance.value > 0) {
+		if (!xmr_balance.value || xmr_balance.value < 0) {
 			console.error("Can't fix xmr_balance: " + JSON.stringify(xmr_balance));
 			process.exit(1);
 			return;
