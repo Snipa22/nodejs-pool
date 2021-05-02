@@ -12,11 +12,11 @@ require("../init_mini.js").init(function() {
 		} 
                 const xmr_balance2 = { value: -xmr_balance.expected_increase, expected_increase: xmr_balance.expected_increase };
 		console.log("In 10 seconds is going to change xmr_balance from " + JSON.stringify(xmr_balance) + " into " + JSON.stringify(xmr_balance2));
-		setTimeout(10*1000, function() {
+		setTimeout(function() {
 			global.database.setCache("xmr_balance", xmr_balance2);
 			console.log("Done.");
 			process.exit(0);
-		});
+		}, 10*1000);
 	} else {
 		console.error("Key xmr_balance is not found");
 		process.exit(1);
