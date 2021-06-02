@@ -1,11 +1,17 @@
 "use strict";
 
 const lmdb = require('node-lmdb');
+const fs   = require('fs');
 
 const argv = require('minimist')(process.argv.slice(2));
 
 if (!argv.dir) {
 	console.error("Please specify output lmdb dir");
+	process.exit(1);
+}
+
+if (fs.existsSync(argv.dir + "/data.mdb")) {
+	console.error("Please specify empty output lmdb dir");
 	process.exit(1);
 }
 
