@@ -56,7 +56,7 @@ require("../init_mini.js").init(function() {
 		let cursor = new global.database.lmdb.Cursor(txn, global.database.blockDB);
 		for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
        		 	cursor.getCurrentBinary(function(key, data) {
- 				txn2.putBinary(global.database.blockDB, key, data);
+ 				txn2.putBinary(blockDB2, key, data);
 			});
 		}
 		cursor.close();
@@ -70,13 +70,28 @@ require("../init_mini.js").init(function() {
 		let cursor = new global.database.lmdb.Cursor(txn, global.database.altblockDB);
 		for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
         		cursor.getCurrentBinary(function(key, data) {
-				txn2.putBinary(global.database.altblockDB, key, data);
+				txn2.putBinary(altblockDB2, key, data);
 			});
 		}
 		cursor.close();
 	        txn.commit();
                 txn2.commit();
 	}
+
+	console.log("Copying shares");
+	{	let txn = global.database.env.beginTxn({readOnly: true});
+		let txn2 = env2.beginTxn();
+		let cursor = new global.database.lmdb.Cursor(txn, global.database.shareDB);
+		for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
+        		cursor.getCurrentBinary(function(key, data) {
+				txn2.putBinary(shareDB2, key, data);
+			});
+		}
+		cursor.close();
+	        txn.commit();
+                txn2.commit();
+	}
+
 
         env2.close();
  	console.log("DONE");
