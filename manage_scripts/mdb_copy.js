@@ -15,7 +15,7 @@ if (!argv.size) {
 }
 
 require("../init_mini.js").init(function() {
-        let env2 = new this.lmdb.Env();
+        let env2 = new lmdb.Env();
         env2.open({
             path: argv.dir,
             maxDbs: 10,
@@ -23,7 +23,7 @@ require("../init_mini.js").init(function() {
             useWritemap: true,
             maxReaders: 512
         });
-        let shareDB2 = this.env.openDbi({
+        let shareDB2 = env2.openDbi({
             name: 'shares',
             create: true,
             dupSort: true,
@@ -32,19 +32,19 @@ require("../init_mini.js").init(function() {
             integerKey: true,
             keyIsUint32: true
         });
-        let blockDB2 = this.env.openDbi({
+        let blockDB2 = env2.openDbi({
             name: 'blocks',
             create: true,
             integerKey: true,
             keyIsUint32: true
         });
-        let altblockDB2 = this.env.openDbi({
+        let altblockDB2 = env2.openDbi({
             name: 'altblocks',
             create: true,
             integerKey: true,
             keyIsUint32: true
         });
-        let cacheDB2 = this.env.openDbi({
+        let cacheDB2 = env2.openDbi({
             name: 'cache',
             create: true
         });
@@ -78,6 +78,7 @@ require("../init_mini.js").init(function() {
                 txn2.commit();
 	}
 
+        env2.close();
  	console.log("DONE");
 	process.exit(0);
 });
