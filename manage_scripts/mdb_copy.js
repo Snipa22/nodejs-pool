@@ -92,6 +92,21 @@ require("../init_mini.js").init(function() {
                 txn2.commit();
 	}
 
+	console.log("Copying cache");
+	{	let txn = global.database.env.beginTxn({readOnly: true});
+		let txn2 = env2.beginTxn();
+		let cursor = new global.database.lmdb.Cursor(txn, global.database.cacheDB);
+		for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
+        		cursor.getCurrentBinary(function(key, data) {
+				txn2.putBinary(cacheDB2, key, data);
+			});
+		}
+		cursor.close();
+	        txn.commit();
+                txn2.commit();
+	}
+
+
 
         env2.close();
  	console.log("DONE");
