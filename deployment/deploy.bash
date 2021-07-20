@@ -31,8 +31,8 @@ sudo systemctl enable monero
 sudo systemctl start monero
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
 source ~/.nvm/nvm.sh
-nvm install v14.16.0
-nvm alias default v14.16.0
+nvm install v14.17.3
+nvm alias default v14.17.3
 cd ~/nodejs-pool
 npm install
 npm install -g pm2

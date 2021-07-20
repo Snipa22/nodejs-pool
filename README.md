@@ -60,14 +60,14 @@ Deployment via Installer
 
 ```shell
 cd ~/nodejs-pool/
-pm2 start init.js --name=blockManager --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z"  -- --module=blockManager
-pm2 start init.js --name=worker --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=worker
-pm2 start init.js --name=pool_stats --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=pool_stats
-pm2 start init.js --name=payments --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" --no-autorestart -- --module=payments
-pm2 start init.js --name=remoteShare --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=remoteShare
-pm2 start init.js --name=longRunner --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=longRunner
-pm2 start init.js --name=pool --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=pool
-pm2 start init.js --name=api --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=api
+pm2 start init.js --name=blockManager --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z"  -- --module=blockManager
+pm2 start init.js --name=worker --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=worker
+pm2 start init.js --name=pool_stats --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=pool_stats
+pm2 start init.js --name=payments --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" --no-autorestart -- --module=payments
+pm2 start init.js --name=remoteShare --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=remoteShare
+pm2 start init.js --name=longRunner --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=longRunner
+pm2 start init.js --name=pool --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=pool
+pm2 start init.js --name=api --kill-timeout 10000 --log-date-format="YYYY-MM-DD HH:mm:ss:SSS Z" -- --module=api
 pm2 restart api
 ```
 
@@ -281,6 +281,7 @@ If you'd like to make a one time donation, the addresses are as follows:
 * CCX - ```ccx7dmnBBoRPuVcpKJSAVZKdSDo9rc7HVijFbhG34jsXL3qiqfRwu7A5ecem44s2rngDd8y8N4QnYK6WR3mXAcAZ5iXun9BQBx```
 * BLOC - ```abLoc5iUG4a6oAb2dqygxkS5M2uHWx16zHb9fUWMzpSEDwm6T7PSq2MLdHonWZ16CGfnJKRomq75aZyviTo6ZjHeYQMzNAEkjMg```
 * RVN - ```RLVJv9rQNHzXS3Zn4JH8hfAHmm1LfECMxy```
+* ERG - ```9fe533kUzAE57YfPP6o3nzsYMKN2W2uCxvg8KG8Vn5DDeJGetRw```
 * BTC - ```3BzvMuLStA388kYZ9nudfm8L22937dSPS3```
 * BCH - ```qrhww48p5s6zw9twhc7cujgwp7vym2k4vutem6f92p```
 * ETH - ```0xCF8BABC074C487Ae17F9Ce0394eab492E6A35658```
