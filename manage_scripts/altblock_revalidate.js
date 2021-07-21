@@ -19,7 +19,14 @@ require("../init_mini.js").init(function() {
 			        is_found = true;
 				global.coinFuncs.getPortBlockHeaderByHash(blockData.port, hash, (err, body) => {
 					if (err !== null || !body.reward) {
-		        			console.log("Altblock with " + hash + " hash still has invalid hash for " + blockData.port + " port! Exiting!");
+						if (blockData.valid) {
+							blockData.valid = false;
+							blockData.unlocked = true;
+							txn.putBinary(global.database.altblockDB, key, global.protos.AltBlock.encode(blockData));
+							console.log("Altblock with " + hash + " hash became invalid for " + blockData.port + " port! Exiting!");
+						} else {
+		        				console.log("Altblock with " + hash + " hash still has invalid hash for " + blockData.port + " port! Exiting!");
+						}
 						cursor.close();
 						txn.commit();
 						process.exit(1);
