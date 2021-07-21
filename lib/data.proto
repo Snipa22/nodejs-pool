@@ -23,6 +23,7 @@ message InvalidShare{
     required string paymentAddress = 1;
     optional string paymentID = 2;
     required string identifier = 3;
+    optional int32 count = 4;
 }
 
 message Share {
