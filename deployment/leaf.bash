@@ -15,9 +15,10 @@ cd ~
 git clone https://github.com/MoneroOcean/nodejs-pool.git
 sudo systemctl enable ntp
 cd /usr/local/src
-sudo git clone --recursive https://github.com/monero-project/monero.git
+sudo git clone https://github.com/monero-project/monero.git
 cd monero
 sudo git checkout v0.17.2.0
+sudo git submodule update --init
 sudo USE_SINGLE_BUILDDIR=1 make -j$(nproc) release || sudo USE_SINGLE_BUILDDIR=1 make release || exit 0
 sudo cp ~/nodejs-pool/deployment/monero.service /lib/systemd/system/
 sudo useradd -m monerodaemon -d /home/monerodaemon
