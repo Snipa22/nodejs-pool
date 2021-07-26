@@ -23,7 +23,7 @@
     "jsonwebtoken": "^8.5.1",
     "minimist": ">=1.2.3",
     "moment": "2.21.0",
-    "mysql": "2.15.0",
+    "mysql": "2.18.1",
     "node-lmdb": "git+https://github.com/Venemo/node-lmdb.git#5941c1e553de4ae1d57a67d355b7c2dd87feaea6",
     "promise-mysql": "3.0.0",
     "protocol-buffers": "^3.2.1",
