@@ -20,7 +20,7 @@
     "debug": "2.6.9",
     "express": "^4.17.1",
     "apicache": "1.2.1",
-    "jsonwebtoken": "^7.2.1",
+    "jsonwebtoken": "^8.5.1",
     "minimist": ">=1.2.3",
     "moment": "2.21.0",
     "mysql": "2.15.0",
