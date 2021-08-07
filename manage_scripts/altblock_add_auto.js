@@ -31,6 +31,7 @@ require("../init_mini.js").init(function() {
         console.error("Can't get block timestamp: " + JSON.stringify(body_header));
         process.exit(0);
       }
+      if ((Date.now() / 1000) < body_header.timestamp) body_header.timestamp /= 1000;
       if (!body_header.difficulty) {
         console.error("Can't get block difficilty: " + JSON.stringify(body_header));
         process.exit(0);
