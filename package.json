@@ -35,6 +35,6 @@
     "wallet-address-validator": "0.1.0",
     "utf8": "^3.0.0",
     "cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v10.0.3",
-    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v24.0.2"
+    "cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v25.0.0"
   }
 }
