@@ -27,6 +27,8 @@ require("../init_mini.js").init(function() {
         console.error("body:" + JSON.stringify(body_header));
         process.exit(0);
       }
+      if (!body_header.timestamp) body_header.timestamp = body_header.time;
+      if (!body_header.timestamp) body_header.timestamp = body_header.mediantime;
       if (!body_header.timestamp) {
         console.error("Can't get block timestamp: " + JSON.stringify(body_header));
         process.exit(0);
