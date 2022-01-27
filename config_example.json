@@ -1,6 +1,7 @@
 {
   "pool_id": 0,
   "eth_pool_support": 1,
+  "worker_num": 0,
   "bind_ip": "127.0.0.1",
   "hostname": "testpool.com",
   "db_storage_path": "CHANGEME",
