@@ -7,7 +7,6 @@ sudo git reset --hard origin/master &&\
 sudo git checkout master &&\
 sudo git pull &&\
 sudo git checkout v0.17.3.0 &&\
-sudo git submodule foreach git pull &&\
 sudo git submodule init &&\
 sudo git submodule update &&\
 sudo rm -rf build &&\
