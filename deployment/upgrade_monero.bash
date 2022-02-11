@@ -7,8 +7,7 @@ sudo git reset --hard origin/master &&\
 sudo git checkout master &&\
 sudo git pull &&\
 sudo git checkout v0.17.3.0 &&\
-sudo git submodule init &&\
-sudo git submodule update &&\
+sudo git submodule update --force --recursive --init --remote &&\
 sudo rm -rf build &&\
 sudo USE_SINGLE_BUILDDIR=1 nice make release &&\
 echo "Done building the new Monero daemon! Please go ahead and reboot monero with: sudo systemctl restart monero as soon as the pool source is updated!"
