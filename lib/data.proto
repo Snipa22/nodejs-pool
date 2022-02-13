@@ -35,7 +35,6 @@ message Share {
     required POOLTYPE poolType = 6;
     required int32 poolID = 7;
     required int64 blockDiff = 8;
-    required bool bitcoin = 9;
     required int32 blockHeight = 10;
     required int64 timestamp = 11;
     required string identifier = 12;
