@@ -42,7 +42,8 @@ require("../init_mini.js").init(function() {
         console.error("Can't get block height: " + JSON.stringify(body_header));
         process.exit(0);
       }
-  
+      body_header.difficulty = parseInt(body_header.difficulty);
+      body_header.timestamp = parseInt(body_header.timestamp);
       global.database.storeAltBlock(body_header.timestamp, global.protos.AltBlock.encode({
         hash:          hash,
         difficulty:    body_header.difficulty,
