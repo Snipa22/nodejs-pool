@@ -243,6 +243,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorXMC',  '0', 'float', 'XMC algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorRVN',  '0', 'float', 'RVN algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorETH',  '0', 'float', 'ETH algo hash price factor relative to coinHashFactor');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorETC',  '0', 'float', 'ETC algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorBLOC',  '0', 'float', 'BLOC algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorERG',  '0', 'float', 'ERG algo hash price factor relative to coinHashFactor');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('daemon', 'coinHashFactorRTM',  '0', 'float', 'RTM algo hash price factor relative to coinHashFactor');
@@ -251,6 +252,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address', '127.0.0.1', 'string', 'Default Daemon RPC Wallet IP');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address_18082', '127.0.0.1', 'string', 'Monero Daemon RPC Wallet IP');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address_8545', '127.0.0.1', 'string', 'ETH Daemon RPC Wallet IP');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address_8645', '127.0.0.1', 'string', 'ETC Daemon RPC Wallet IP');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address_8766', '127.0.0.1', 'string', 'RVN Daemon RPC Wallet IP');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'address_9053', '127.0.0.1', 'string', 'ERG Daemon RPC Wallet IP');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('wallet', 'port', '18082', 'int', 'Monero Daemon RPC Wallet Port');
@@ -314,6 +316,7 @@ INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES 
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_9231', '', 'string', 'Address to mine to for 9231 (Equilibria) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_8766', '', 'string', 'Address to mine to for 8766 (Ravencoin) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_8545', '', 'string', 'Address to mine to for 8545 (Ethereum) port.');
+INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_8645', '', 'string', 'Address to mine to for 8645 (Ethereum Classic) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_2086', '', 'string', 'Address to mine to for 2086 (BLOC) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_9053', '', 'string', 'Address to mine to for 9053 (ERG) port.');
 INSERT INTO pool.config (module, item, item_value, item_type, Item_desc) VALUES ('pool', 'address_9998', '', 'string', 'Address to mine to for 9998 (RTM) port.');

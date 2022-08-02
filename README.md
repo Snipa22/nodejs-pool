@@ -283,10 +283,11 @@ If you'd like to make a one time donation, the addresses are as follows:
 * RVN - ```RLVJv9rQNHzXS3Zn4JH8hfAHmm1LfECMxy```
 * RTM - ```RUCyaEZxQu3Eure73XPQ57si813RYAMQKC```
 * ERG - ```9fe533kUzAE57YfPP6o3nzsYMKN2W2uCxvg8KG8Vn5DDeJGetRw```
-* BTC - ```3BzvMuLStA388kYZ9nudfm8L22937dSPS3```
-* BCH - ```qrhww48p5s6zw9twhc7cujgwp7vym2k4vutem6f92p```
-* ETH - ```0xCF8BABC074C487Ae17F9Ce0394eab492E6A35658```
-* LTC - ```MCkjQo99VzoeZQ1piDzLDb4uqNSDRZpx55```
+* BTC - ```3HRbMgcvbqHVW7P34MNGvF2Gh3DE26iHdw```
+* BCH - ```18sKoDSjLCFW9kZrXuza1qzEERnKi7bx8S```
+* ETH - ```0xfE23a61548FCCE159a541FAe9e16cEB92Da650ed```
+* ETC - ```0x4480Ad73a113BEFf05B2079E38D90c9757Ecb063```
+* LTC - ```MGj8PU1PpTNDDqRHmuEqfDpH3gxp6cJrUU```
 
 Credits
 =======
