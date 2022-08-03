@@ -6,7 +6,7 @@ cd /usr/local/src/monero &&\
 sudo git reset --hard origin/master &&\
 sudo git checkout master &&\
 sudo git pull &&\
-sudo git checkout v0.17.3.0 &&\
+sudo git checkout v0.18.0.0 &&\
 sudo git submodule update --force --recursive --init &&\
 sudo rm -rf build &&\
 sudo USE_SINGLE_BUILDDIR=1 nice make release &&\
