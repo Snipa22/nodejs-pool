@@ -168,7 +168,7 @@ CREATE TABLE `transactions` (
   KEY `transactions_shapeshiftTxn_id_fk` (`exchange_txn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(256) NOT NULL,
   `pass` varchar(64) DEFAULT NULL,
   `email` varchar(256) DEFAULT NULL,
