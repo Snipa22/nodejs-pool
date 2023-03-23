@@ -5,10 +5,13 @@ require("../init_mini.js").init(function() {
 	let txn = global.database.env.beginTxn({readOnly: true});
 	let cursor = new global.database.lmdb.Cursor(txn, global.database.altblockDB);
         let deleted = [];
-	for (let found = cursor.goToFirst(); found; found = cursor.goToNext()) {
+        let block_count = {};
+	for (let found = cursor.goToLast(); found; found = cursor.goToPrev()) {
         	cursor.getCurrentBinary(function(key, data){  // jshint ignore:line
 			let blockData = global.protos.AltBlock.decode(data);
-                        if (blockData.unlocked && Date.now() - blockData.timestamp > 365*24*60*60*1000) { 
+                        if (!(blockData.port in block_count)) block_count[blockData.port] = 0;
+                        ++ block_count[blockData.port];
+                        if (blockData.unlocked && (block_count[blockData.port] > 100000 || Date.now() - blockData.timestamp > 2*365*24*60*60*1000)) {
                            deleted.push(key);
                            console.log(JSON.stringify(blockData));
                         } else {
