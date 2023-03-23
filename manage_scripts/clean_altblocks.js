@@ -13,9 +13,6 @@ require("../init_mini.js").init(function() {
                         ++ block_count[blockData.port];
                         if (blockData.unlocked && (block_count[blockData.port] > 20000 || Date.now() - blockData.timestamp > 3*365*24*60*60*1000)) {
                            deleted.push(key);
-                           console.log(JSON.stringify(blockData));
-                        } else {
-                           console.log("SKIP: " + JSON.stringify(blockData));
                         }
 		});
 	}
@@ -26,16 +23,16 @@ require("../init_mini.js").init(function() {
 	console.log("Deleting altblock items: " + deleted.length);
 
         let chunkSize = 0;
-        //txn = global.database.env.beginTxn();
+        txn = global.database.env.beginTxn();
         deleted.forEach(function(key) {
             ++ chunkSize;
-            //txn.del(global.database.altblockDB, key);
+            txn.del(global.database.altblockDB, key);
       	    if (chunkSize > 500) {
-	        //txn.commit();
-		//txn = global.database.env.beginTxn();
+	        txn.commit();
+		txn = global.database.env.beginTxn();
                 chunkSize = 0;
 	    }
         });
-        //txn.commit();
+        txn.commit();
 	process.exit(0);
 });
