@@ -11,7 +11,7 @@ require("../init_mini.js").init(function() {
 			let blockData = global.protos.AltBlock.decode(data);
                         if (!(blockData.port in block_count)) block_count[blockData.port] = 0;
                         ++ block_count[blockData.port];
-                        if (blockData.unlocked && (block_count[blockData.port] > 20000 || Date.now() - blockData.timestamp > 2*365*24*60*60*1000)) {
+                        if (blockData.unlocked && (block_count[blockData.port] > 20000 || Date.now() - blockData.timestamp > 3*365*24*60*60*1000)) {
                            deleted.push(key);
                            console.log(JSON.stringify(blockData));
                         } else {
