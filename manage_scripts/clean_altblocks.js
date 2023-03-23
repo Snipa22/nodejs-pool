@@ -37,4 +37,5 @@ require("../init_mini.js").init(function() {
 	    }
         });
         //txn.commit();
+	process.exit(0);
 });
