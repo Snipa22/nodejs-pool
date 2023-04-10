@@ -1,0 +1,34 @@
+upstream poolApi {
+  server        pool-backend:8001;
+}
+
+upstream remoteShare {
+  server        pool-backend:8000;
+}
+
+server {
+  listen        80;
+  server_name   ${WEB_HOSTNAME};
+
+  location / {
+    root /www;
+    index index.html index.htm;
+  }
+}
+
+
+server {
+  listen        80;
+  server_name   ${API_HOSTNAME};
+
+  location /leafApi {
+    proxy_pass  http://remoteShare;
+  }
+
+  location / {
+    proxy_pass  http://poolApi;
+  }
+
+}
+
+
