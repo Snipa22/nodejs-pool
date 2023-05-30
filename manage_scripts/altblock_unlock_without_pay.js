@@ -1,15 +1,16 @@
 "use strict";
 
-const argv = require('minimist')(process.argv.slice(2));
+const argv = require('minimist')(process.argv.slice(2), { '--': true });
 
-if (!argv.hash) {
-	console.error("Please specify altblock hash to unlock it (and avoid payment)");
-	process.exit(1);
+let hashes = [];
+for (const h of argv['--']) {
+  hashes.push(h);
 }
-const hash = argv.hash;
 
 require("../init_mini.js").init(function() {
-	global.database.unlockAltBlock(hash);
-	console.log("Altblock with " + hash + " hash un-locked! Exiting!");
+        hashes.forEach(function(hash) {
+          global.database.unlockAltBlock(hash);
+    	  console.log("Altblock with " + hash + " hash un-locked!");
+        })
 	process.exit(0);
 });
