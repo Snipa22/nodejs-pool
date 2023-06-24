@@ -15,6 +15,7 @@
     "body-parser": "^1.16.0",
     "circular-buffer": "1.0.2",
     "cluster": "0.7.7",
+    "crypto-js": "4.1.1",
     "concat-stream": "^1.6.0",
     "cors": "^2.8.1",
     "debug": "2.6.9",
