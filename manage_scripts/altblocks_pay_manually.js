@@ -34,6 +34,6 @@ require("../init_mini.js").init(function() {
         cursor.close();
         txn.commit();
         if (!changed) console.log("Not found altblocks with specified hashes");
-        else console.log("Changed " + changed + "blocks");
+        else console.log("Changed " + changed + " blocks");
         process.exit(0);
 });
