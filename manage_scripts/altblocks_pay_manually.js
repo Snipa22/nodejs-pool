@@ -27,12 +27,13 @@ require("../init_mini.js").init(function() {
                                 console.log("Put " + blockData.pay_value + " pay_value to block");
                                 txn.putBinary(global.database.altblockDB, key, global.protos.AltBlock.encode(blockData));
                                 console.log("Changed altblock");
-                                changed = 1;
+                                changed += 1;
                         }
                 });
         }
         cursor.close();
         txn.commit();
         if (!changed) console.log("Not found altblocks with specified hashes");
+        else console.log("Changed " + changed + "blocks");
         process.exit(0);
 });
