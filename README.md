@@ -280,8 +280,10 @@ If you'd like to make a one time donation, the addresses are as follows:
 * DERO - ```dero1qygrgnz9gea2rqgwhdtpfpa3mvagt5uyq0g92nurwrpk6wnn7hdnzqgudsv6t```
 * CCX - ```ccx7dmnBBoRPuVcpKJSAVZKdSDo9rc7HVijFbhG34jsXL3qiqfRwu7A5ecem44s2rngDd8y8N4QnYK6WR3mXAcAZ5iXun9BQBx```
 * BLOC - ```abLoc5iUG4a6oAb2dqygxkS5M2uHWx16zHb9fUWMzpSEDwm6T7PSq2MLdHonWZ16CGfnJKRomq75aZyviTo6ZjHeYQMzNAEkjMg```
+* ZEPH - ```ZEPHYR2nic7ULkkmgZNX8a9i2tMbkxuCqjgWZYuee3awX7RhtmhoT98CwGEGrruWZVSKtA7Z7JC8m7oeYHtBD9cBEZzdEh9BSdq4q```
 * RVN - ```RLVJv9rQNHzXS3Zn4JH8hfAHmm1LfECMxy```
 * RTM - ```RUCyaEZxQu3Eure73XPQ57si813RYAMQKC```
+* BTRM - ```Bfhtr2g56tg73TNZBRCu6fJUD39Kur6SGG```
 * ERG - ```9fe533kUzAE57YfPP6o3nzsYMKN2W2uCxvg8KG8Vn5DDeJGetRw```
 * BTC - ```3HRbMgcvbqHVW7P34MNGvF2Gh3DE26iHdw```
 * BCH - ```18sKoDSjLCFW9kZrXuza1qzEERnKi7bx8S```
