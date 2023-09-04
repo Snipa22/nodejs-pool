@@ -282,6 +282,7 @@ If you'd like to make a one time donation, the addresses are as follows:
 * BLOC - ```abLoc5iUG4a6oAb2dqygxkS5M2uHWx16zHb9fUWMzpSEDwm6T7PSq2MLdHonWZ16CGfnJKRomq75aZyviTo6ZjHeYQMzNAEkjMg```
 * ZEPH - ```ZEPHYR2nic7ULkkmgZNX8a9i2tMbkxuCqjgWZYuee3awX7RhtmhoT98CwGEGrruWZVSKtA7Z7JC8m7oeYHtBD9cBEZzdEh9BSdq4q```
 * RVN - ```RLVJv9rQNHzXS3Zn4JH8hfAHmm1LfECMxy```
+* XNA - ```Nb931jkFtFN7QWpu4FqSThaoKajYjS5iFZ```
 * RTM - ```RUCyaEZxQu3Eure73XPQ57si813RYAMQKC```
 * BTRM - ```Bfhtr2g56tg73TNZBRCu6fJUD39Kur6SGG```
 * ERG - ```9fe533kUzAE57YfPP6o3nzsYMKN2W2uCxvg8KG8Vn5DDeJGetRw```
