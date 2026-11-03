@@ -25,9 +25,31 @@ function pearlSolutionIdFromData(solutionData) {
 
 function submitGatewayProof(context) {
     return new Promise(resolve => pearlProfile.pool.submitBlockRpc.call(pearlProfile.pool, {
+        blockTemplate: { height: 123 },
         ...context,
         replyFn(result, status) { resolve({ result, status }); }
     }));
+}
+
+function capturePearlLogs(t) {
+    const lines = [];
+    for (const method of ["log", "error"]) t.mock.method(console, method, line => lines.push(line));
+    return lines;
+}
+
+function isolatedPearlProfile() {
+    const filename = require.resolve("../../../lib/coins/pearl.js");
+    const previous = require.cache[filename];
+    delete require.cache[filename];
+    try { return require(filename); }
+    finally { require.cache[filename] = previous; }
+}
+
+function assertPearlLogCorrelation(line, height, job) {
+    assert.ok(line.includes(`pid=${process.pid} `));
+    assert.ok(line.includes(`height=${height} `));
+    assert.ok(line.includes(`job=${job} `));
+    assert.match(line, new RegExp(`\\bsolution=${PEARL_SOLUTION_ID}(?: |$)`));
 }
 
 function workerRecipeFixture(header) {
@@ -958,6 +980,167 @@ test.describe("pool coin helpers: Pearl", { concurrency: false }, () => {
         assert.deepEqual(verifiedArgs, [1, null, proof.toString("base64"), false, true, true]);
         assert.equal(context.params.pearl_solution_id, PEARL_SOLUTION_ID);
         assert.equal(context.params.pearl_proof_id, "12".repeat(32));
+    });
+
+    test("logs every verified network candidate with full correlation, including unclaimed winners", t => {
+        const lines = capturePearlLogs(t);
+        t.mock.method(Date, "now", () => 100000);
+        const profile = isolatedPearlProfile();
+        for (const [index, claim] of [
+            { jackpot: "00".repeat(32), adjustment_factor: 1 },
+            {},
+            { jackpot: "00".repeat(32), adjustment_factor: 1 }
+        ].entries()) {
+            const fixture = pearlShareFixture({ claim,
+                verifier: { valid: true, candidate: true, jackpot: "00".repeat(32), config: validPearlVerifierConfig(1) } });
+            fixture.context.blockTemplate.height = 321;
+            fixture.context.job.id = `candidate-${index}`;
+            assert.equal(profile.pool.verifySpecialShare(fixture.context), true);
+            assert.equal(fixture.calls.verified.length, 1);
+            const line = lines.find(value => value.startsWith("PRL candidate verified:") && value.includes(`job=candidate-${index} `));
+            assert.ok(line);
+            assertPearlLogCorrelation(line, 321, `candidate-${index}`);
+            assert.ok(line.includes(`jackpot=${"00".repeat(32)} `));
+            assert.ok(line.includes(`network_target=${fixture.networkTarget.targetDecimal} `));
+            assert.match(line, /adjustment_factor=1 network_target_met=true$/);
+            assert.equal(lines.join("\n").includes(fixture.proof.toString("base64")), false);
+        }
+        assert.equal(lines.filter(line => line.startsWith("PRL candidate verified:")).length, 3);
+        assert.equal(lines.filter(line => line.startsWith("PRL candidate claimed:")).length, 1);
+        const claimed = lines.find(line => line.startsWith("PRL candidate claimed:"));
+        assertPearlLogCorrelation(claimed, 321, "candidate-0");
+        assert.ok(claimed.includes(`jackpot=${"00".repeat(32)} `));
+        assert.match(claimed, /network_target=\d+ adjustment_factor=1$/);
+        assert.equal(lines.some(line => line.startsWith("PRL candidate rejected:")), false);
+    });
+
+    test("does not add candidate logs to ordinary shares or unclaimed invalid proofs", t => {
+        const lines = capturePearlLogs(t);
+        const jackpot = pearl.targetForDifficulty(1).targetHex;
+        for (const trusted of [false, true]) {
+            for (const claim of [{}, { jackpot, adjustment_factor: 1 }]) {
+                const fixture = pearlShareFixture({ claim,
+                    verifier: { valid: true, candidate: true, jackpot, config: validPearlVerifierConfig(1) } });
+                if (trusted) fixture.context.tryTrustedShare = accept => { accept(); return true; };
+                pearlProfile.pool.verifySpecialShare(fixture.context);
+                assert.equal(fixture.calls.verified.length, 1);
+                assert.equal(fixture.calls.verified[0][4], false);
+            }
+        }
+        pearlProfile.pool.verifySpecialShare(pearlShareFixture({ verifier: { valid: false } }).context);
+        assert.deepEqual(lines, []);
+    });
+
+    test("bounds claimed and rejected candidate logs across repeated failed verification", t => {
+        const lines = capturePearlLogs(t);
+        const profile = isolatedPearlProfile();
+        let now = 100000;
+        let claimIndex = 0;
+        t.mock.method(Date, "now", () => now);
+        function rejectClaim(unavailable = false) {
+            const fixture = pearlShareFixture({ claim: { jackpot: "00".repeat(32), adjustment_factor: 1 },
+                verifier: { valid: false } });
+            fixture.context.blockTemplate.height = 321;
+            fixture.context.job.id = `rejected-candidate-${claimIndex++}`;
+            fixture.context.miner.payout = `untrusted-wallet-${claimIndex}`;
+            if (unavailable) fixture.context.coinFuncs.verifyPearlAsync = (_header, _proof, _target, _miner, callback) =>
+                callback(null, "verify-host-error");
+            profile.pool.verifySpecialShare(fixture.context);
+            assert.equal(fixture.calls.invalid.length, 1);
+        }
+        for (let index = 0; index < 32; ++index) rejectClaim();
+        assert.equal(lines.length, 2);
+        assert.match(lines[0], /^PRL candidate claimed:/);
+        assertPearlLogCorrelation(lines[0], 321, "rejected-candidate-0");
+        assert.match(lines[1], /^PRL candidate rejected:.*stage=verification reason=invalid-proof$/);
+        now += 9999;
+        rejectClaim();
+        assert.equal(lines.length, 2);
+        now += 1;
+        rejectClaim(true);
+        assert.equal(lines.length, 4);
+        assertPearlLogCorrelation(lines[2], 321, "rejected-candidate-33");
+        assert.match(lines[3], /^PRL candidate rejected:.*stage=verification reason=verifier-unavailable$/);
+    });
+
+    test("logs gzip upload sizes and accepted block correlation without proof or miner data", async t => {
+        const lines = capturePearlLogs(t);
+        const proof = Buffer.from("private-proof-payload-for-logging-test");
+        const packed = zlib.gzipSync(proof);
+        const header = Buffer.alloc(pearl.PEARL_HEADER_BYTES, 0x73).toString("base64");
+        let now = 100000;
+        t.mock.method(Date, "now", () => now);
+        t.mock.method(pearl, "packPearlGatewayProof", (_proof, callback) => { now += 2; callback(null, packed); });
+        t.mock.method(pearl, "gatewayRequest", (_method, _params, callback) => {
+            now += 5;
+            callback(null, { result: { status: "accepted", block_hash: "AB".repeat(32) } });
+        });
+        const response = await submitGatewayProof({
+            blockTemplate: { height: 321 }, blockData: proof.toString("base64"),
+            params: { plain_proof: proof, pearl_solution_id: PEARL_SOLUTION_ID },
+            job: { id: "submitted-candidate", targetDecimal: "1", incomplete_header_bytes: header },
+            miner: { payout: "private-wallet", identifier: "private-worker" }
+        });
+        assert.equal(response.status, 200);
+        assert.equal(lines.length, 2);
+        assert.match(lines[0], /^PRL submit started:/);
+        assertPearlLogCorrelation(lines[0], 321, "submitted-candidate");
+        assert.ok(lines[0].endsWith(`encoding=gzip raw_bytes=${proof.length} packed_bytes=${packed.length}`));
+        assert.match(lines[1], /^PRL submit accepted:/);
+        assertPearlLogCorrelation(lines[1], 321, "submitted-candidate");
+        assert.ok(lines[1].endsWith(`block=${"ab".repeat(32)} elapsed_ms=7`));
+        const logged = lines.join("\n");
+        for (const secret of [proof.toString(), proof.toString("base64"), proof.toString("hex"), packed.toString("base64"),
+            header, "private-wallet", "private-worker", "plain_proof"]) assert.equal(logged.includes(secret), false);
+    });
+
+    test("logs fixed gateway rejection, timeout and transport reasons without copying error payloads", async t => {
+        const lines = capturePearlLogs(t);
+        const proof = Buffer.from("private-failed-proof");
+        const packed = zlib.gzipSync(proof);
+        let failure;
+        t.mock.method(pearl, "packPearlGatewayProof", (_proof, callback) => callback(null, packed));
+        t.mock.method(pearl, "gatewayRequest", (_method, _params, callback) => {
+            if (failure === "timeout") return callback(new Error("Pearl gateway timeout"));
+            if (failure === "transport") return callback(new Error(`private-transport\n${proof.toString("base64")}`));
+            return callback(null, { error: { message: `private-rejection\n${proof.toString("base64")}` } });
+        });
+        for (failure of ["rejection", "timeout", "transport"]) {
+            const response = await submitGatewayProof({ blockData: proof.toString("base64"),
+                params: { plain_proof: proof, pearl_solution_id: PEARL_SOLUTION_ID },
+                job: { id: "failed-candidate", targetDecimal: "1" } });
+            assert.equal(response.status, failure === "rejection" ? 200 : 0);
+        }
+        const failed = lines.filter(line => line.startsWith("PRL submit failed:"));
+        assert.equal(failed.length, 3);
+        for (const line of failed) assertPearlLogCorrelation(line, 123, "failed-candidate");
+        assert.match(failed[0], /stage=gateway reason=proof-not-accepted elapsed_ms=\d+$/);
+        assert.match(failed[1], /stage=gateway reason=timeout elapsed_ms=\d+$/);
+        assert.match(failed[2], /stage=gateway reason=request-failed elapsed_ms=\d+$/);
+        assert.equal(lines.join("\n").includes("private-"), false);
+        assert.equal(lines.join("\n").includes(proof.toString("base64")), false);
+        assert.equal(lines.every(line => !line.includes("\n")), true);
+    });
+
+    test("logs compression and invalid-submission failures before any gateway upload", async t => {
+        const lines = capturePearlLogs(t);
+        const proof = Buffer.from("private-compression-proof");
+        t.mock.method(pearl, "packPearlGatewayProof", (_proof, callback) => callback(new Error("private-codec-error")));
+        t.mock.method(pearl, "gatewayRequest", () => assert.fail("failed compression must not upload"));
+        const context = { blockData: proof.toString("base64"),
+            params: { plain_proof: proof, pearl_solution_id: PEARL_SOLUTION_ID },
+            job: { id: "codec-candidate", targetDecimal: "1" } };
+        const compressed = await submitGatewayProof(context);
+        const invalid = await submitGatewayProof({ ...context, blockData: "not-base64" });
+        assert.equal(compressed.status, 0);
+        assert.equal(compressed.result.error.message, "Pearl proof compression failed");
+        assert.equal(invalid.status, 0);
+        assert.equal(invalid.result.error.message, "Invalid Pearl proof submission");
+        assert.equal(lines.length, 2);
+        for (const line of lines) assertPearlLogCorrelation(line, 123, "codec-candidate");
+        assert.match(lines[0], /^PRL submit failed:.*stage=compression reason=compression-failed elapsed_ms=\d+$/);
+        assert.match(lines[1], /^PRL submit failed:.*stage=submission reason=invalid-proof-submission elapsed_ms=\d+$/);
+        assert.equal(lines.join("\n").includes("private-"), false);
     });
 
     test("gateway submissions preserve validated miner gzip without repacking raw verification data", async () => {
