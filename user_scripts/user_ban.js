@@ -10,6 +10,15 @@ cli.init(function() {
 		printBans(function () { process.exit(0); });
 		return;
 	}
+	let validAddress = false;
+	try {
+		validAddress = global.coinFuncs.validateAddress(user);
+	} catch (_error) { /* Malformed addresses may also be rejected by the decoder. */ }
+	if (!validAddress) {
+		console.error("Invalid XMR address. User was not banned.");
+		process.exit(1);
+		return;
+	}
 	insertBan(user, reason).then(function () {
 		printBans(function () {
 			console.log("Done. User was banned.");

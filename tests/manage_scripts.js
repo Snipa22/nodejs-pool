@@ -16,6 +16,12 @@ const fixHighBridgeCredit = require("../manage_scripts/exchange_recovery_bridge_
 const fixLowXmrCredit = require("../manage_scripts/exchange_recovery_low_xmr_credit_fix.js");
 const fixExchangeXmrBalance = require("../manage_scripts/exchange_recovery_xmr_balance_fix.js");
 const runUserDelete = require("../manage_scripts/user_delete_common.js");
+const {
+    DEFAULT_WALLET: VALID_BAN_ADDRESS,
+    keccak256,
+    moneroBase58Decode,
+    moneroBase58Encode
+} = require("./live/shared.js");
 const INIT_MINI_PATH = require.resolve("../init_mini.js");
 const LIB2_COINS_PATH = path.join(__dirname, "..", "lib2", "coins.js");
 const HAS_LIB2_COINS = fs.existsSync(LIB2_COINS_PATH);
@@ -61,13 +67,31 @@ function withExitTrap(fn) {
     });
 }
 
-function runUserBanForTest(args) {
+function banAddressWithPrefix(prefix) {
+    const payload = Buffer.concat([
+        Buffer.from([prefix]),
+        moneroBase58Decode(VALID_BAN_ADDRESS).subarray(1, -4),
+        ...(prefix === 19 ? [Buffer.alloc(8)] : [])
+    ]);
+    return moneroBase58Encode(Buffer.concat([payload, keccak256(payload).subarray(0, 4)]));
+}
+
+function runUserBanForTest(args, decoderThrows = false) {
     const scriptPath = path.resolve(__dirname, "../user_scripts/user_ban.js");
     const scriptUtilsPath = path.resolve(__dirname, "../script_utils.js");
     const source = `
         const Module = require("node:module");
+        const blockTemplate = require("node-blocktemplate");
         const originalLoad = Module._load;
         const queries = [];
+        if (${decoderThrows}) {
+            blockTemplate.address_decode = function failDecode() { throw new Error("native decoder failure"); };
+        }
+        global.coinFuncs = { validateAddress(address) {
+            const code = blockTemplate.address_decode(Buffer.from(address));
+            return code === 18 || code === 42
+                || blockTemplate.address_decode_integrated(Buffer.from(address)) === 19;
+        } };
         process.argv = [process.execPath, ${JSON.stringify(scriptPath)}, ...${JSON.stringify(args)}];
         global.mysql = { query(sql, params) {
             queries.push({ sql, params });
@@ -750,15 +774,15 @@ test.describe("manage_scripts", { concurrency: false }, function suite() {
 
     test("user ban CLI defaults the reason and preserves custom reasons", function testBanReasons() {
         for (const [args, reason] of [
-            [["--user", "wallet-address"], "Reported as botnet"],
-            [["--user", "wallet-address", "--reason", "custom reason"], "custom reason"]
+            [["--user", VALID_BAN_ADDRESS], "Reported as botnet"],
+            [["--user", VALID_BAN_ADDRESS, "--reason", "custom reason"], "custom reason"]
         ]) {
             const result = runUserBanForTest(args);
             assert.equal(result.status, 0, result.stderr);
             assert.deepEqual(result.queries, [
                 {
                     sql: "INSERT INTO bans (mining_address, reason) VALUES (?, ?) ON DUPLICATE KEY UPDATE id=id",
-                    params: ["wallet-address", reason]
+                    params: [VALID_BAN_ADDRESS, reason]
                 },
                 { sql: "SELECT * FROM bans" }
             ]);
@@ -769,13 +793,50 @@ test.describe("manage_scripts", { concurrency: false }, function suite() {
     test("user ban CLI rejects missing user and malformed option values without SQL", function testBanArgumentValidation() {
         for (const args of [
             ["--reason", "custom reason"], ["--user"], ["--user", ""],
-            ["--user", "wallet-address", "--reason"], ["--user", "wallet-address", "--reason="]
+            ["--user", VALID_BAN_ADDRESS, "--reason"], ["--user", VALID_BAN_ADDRESS, "--reason="]
         ]) {
             const result = runUserBanForTest(args);
             assert.equal(result.status, 1, result.stderr);
             assert.deepEqual(result.queries, []);
             assert.match(result.stderr, /Please specify (user address|reason) to ban/);
         }
+    });
+
+    test("user ban CLI accepts mainnet subaddresses and integrated addresses", function testBanAddressTypes() {
+        for (const address of [banAddressWithPrefix(42), banAddressWithPrefix(19)]) {
+            const result = runUserBanForTest(["--user", address]);
+            assert.equal(result.status, 0, result.stderr);
+            assert.deepEqual(result.queries.map(query => query.params), [
+                [address, "Reported as botnet"], undefined
+            ]);
+        }
+    });
+
+    test("user ban CLI rejects malformed, checksum-invalid and wrong-network addresses before SQL", function testBanInvalidAddresses() {
+        const checksumCorruption = VALID_BAN_ADDRESS.slice(0, -1)
+            + (VALID_BAN_ADDRESS.endsWith("1") ? "2" : "1");
+        for (const address of [
+            "bad-address",
+            VALID_BAN_ADDRESS.slice(0, -1),
+            checksumCorruption,
+            ` ${VALID_BAN_ADDRESS}`,
+            `${VALID_BAN_ADDRESS} `,
+            banAddressWithPrefix(53)
+        ]) {
+            const result = runUserBanForTest(["--user", address]);
+            assert.equal(result.status, 1, result.stderr);
+            assert.deepEqual(result.queries, [], "invalid addresses must never query or insert bans");
+            assert.match(result.stderr, /Invalid XMR address\. User was not banned\./);
+            assert.doesNotMatch(result.stdout, /Done\. User was banned\./);
+        }
+    });
+
+    test("user ban CLI treats native decoder exceptions as invalid without SQL", function testBanDecoderFailure() {
+        const result = runUserBanForTest(["--user", VALID_BAN_ADDRESS], true);
+        assert.equal(result.status, 1, result.stderr);
+        assert.deepEqual(result.queries, []);
+        assert.match(result.stderr, /Invalid XMR address\. User was not banned\./);
+        assert.doesNotMatch(result.stderr, /native decoder failure/);
     });
 
     test("refactored trade-context fix aligns XMR baseline to the current exchange balance", function testTradeContextFix() {
