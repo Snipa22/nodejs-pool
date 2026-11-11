@@ -47,6 +47,8 @@ The backend is typically paired with the static [`mo-pool-ui`](https://github.co
 
 Leaf nodes need far less disk than a full single-node install because they do not need the full main-server footprint.
 
+At startup, the backend removes the compromised `emSign ECC Root CA - G3` from Node's default TLS trust before loading application dependencies. Automatic filtering requires Node's CA APIs, available in Node `22.19+` and `24.5+`. On older runtimes, use `--use-openssl-ca` with an updated system CA store; startup refuses a bundled store that still contains the blocked root and cannot be filtered. Explicit per-connection CA settings and pinned mining certificates are preserved.
+
 Pearl proof uploads use raw transport for localhost and loopback verifiers, and gzip for remote
 verifiers when smaller. The pool forwards validated miner gzip unchanged, or compresses raw proofs
 asynchronously. Remote verifiers must support gzip proof frames before updating the pool.

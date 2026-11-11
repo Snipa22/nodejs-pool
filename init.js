@@ -1,4 +1,5 @@
 "use strict";
+require("./lib/common/ca_trust.js")();
 const mysql = require("promise-mysql");
 const fs = require("fs");
 // Node exports Cluster directly to CommonJS; @types/node describes its ESM default.

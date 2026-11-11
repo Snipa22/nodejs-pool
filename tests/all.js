@@ -2,6 +2,7 @@
 const fs = require("fs");
 const path = require("path");
 
+require("./ca_trust.js");
 require("./pool.js");
 require("./coin_template_errors.js");
 require("./pool/components/worker_templates.js");
